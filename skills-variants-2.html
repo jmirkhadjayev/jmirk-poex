@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Skills — yana 15 ta variant</title>
+<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+<style>
+@font-face{font-family:"M PLUS 1 Code";font-weight:300 700;font-display:swap;src:url("assets/fonts/mplus1code-latin.woff2") format("woff2");unicode-range:U+0000-00FF,U+2000-206F}
+@font-face{font-family:"M PLUS 1 Code";font-weight:300 700;font-display:swap;src:url("assets/fonts/mplus1code-latin-ext.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BB-02FF}
+:root{
+  --bg:#e7eeea;--panel:#fff;--surface:#f3f6f8;--surface2:#e9eef1;--border:rgba(15,23,30,.12);
+  --text:#15181d;--muted:#454b54;--accent:#0f9d4f;--accent-text:#0a7d3f;--fill:#18d26e;--soft:rgba(24,210,110,.14);
+  --blue:#3b82f6;--violet:#8b5cf6;--amber:#f59e0b;
+  --ease:cubic-bezier(.22,1,.36,1);--font:"M PLUS 1 Code",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--font);color:var(--text);background:var(--bg);
+  background-image:linear-gradient(rgba(15,157,79,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(15,157,79,.06) 1px,transparent 1px);background-size:24px 24px;-webkit-font-smoothing:antialiased}
+img{display:block}
+.top{position:sticky;top:0;z-index:20;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.top .in{max-width:1180px;margin:0 auto;padding:12px 18px;display:flex;align-items:center;gap:14px}
+.top h1{font-size:16px;margin:0;white-space:nowrap}.top h1 b{color:var(--accent)}
+.top .prev{font-size:12px;color:var(--muted);white-space:nowrap}
+.jump{display:flex;gap:5px;overflow-x:auto;scrollbar-width:none;margin-left:auto}
+.jump::-webkit-scrollbar{display:none}
+.jump a{flex:none;font-size:12px;font-weight:600;text-decoration:none;color:var(--muted);padding:6px 10px;border-radius:99px;border:1px solid var(--border);background:var(--panel)}
+.jump a:hover,.jump a.on{background:var(--text);color:#fff;border-color:var(--text)}
+.wrap{max-width:1180px;margin:0 auto;padding:22px 18px 80px}
+.intro{font-size:13px;color:var(--muted);line-height:1.6;margin:0 0 22px;max-width:860px}
+.intro b{color:var(--text)}
+.var{background:var(--panel);border-radius:20px;margin-bottom:28px;position:relative;overflow:hidden;box-shadow:0 18px 40px -30px rgba(15,23,30,.45);scroll-margin-top:70px}
+.var::before{content:"";position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,var(--fill),#9be8c0 60%,transparent);z-index:2}
+.vh{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:18px 24px 14px;border-bottom:1px dashed var(--border);background:#fbfcfb}
+.vh .n{min-width:30px;height:30px;padding:0 6px;border-radius:9px;background:var(--soft);color:var(--accent-text);font-weight:700;display:flex;align-items:center;justify-content:center}
+.vh h2{font-size:17px;margin:0}
+.vh .tag{font-size:10.5px;font-weight:700;color:var(--accent-text);background:var(--soft);padding:3px 9px;border-radius:99px}
+.vh p{width:100%;margin:2px 0 0 40px;font-size:12.5px;color:var(--muted);line-height:1.55}
+.vb{padding:26px 24px 30px;position:relative}
+.st{display:flex;align-items:center;gap:12px;margin:0 0 22px;position:relative;z-index:1}
+.st h3{font-size:30px;font-weight:700;margin:0;text-transform:uppercase}
+.st::after{content:"";width:48px;height:3px;background:var(--accent);border-radius:2px}
+.st.light h3{color:#fff}
+@media(max-width:640px){.vh p{margin-left:0}.vb{padding:20px 16px 24px}.st h3{font-size:24px}}
+.ico{width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.ico img{width:100%;height:100%;object-fit:contain}
+.ico i{font-size:30px;line-height:1;color:var(--blue)}
+.mono .ico{filter:grayscale(1)}
+.rv{opacity:0;transform:translateY(14px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.in .rv{opacity:1;transform:none}
+.cmpline{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:22px}
+.cmpline span{font-size:12px;font-weight:600;padding:7px 12px;border-radius:99px;background:var(--soft);color:var(--accent-text)}
+
+/* A — flip cards */
+.flips{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.flip{perspective:900px;aspect-ratio:1/1.05}
+.flip .inr{position:relative;width:100%;height:100%;transition:transform .7s var(--ease);transform-style:preserve-3d}
+.flip:hover .inr,.flip:focus-within .inr{transform:rotateY(180deg)}
+.flip .f,.flip .b{position:absolute;inset:0;border-radius:16px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:12px;text-align:center}
+.flip .f{background:var(--surface);border:1px solid var(--border)}
+.flip .f .ico{width:46px;height:46px}.flip .f .ico i{font-size:40px}
+.flip .f b{font-size:13.5px}
+.flip .b{background:linear-gradient(150deg,var(--accent),var(--fill));color:#fff;transform:rotateY(180deg)}
+.flip .b b{font-size:13px}.flip .b small{font-size:11.5px;line-height:1.45;opacity:.95}
+@media(max-width:820px){.flips{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:480px){.flips{grid-template-columns:repeat(2,1fr)}}
+
+/* B — word cloud */
+.cloud{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px 22px;max-width:900px;margin:0 auto;padding:20px 0;line-height:1.2}
+.cloud span{font-weight:700;transition:color .25s,transform .3s var(--ease);cursor:default;animation:bob 6s ease-in-out infinite}
+.cloud span:hover{color:var(--accent);transform:scale(1.08)}
+.cloud .w1{font-size:clamp(34px,6vw,58px)}.cloud .w2{font-size:clamp(24px,4vw,38px)}.cloud .w3{font-size:clamp(17px,2.6vw,24px);font-weight:600}.cloud .w4{font-size:15px;font-weight:500;color:var(--muted)}
+.cloud .g{color:var(--accent-text)}.cloud .bl{color:#1d4ed8}.cloud .vi{color:#6d28d9}.cloud .am{color:#b45309}
+@keyframes bob{50%{transform:translateY(-4px)}}
+
+/* C — code editor */
+.ed{border-radius:14px;overflow:hidden;border:1px solid #d0d7de;background:#fff;box-shadow:0 20px 40px -26px rgba(0,0,0,.35)}
+.ed .tbar{display:flex;align-items:center;gap:7px;padding:9px 12px;background:#f6f8fa;border-bottom:1px solid #d0d7de}
+.ed .tbar i.d{width:11px;height:11px;border-radius:50%;display:inline-block}
+.ed .tabs{display:flex;background:#f6f8fa;border-bottom:1px solid #d0d7de;overflow-x:auto}
+.ed .tabs button{font-family:inherit;font-size:12.5px;border:0;background:transparent;padding:9px 16px;cursor:pointer;color:#57606a;border-right:1px solid #d0d7de;display:flex;align-items:center;gap:7px;white-space:nowrap}
+.ed .tabs button.on{background:#fff;color:var(--text);box-shadow:inset 0 2px 0 var(--accent)}
+.ed .tabs .ico{width:15px;height:15px}
+.ed .body{display:grid;grid-template-columns:200px 1fr;min-height:330px}
+.ed .tree{background:#fbfcfd;border-right:1px solid #d0d7de;padding:12px 8px;font-size:12.5px}
+.ed .tree div{padding:5px 8px;border-radius:6px;display:flex;align-items:center;gap:7px;color:#57606a;cursor:pointer}
+.ed .tree div.on{background:var(--soft);color:var(--accent-text);font-weight:600}
+.ed .tree .ico{width:15px;height:15px}
+.ed pre{margin:0;padding:16px 18px;font-family:var(--font);font-size:13.5px;line-height:1.75;overflow-x:auto}
+.k{color:#cf222e}.t{color:#8250df}.s{color:#0a3069}.c{color:#6e7781;font-style:italic}.f{color:#953800}
+@media(max-width:720px){.ed .body{grid-template-columns:1fr}.ed .tree{display:none}}
+
+/* D — architecture layers */
+.arch{display:grid;grid-template-columns:1fr 220px;gap:18px;align-items:stretch}
+.layers{display:flex;flex-direction:column;gap:10px}
+.layer{display:grid;grid-template-columns:170px 1fr;align-items:center;gap:14px;padding:14px 16px;border-radius:14px;border:1px solid var(--border);background:var(--surface);position:relative;transition:.3s var(--ease)}
+.layer:hover{transform:translateX(6px);background:#fff;border-color:rgba(15,157,79,.45)}
+.layer h5{margin:0;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
+.layer h5 small{display:block;font-size:11px;letter-spacing:0;text-transform:none;color:var(--muted);font-weight:500;margin-top:3px}
+.layer .its{display:flex;flex-wrap:wrap;gap:8px}
+.layer::after{content:"";position:absolute;left:50%;bottom:-11px;width:2px;height:10px;background:var(--accent)}
+.layer:last-child::after{display:none}
+.l1{border-left:4px solid var(--blue)}.l2{border-left:4px solid var(--accent)}.l3{border-left:4px solid var(--violet)}.l4{border-left:4px solid #0ea5e9}
+.side{border-radius:14px;border:1px dashed rgba(15,157,79,.5);background:var(--soft);padding:16px;display:flex;flex-direction:column;gap:10px}
+.side h5{margin:0 0 4px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-text)}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 12px 7px 8px;border-radius:11px;background:#fff;border:1px solid var(--border);font-size:13px;font-weight:600;white-space:nowrap}
+.pill .ico{width:20px;height:20px}.pill .ico i{font-size:17px}
+@media(max-width:820px){.arch{grid-template-columns:1fr}.layer{grid-template-columns:1fr}}
+
+/* E — editorial list with cursor icon */
+.elist{border-top:1px solid var(--text);position:relative}
+.erow{display:grid;grid-template-columns:1fr auto;align-items:center;gap:16px;padding:16px 4px;border-bottom:1px solid var(--border);cursor:default;transition:padding .35s var(--ease),background .3s}
+.erow b{font-size:clamp(24px,4.4vw,44px);letter-spacing:-.02em;font-weight:700;line-height:1;transition:color .25s}
+.erow span{font-size:12.5px;color:var(--muted);text-align:right;max-width:260px}
+.erow:hover{padding-left:18px;background:linear-gradient(90deg,var(--soft),transparent)}
+.erow:hover b{color:var(--accent)}
+.follow{position:fixed;left:0;top:0;width:76px;height:76px;border-radius:20px;background:#fff;box-shadow:0 18px 30px -12px rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;pointer-events:none;opacity:0;transform:translate(-50%,-50%) scale(.6);transition:opacity .2s,transform .25s var(--ease);z-index:30}
+.follow.on{opacity:1;transform:translate(-50%,-50%) scale(1) rotate(-6deg)}
+.follow .ico{width:44px;height:44px}
+
+/* F — sticker board (draggable) */
+.board{position:relative;height:420px;border-radius:16px;background:#f7faf8;border:1px dashed rgba(15,157,79,.35);overflow:hidden;
+  background-image:radial-gradient(rgba(15,157,79,.18) 1px,transparent 1px);background-size:18px 18px}
+.stk{position:absolute;display:flex;flex-direction:column;align-items:center;gap:6px;padding:12px 14px;border-radius:18px;background:#fff;border:3px solid #fff;
+  box-shadow:0 10px 20px -10px rgba(0,0,0,.35),0 0 0 1px var(--border);cursor:grab;user-select:none;touch-action:none;transition:box-shadow .2s}
+.stk:active{cursor:grabbing;box-shadow:0 24px 30px -14px rgba(0,0,0,.45),0 0 0 2px var(--accent)}
+.stk .ico{width:40px;height:40px}.stk b{font-size:12.5px}
+.stk.word{background:var(--accent);color:#fff;border-color:var(--accent);border-radius:99px;padding:9px 16px;font-weight:700;font-size:13px}
+.boardhint{position:absolute;right:14px;bottom:10px;font-size:11.5px;color:var(--muted)}
+
+/* G — keyboard */
+.kb{display:flex;flex-direction:column;gap:10px;align-items:center;padding:22px;border-radius:20px;background:linear-gradient(#eef2ef,#e2e8e4);box-shadow:inset 0 2px 0 #fff,0 20px 40px -26px rgba(0,0,0,.4);max-width:900px;margin:0 auto}
+.kb .row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.key{width:96px;height:84px;border-radius:12px;background:linear-gradient(#fff,#f1f4f2);border:1px solid #cfd8d2;box-shadow:0 5px 0 #c3ccc6,0 8px 14px -6px rgba(0,0,0,.25);
+  display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;padding:9px 10px;transition:transform .08s,box-shadow .08s;cursor:pointer;user-select:none}
+.key .ico{width:28px;height:28px}.key .ico i{font-size:24px}
+.key b{font-size:11.5px}
+.key:active,.key.dn{transform:translateY(4px);box-shadow:0 1px 0 #c3ccc6,0 3px 8px -4px rgba(0,0,0,.25)}
+.key.wide{width:210px;background:linear-gradient(var(--fill),var(--accent));color:#fff;border-color:var(--accent);box-shadow:0 5px 0 #0b7a3c,0 8px 14px -6px rgba(0,0,0,.25);align-items:center;justify-content:center}
+.key.wide:active,.key.wide.dn{box-shadow:0 1px 0 #0b7a3c}
+.kbout{margin-top:14px;font-size:13px;color:var(--muted);min-height:20px;text-align:center}
+.kbout b{color:var(--accent-text)}
+@media(max-width:560px){.key{width:72px;height:70px}.key.wide{width:160px}}
+
+/* H — honeycomb */
+.hive{display:flex;flex-direction:column;align-items:center;padding:10px 0}
+.hrow{display:flex;gap:8px}
+.hrow+.hrow{margin-top:-26px}
+.hex{width:118px;height:132px;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:var(--surface2);display:flex;align-items:center;justify-content:center;transition:transform .3s var(--ease),background .3s;position:relative}
+.hex .inr{position:absolute;inset:2px;clip-path:inherit;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px}
+.hex .ico{width:36px;height:36px}.hex b{font-size:11.5px;text-align:center;padding:0 10px}
+.hex:hover{background:var(--accent);transform:scale(1.06)}
+.hex.core .inr{background:linear-gradient(150deg,var(--accent),var(--fill));color:#fff}
+@media(max-width:600px){.hex{width:84px;height:96px}.hrow+.hrow{margin-top:-18px}.hex .ico{width:26px;height:26px}.hex b{font-size:9.5px}}
+
+/* I — venn */
+.venn{position:relative;width:min(640px,100%);aspect-ratio:1.15;margin:0 auto}
+.vc{position:absolute;width:58%;aspect-ratio:1;border-radius:50%;mix-blend-mode:multiply;transition:transform .4s var(--ease)}
+.vc.a{left:4%;top:0;background:rgba(24,210,110,.28);border:2px solid rgba(15,157,79,.5)}
+.vc.b{right:4%;top:0;background:rgba(59,130,246,.22);border:2px solid rgba(59,130,246,.5)}
+.vc.c{left:21%;bottom:0;background:rgba(245,158,11,.22);border:2px solid rgba(245,158,11,.5)}
+.venn:hover .vc.a{transform:translate(-6px,-4px)}.venn:hover .vc.b{transform:translate(6px,-4px)}.venn:hover .vc.c{transform:translateY(6px)}
+.vl{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:5px;text-align:center;font-size:12px;font-weight:600}
+.vl h6{margin:0 0 4px;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.vl .row{display:flex;gap:5px;flex-wrap:wrap;justify-content:center;max-width:150px}
+.vl .ico{width:24px;height:24px}
+.vl .mini{font-size:10.5px;font-weight:600;padding:3px 7px;border-radius:99px;background:rgba(255,255,255,.85);border:1px solid var(--border);white-space:nowrap}
+.vl.center .mini{background:var(--text);color:#fff}
+
+/* J — mind map */
+.mm{width:100%;height:auto;max-height:520px}
+.mm .lk{fill:none;stroke-width:2;transition:stroke-width .2s,opacity .2s}
+.mm .nd rect{rx:12;transition:.2s}
+.mm text{font-family:var(--font);font-size:13px;font-weight:600}
+.mm .br:hover .lk{stroke-width:3.5}
+.mm .br:hover rect{filter:drop-shadow(0 6px 10px rgba(0,0,0,.15))}
+.mm.dim .br:not(:hover){opacity:.35}
+
+/* K — dark spotlight */
+.dark{background:#0a0f0c;border-radius:18px;padding:26px;position:relative;overflow:hidden}
+.dgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;position:relative}
+.dt{position:relative;border-radius:14px;background:#111814;border:1px solid rgba(255,255,255,.06);padding:18px 10px;display:flex;flex-direction:column;align-items:center;gap:10px;color:#e8efe9;overflow:hidden}
+.dt::before{content:"";position:absolute;inset:0;background:radial-gradient(220px circle at var(--x,-100px) var(--y,-100px),rgba(24,210,110,.22),transparent 60%);pointer-events:none}
+.dt::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1px;background:radial-gradient(160px circle at var(--x,-100px) var(--y,-100px),rgba(24,210,110,.9),transparent 60%);
+  -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.dt .ico{width:38px;height:38px;filter:grayscale(1) brightness(1.6);transition:filter .3s}
+.dt:hover .ico{filter:none}
+.dt .ico i{color:#e8efe9}
+.dt b{font-size:12.5px}
+.dark .cmpline span{background:rgba(24,210,110,.12);color:#7ef0b0;border:1px solid rgba(24,210,110,.25)}
+@media(max-width:720px){.dgrid{grid-template-columns:repeat(2,1fr)}}
+
+/* L — kanban */
+.kanban{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.col{background:var(--surface);border-radius:14px;padding:12px;border:1px solid var(--border)}
+.col h5{margin:2px 4px 12px;font-size:12px;letter-spacing:.06em;text-transform:uppercase;display:flex;align-items:center;gap:8px}
+.col h5 i{width:9px;height:9px;border-radius:50%}
+.card{background:#fff;border:1px solid var(--border);border-radius:11px;padding:11px 12px;margin-bottom:9px;box-shadow:0 2px 6px -4px rgba(0,0,0,.2);display:flex;gap:10px;align-items:center;cursor:grab;transition:transform .2s,box-shadow .2s}
+.card:hover{transform:translateY(-2px) rotate(-.6deg);box-shadow:0 12px 20px -14px rgba(0,0,0,.4)}
+.card .ico{width:26px;height:26px}.card .ico i{font-size:22px}
+.card b{display:block;font-size:13px}
+.card small{font-size:11px;color:var(--muted)}
+.card .lbl{margin-left:auto;font-size:10px;font-weight:700;padding:2px 7px;border-radius:5px}
+@media(max-width:860px){.kanban{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.kanban{grid-template-columns:1fr}}
+
+/* M — metro map */
+.metro{width:100%;height:auto}
+.metro .ln{fill:none;stroke-width:10;stroke-linecap:round;stroke-linejoin:round}
+.metro .stn{fill:#fff;stroke:var(--text);stroke-width:3;transition:r .2s}
+.metro .stn.x{stroke-width:4}
+.metro g.s:hover .stn{r:13}
+.metro text{font-family:var(--font);font-size:14px;font-weight:700;fill:var(--text)}
+.metro .lname{font-size:12px;font-weight:700}
+.mlegend{display:flex;flex-wrap:wrap;justify-content:center;gap:16px;font-size:12px;margin-top:8px}
+.mlegend span{display:inline-flex;align-items:center;gap:7px}
+.mlegend i{width:22px;height:6px;border-radius:3px}
+
+/* N — glass */
+.glass{position:relative;border-radius:18px;overflow:hidden;padding:30px 24px;background:#f5faf7}
+.blob{position:absolute;border-radius:50%;filter:blur(40px);opacity:.75;animation:drift 14s ease-in-out infinite alternate}
+.blob.b1{width:340px;height:340px;background:#5eeaa0;left:-60px;top:-80px}
+.blob.b2{width:300px;height:300px;background:#93c5fd;right:-40px;top:30px;animation-delay:-5s}
+.blob.b3{width:260px;height:260px;background:#fcd34d;left:35%;bottom:-120px;animation-delay:-9s}
+@keyframes drift{to{transform:translate(40px,30px) scale(1.1)}}
+.ggrid{position:relative;display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.gc{background:rgba(255,255,255,.45);backdrop-filter:blur(14px) saturate(1.4);-webkit-backdrop-filter:blur(14px) saturate(1.4);border:1px solid rgba(255,255,255,.7);border-radius:18px;padding:16px;display:flex;gap:12px;align-items:center;box-shadow:0 10px 30px -18px rgba(0,0,0,.35);transition:transform .3s var(--ease)}
+.gc:hover{transform:translateY(-4px)}
+.gc .ico{width:38px;height:38px}
+.gc b{display:block;font-size:14px}.gc small{font-size:11.5px;color:var(--muted)}
+
+/* O — sentence */
+.story{font-size:clamp(20px,3.2vw,32px);line-height:1.9;font-weight:500;max-width:980px}
+.story .chipi{display:inline-flex;align-items:center;gap:8px;padding:2px 14px 2px 8px;border-radius:99px;background:var(--surface);border:1px solid var(--border);font-weight:700;vertical-align:middle;line-height:1.5;transition:.25s var(--ease);font-size:.8em}
+.story .chipi:hover{background:#fff;border-color:var(--accent);transform:translateY(-2px)}
+.story .chipi .ico{width:1.15em;height:1.15em}.story .chipi .ico i{font-size:1em}
+.story u{text-decoration:none;background:linear-gradient(transparent 62%,rgba(24,210,110,.35) 62%);padding:0 2px}
+.story .dim{color:var(--muted)}
+</style>
+</head>
+<body>
+<div class="top"><div class="in">
+  <h1>Skills — yana <b>15</b> variant</h1>
+  <a class="prev" href="skills-variants.html">← avvalgi 12 ta</a>
+  <nav class="jump" id="jump"></nav>
+</div></div>
+<div class="wrap">
+  <p class="intro">Avvalgilardan butunlay boshqacha 15 ta ko'rinish. Hech birida <b>raqam, foiz yoki daraja yo'q</b> — ko'nikmalar so'z, ikonka, tuzilma va harakat orqali ko'rsatiladi. Hammasi saytning ranglari va shriftida. Variantlar harf bilan belgilangan (A–O).</p>
+  <div id="variants"></div>
+</div>
+<div class="follow" id="follow"></div>
+
+<script>
+const SK={
+ html:{n:"HTML",ic:"html5",g:"Frontend",d:"Semantic, accessible markup"},
+ css:{n:"CSS",ic:"css3",g:"Frontend",d:"Responsive layouts & motion"},
+ js:{n:"JavaScript",ic:"javascript",g:"Frontend",d:"Interactive UI & browser APIs"},
+ java:{n:"Java",ic:"java",g:"Backend",d:"OOP & clean, typed code"},
+ spring:{n:"Spring Boot",ic:"spring",g:"Backend",d:"REST APIs & microservices"},
+ py:{n:"Python",ic:"python",g:"Backend",d:"Scripting & automation"},
+ pg:{n:"PostgreSQL",ic:"postgresql",g:"Data",d:"Relational design & SQL"},
+ claude:{n:"Claude",ic:"claude",g:"Tools",d:"AI-assisted development"},
+ cloud:{n:"Cloud",ic:null,g:"Tools",d:"Cloud integration & security"},
+ gh:{n:"GitHub",ic:"github",g:"Tools",d:"Version control & teamwork"}
+};
+const ALL=Object.keys(SK);
+const COMP=["Programming Proficiency","Debugging Skills","Version Control","Database Management","Code Testing","Problem Solving","API Integration","Basic Security Knowledge"];
+const ico=k=>{const s=SK[k];return `<span class="ico">${s.ic?`<img src="assets/img/skills/${s.ic}.svg" alt="">`:`<i class="bi bi-cloud-fill"></i>`}</span>`};
+const pill=k=>`<span class="pill">${ico(k)}${SK[k].n}</span>`;
+const title=(t,c="")=>`<div class="st ${c}"><h3>${t}</h3></div>`;
+const cmps=()=>`<div class="cmpline">${COMP.map(c=>`<span>${c}</span>`).join("")}</div>`;
+
+const V=[
+ {id:"A",t:"Aylanuvchi kartalar",tag:"interaktiv",d:"Har bir texnologiya kartasi sichqoncha ustiga borganda aylanadi va orqa tomonida u bilan nima qilishingiz yoziladi.",
+  h:()=>title("Skills")+`<div class="flips">${ALL.map(k=>`<div class="flip" tabindex="0"><div class="inr"><div class="f">${ico(k)}<b>${SK[k].n}</b></div><div class="b"><b>${SK[k].n}</b><small>${SK[k].d}</small></div></div></div>`).join("")}</div>${cmps()}`},
+
+ {id:"B",t:"So'zlar buluti",tag:"tipografik · yengil",d:"Texnologiya va kompetensiyalar bitta bulutda: asosiylari kattaroq, rang — kategoriya. Raqamsiz, lekin nima muhimligi darhol ko'rinadi.",
+  h:()=>{const W=[["Java","w1 g"],["API Integration","w4"],["Spring Boot","w1 g"],["HTML","w3 bl"],["Problem Solving","w2"],["PostgreSQL","w2 vi"],["Debugging","w4"],["Claude","w2 am"],["CSS","w3 bl"],["Version Control","w4"],["Python","w3 g"],["GitHub","w3 am"],["Database Management","w4"],["JavaScript","w2 bl"],["Cloud","w3 am"],["Code Testing","w4"],["Security","w4"],["Programming","w3"]];
+   return title("Skills")+`<div class="cloud">${W.map(([w,c],i)=>`<span class="${c}" style="animation-delay:-${(i*0.7).toFixed(1)}s">${w}</span>`).join("")}</div>`}},
+
+ {id:"C",t:"Kod muharriri",tag:"backend ruhi",d:"Ko'nikmalar IDE oynasida Java klassi sifatida. Tablar va fayl daraxti orqali Backend, Frontend va Tools fayllari almashadi.",
+  h:()=>title("Skills")+`<div class="ed"><div class="tbar"><i class="d" style="background:#ff5f56"></i><i class="d" style="background:#ffbd2e"></i><i class="d" style="background:#27c93f"></i><span style="margin-left:auto;font-size:11.5px;color:#57606a">portfolio — skills</span></div>
+   <div class="tabs" id="edTabs"><button class="on" data-f="be">${ico("java")}Backend.java</button><button data-f="fe">${ico("html")}Frontend.html</button><button data-f="tl">${ico("gh")}tools.yml</button></div>
+   <div class="body"><div class="tree" id="edTree"><div data-f="be" class="on">${ico("java")}Backend.java</div><div data-f="fe">${ico("html")}Frontend.html</div><div data-f="tl">${ico("gh")}tools.yml</div></div><pre id="edCode"></pre></div></div>`},
+
+ {id:"D",t:"Arxitektura qatlamlari",tag:"muhandislik",d:"Ko'nikmalar tizim arxitekturasi kabi: Frontend → API → Ma'lumotlar → Infratuzilma, yon tomonda ish vositalari. Backend va PM sifatida tizimni tushunishingizni ko'rsatadi.",
+  h:()=>title("Skills")+`<div class="arch"><div class="layers">
+    <div class="layer l1 rv"><h5>Presentation<small>what users see</small></h5><div class="its">${["html","css","js"].map(pill).join("")}</div></div>
+    <div class="layer l2 rv"><h5>Application<small>business logic & APIs</small></h5><div class="its">${["java","spring","py"].map(pill).join("")}</div></div>
+    <div class="layer l3 rv"><h5>Data<small>storage & queries</small></h5><div class="its">${pill("pg")}</div></div>
+    <div class="layer l4 rv"><h5>Infrastructure<small>deploy & integrate</small></h5><div class="its">${pill("cloud")}</div></div>
+   </div><div class="side rv"><h5>Workflow</h5>${pill("gh")}${pill("claude")}<h5 style="margin-top:10px">Practices</h5>${["Code Testing","Debugging","Security"].map(c=>`<span class="pill">${c}</span>`).join("")}</div></div>`},
+
+ {id:"E",t:"Jurnal ro'yxati",tag:"minimal · premium",d:"Katta harflar bilan ro'yxat. Qatorga sichqoncha borganda ikonka kursor ortidan ergashadi, o'ngda qisqa izoh.",
+  h:()=>title("Skills")+`<div class="elist">${["java","spring","pg","py","js","html","css","cloud","gh","claude"].map(k=>`<div class="erow" data-k="${k}"><b>${SK[k].n}</b><span>${SK[k].d}</span></div>`).join("")}</div>${cmps()}`},
+
+ {id:"F",t:"Stikerlar doskasi",tag:"o'yinli · noyob",d:"Ikonkalar doskaga yopishtirilgan stikerlar kabi — ularni sichqoncha yoki barmoq bilan surib joyini o'zgartirish mumkin. Mehmon o'ynab ko'radi va eslab qoladi.",
+  h:()=>title("Skills")+`<div class="board" id="board">${ALL.map(k=>`<div class="stk" data-k="${k}">${ico(k)}<b>${SK[k].n}</b></div>`).join("")}${["Problem Solving","API Integration","Version Control","Debugging"].map(w=>`<div class="stk word">${w}</div>`).join("")}<span class="boardhint">✋ surib ko'ring</span></div>`},
+
+ {id:"G",t:"Klaviatura",tag:"taktil · coder",d:"Har bir texnologiya mexanik klaviatura tugmasi. Bosilganda tugma pastga tushadi va pastda izoh chiqadi. Klaviaturada harf bosish ham ishlaydi.",
+  h:()=>{const R=[["java","spring","py","pg"],["html","css","js"],["gh","cloud","claude"]];
+   return title("Skills")+`<div class="kb">${R.map(r=>`<div class="row">${r.map(k=>`<div class="key" data-k="${k}">${ico(k)}<b>${SK[k].n}</b></div>`).join("")}</div>`).join("")}<div class="row"><div class="key wide" data-k="">Problem Solving</div></div></div><div class="kbout" id="kbout">⌨ tugmani bosing</div>`}},
+
+ {id:"H",t:"Asalari uyasi",tag:"geometrik",d:"Olti burchakli kataklar: markazda backend yadrosi, atrofida qolgan texnologiyalar. Bir butun tizim hissini beradi.",
+  h:()=>{const hex=(k,core)=>`<div class="hex ${core?"core":""}"><div class="inr">${k?ico(k):'<i class="bi bi-cpu" style="font-size:30px"></i>'}<b>${k?SK[k].n:"Core"}</b></div></div>`;
+   return title("Skills")+`<div class="hive"><div class="hrow">${["html","css","js"].map(k=>hex(k)).join("")}</div><div class="hrow">${hex("py")}${hex("java",1)}${hex("spring",1)}${hex("pg")}</div><div class="hrow">${["gh","cloud","claude"].map(k=>hex(k)).join("")}</div></div>${cmps()}`}},
+
+ {id:"I",t:"Venn diagrammasi",tag:"strategik · PM",d:"Uch soha kesishmasi: Backend, Project Management va Web/AI. Kesishmalarda — ikkalasini talab qiladigan kompetensiyalar, markazda “Problem Solving”. Sizning noyob kombinatsiyangizni ko'rsatadi.",
+  h:()=>title("Skills")+`<div class="venn"><div class="vc a"></div><div class="vc b"></div><div class="vc c"></div>
+   <div class="vl" style="left:22%;top:30%"><h6 style="color:var(--accent-text)">Backend</h6><div class="row">${ico("java")}${ico("spring")}${ico("pg")}${ico("py")}</div></div>
+   <div class="vl" style="left:78%;top:30%"><h6 style="color:#1d4ed8">Project Mgmt</h6><div class="row"><span class="mini">Planning</span><span class="mini">Vendors</span><span class="mini">Tech specs</span><span class="mini">ICAO / IATA</span></div></div>
+   <div class="vl" style="left:50%;top:84%"><h6 style="color:#b45309">Web & AI</h6><div class="row">${ico("html")}${ico("css")}${ico("js")}${ico("claude")}</div></div>
+   <div class="vl" style="left:50%;top:17%"><span class="mini">API Integration</span><span class="mini">Version Control</span></div>
+   <div class="vl" style="left:30%;top:60%"><span class="mini">Debugging</span><span class="mini">Code Testing</span></div>
+   <div class="vl" style="left:70%;top:60%"><span class="mini">Cloud</span><span class="mini">Security</span></div>
+   <div class="vl center" style="left:50%;top:46%"><span class="mini">Problem Solving</span></div></div>`},
+
+ {id:"J",t:"Fikrlar xaritasi",tag:"tizimli",d:"Markazda siz, shoxlarda kategoriyalar, uchlarida texnologiyalar. Shoxga sichqoncha borganda u ajralib, qolganlari xiralashadi.",
+  h:()=>{const W=900,H=480,cx=W/2,cy=H/2;
+   const B=[{n:"Backend",c:"#0f9d4f",a:-140,k:["java","spring","py"]},{n:"Frontend",c:"#3b82f6",a:-40,k:["html","css","js"]},{n:"Data",c:"#8b5cf6",a:140,k:["pg"]},{n:"Tools & AI",c:"#f59e0b",a:40,k:["gh","cloud","claude"]}];
+   let s=`<svg class="mm" id="mm" viewBox="0 0 ${W} ${H}">`;
+   B.forEach(b=>{const r=b.a*Math.PI/180,bx=cx+Math.cos(r)*190,by=cy+Math.sin(r)*170;
+     s+=`<g class="br"><path class="lk" stroke="${b.c}" d="M${cx},${cy} C${(cx+bx)/2},${cy} ${(cx+bx)/2},${by} ${bx},${by}"/>`;
+     b.k.forEach((k,i)=>{const off=(i-(b.k.length-1)/2)*58,lx=bx+(Math.cos(r)>0?150:-150),ly=by+off;
+       s+=`<path class="lk" stroke="${b.c}" opacity=".6" d="M${bx},${by} C${(bx+lx)/2},${by} ${(bx+lx)/2},${ly} ${lx},${ly}"/>`;
+       s+=`<g class="nd"><rect x="${lx-62}" y="${ly-19}" width="124" height="38" fill="#fff" stroke="${b.c}"/>${SK[k].ic?`<image href="assets/img/skills/${SK[k].ic}.svg" x="${lx-54}" y="${ly-11}" width="22" height="22"/>`:`<text x="${lx-54}" y="${ly+7}" fill="#3b82f6" font-size="20">☁</text>`}<text x="${lx-26}" y="${ly+5}" fill="#15181d">${SK[k].n}</text></g>`});
+     s+=`<g class="nd"><rect x="${bx-64}" y="${by-20}" width="128" height="40" fill="${b.c}"/><text x="${bx}" y="${by+5}" text-anchor="middle" fill="#fff">${b.n}</text></g></g>`});
+   s+=`<circle cx="${cx}" cy="${cy}" r="48" fill="url(#mmg)"/><text x="${cx}" y="${cy+7}" text-anchor="middle" fill="#fff" style="font-size:22px;font-weight:700">JM</text><defs><radialGradient id="mmg" cx=".3" cy=".3"><stop offset="0" stop-color="#2be38a"/><stop offset="1" stop-color="#0f9d4f"/></radialGradient></defs></svg>`;
+   return title("Skills")+s}},
+
+ {id:"K",t:"Qorong'i spotlight",tag:"premium · kontrast",d:"Bo'lim qorong'i panelga o'tadi, sichqoncha ortidan yashil nur yuradi va kartalar chetini yoritadi. Ikonkalar faqat nur tushganda rangga kiradi.",
+  h:()=>`<div class="dark" id="dark">${title("Skills","light")}<div class="dgrid">${ALL.map(k=>`<div class="dt">${ico(k)}<b>${SK[k].n}</b></div>`).join("")}</div>${cmps()}</div>`},
+
+ {id:"L",t:"Kanban doska",tag:"PM uslubi",d:"Jira/Trello doskasi kabi ustunlar: Backend, Frontend, Data & Infra, Tools & AI. IT loyiha menejeri uchun juda mos va tushunarli.",
+  h:()=>{const C=[["Backend","#0f9d4f",["java","spring","py"]],["Frontend","#3b82f6",["html","css","js"]],["Data & Infra","#8b5cf6",["pg","cloud"]],["Tools & AI","#f59e0b",["gh","claude"]]];
+   return title("Skills")+`<div class="kanban">${C.map(([n,c,ks])=>`<div class="col rv"><h5><i style="background:${c}"></i>${n}</h5>${ks.map(k=>`<div class="card">${ico(k)}<div><b>${SK[k].n}</b><small>${SK[k].d}</small></div></div>`).join("")}</div>`).join("")}</div>${cmps()}`}},
+
+ {id:"M",t:"Metro xaritasi",tag:"kreativ · transport",d:"Har bir kategoriya — metro liniyasi, texnologiyalar — bekatlar. Kesishgan bekatlar texnologiyalar bir-biri bilan qanday bog'lanishini ko'rsatadi. Aviatsiya/transport sohangizga mos.",
+  h:()=>{
+   const st={html:[90,90],css:[230,90],js:[370,90],spring:[520,210],java:[370,210],py:[230,330],pg:[680,210],cloud:[830,210],gh:[520,330],claude:[680,330]};
+   const lines=[["#3b82f6",["html","css","js","spring"],"Frontend line"],["#0f9d4f",["py","java","spring","pg","cloud"],"Backend line"],["#f59e0b",["py","gh","claude","cloud"],"Tools line"]];
+   const inter={spring:1,py:1,cloud:1};
+   let s=`<svg class="metro" viewBox="0 0 920 420">`;
+   lines.forEach(([c,ks])=>{s+=`<path class="ln" stroke="${c}" d="${ks.map((k,i)=>(i?"L":"M")+st[k].join(",")).join(" ")}"/>`});
+   ALL.forEach(k=>{const [x,y]=st[k];const lbl=y<150?y-26:y+40;s+=`<g class="s"><circle class="stn ${inter[k]?"x":""}" cx="${x}" cy="${y}" r="${inter[k]?13:10}"/><text x="${x}" y="${lbl}" text-anchor="middle">${SK[k].n}</text></g>`});
+   s+=`</svg>`;
+   return title("Skills")+s+`<div class="mlegend">${lines.map(([c,,n])=>`<span><i style="background:${c}"></i>${n}</span>`).join("")}<span>◎ almashish bekati</span></div>`}},
+
+ {id:"N",t:"Shisha kartalar",tag:"yumshoq · zamonaviy",d:"Orqada sekin suzuvchi rangli dog'lar, ustida xira shisha kartalar (glassmorphism). Saytning och fonida juda nafis ko'rinadi.",
+  h:()=>`<div class="glass"><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>${title("Skills")}<div class="ggrid">${ALL.map(k=>`<div class="gc">${ico(k)}<div><b>${SK[k].n}</b><small>${SK[k].d}</small></div></div>`).join("")}</div></div>`},
+
+ {id:"O",t:"Hikoya jumlasi",tag:"shaxsiy · o'qiladi",d:"Ro'yxat o'rniga bitta jumla: texnologiyalar matn ichida ikonka-chip, kompetensiyalar ta'kidlangan. Recruiter o'qiydi — va sizning ishingizni darhol tushunadi.",
+  h:()=>{const c=k=>`<span class="chipi">${ico(k)}${SK[k].n}</span>`;
+   return title("Skills")+`<p class="story">I build backends with ${c("java")} and ${c("spring")}, keep data clean in ${c("pg")} and automate the boring parts with ${c("py")}. On the front I work with ${c("html")} ${c("css")} ${c("js")}, ship through ${c("gh")} and the ${c("cloud")}, and pair with ${c("claude")} every day. <span class="dim">What I bring to a team:</span> <u>problem solving</u>, <u>API integration</u>, <u>careful debugging</u>, <u>version control</u>, <u>database design</u>, <u>testing</u> and a <u>security-first mindset</u>.</p>`}}
+];
+
+document.getElementById("jump").innerHTML=V.map(v=>`<a href="#${v.id}">${v.id}</a>`).join("");
+document.getElementById("variants").innerHTML=V.map(v=>`<section class="var" id="${v.id}"><div class="vh"><span class="n">${v.id}</span><h2>${v.t}</h2><span class="tag">${v.tag}</span><p>${v.d}</p></div><div class="vb">${v.h()}</div></section>`).join("");
+
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");e.target.querySelectorAll(".rv").forEach((r,i)=>r.style.transitionDelay=i*70+"ms");io.unobserve(e.target)}}),{threshold:.15});
+document.querySelectorAll(".var").forEach(s=>io.observe(s));
+const links=[...document.querySelectorAll(".jump a")];
+addEventListener("scroll",()=>{let cur="A";V.forEach(v=>{if(document.getElementById(v.id).getBoundingClientRect().top<160)cur=v.id});links.forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+cur))},{passive:true});
+
+/* C — editor */
+const CODE={
+ be:`<span class="k">public class</span> <span class="t">Jamshid</span> <span class="k">extends</span> <span class="t">BackendDeveloper</span> {
+
+  <span class="k">private final</span> <span class="t">List</span>&lt;<span class="t">Skill</span>&gt; stack = <span class="t">List</span>.<span class="f">of</span>(
+      <span class="s">"Java"</span>, <span class="s">"Spring Boot"</span>, <span class="s">"Python"</span>, <span class="s">"PostgreSQL"</span>
+  );
+
+  <span class="c">// what I'm good at</span>
+  <span class="k">public</span> <span class="t">Set</span>&lt;<span class="t">String</span>&gt; <span class="f">strengths</span>() {
+    <span class="k">return</span> <span class="t">Set</span>.<span class="f">of</span>(<span class="s">"Problem Solving"</span>, <span class="s">"API Integration"</span>,
+                  <span class="s">"Database Management"</span>, <span class="s">"Debugging"</span>);
+  }
+}`,
+ fe:`<span class="c">&lt;!-- the part users actually see --&gt;</span>
+&lt;<span class="k">section</span> <span class="f">class</span>=<span class="s">"frontend"</span>&gt;
+  &lt;<span class="k">skill</span>&gt;HTML&lt;/<span class="k">skill</span>&gt;        <span class="c">&lt;!-- semantic & accessible --&gt;</span>
+  &lt;<span class="k">skill</span>&gt;CSS&lt;/<span class="k">skill</span>&gt;         <span class="c">&lt;!-- responsive & animated --&gt;</span>
+  &lt;<span class="k">skill</span>&gt;JavaScript&lt;/<span class="k">skill</span>&gt;  <span class="c">&lt;!-- interactive UI --&gt;</span>
+&lt;/<span class="k">section</span>&gt;`,
+ tl:`<span class="k">tools</span>:
+  <span class="t">version-control</span>: <span class="s">GitHub</span>
+  <span class="t">infrastructure</span>:  <span class="s">Cloud</span>
+  <span class="t">ai-pair</span>:         <span class="s">Claude</span>
+
+<span class="k">practices</span>:
+  - <span class="s">Code Testing</span>
+  - <span class="s">Version Control</span>
+  - <span class="s">Basic Security</span>`
+};
+const edCode=document.getElementById("edCode");
+function edShow(f){edCode.innerHTML=CODE[f];document.querySelectorAll("#edTabs button,#edTree div").forEach(x=>x.classList.toggle("on",x.dataset.f===f))}
+document.querySelectorAll("#edTabs button,#edTree div").forEach(x=>x.addEventListener("click",()=>edShow(x.dataset.f)));edShow("be");
+
+/* E — follow icon */
+const fol=document.getElementById("follow");
+document.querySelectorAll(".erow").forEach(r=>{r.addEventListener("mouseenter",()=>{fol.innerHTML=ico(r.dataset.k);fol.classList.add("on")});r.addEventListener("mouseleave",()=>fol.classList.remove("on"))});
+addEventListener("mousemove",e=>{fol.style.left=e.clientX+60+"px";fol.style.top=e.clientY+"px"},{passive:true});
+
+/* F — draggable stickers */
+const board=document.getElementById("board");
+function scatter(){const W=board.clientWidth,H=board.clientHeight;[...board.querySelectorAll(".stk")].forEach((s,i)=>{
+  const cols=Math.max(3,Math.floor(W/150)),cx=(i%cols+.5)*(W/cols),cy=(Math.floor(i/cols)+.5)*(H/Math.ceil(14/cols));
+  s.style.left=Math.max(6,Math.min(W-s.offsetWidth-6,cx-s.offsetWidth/2+(Math.sin(i*7)*18)))+"px";
+  s.style.top=Math.max(6,Math.min(H-s.offsetHeight-6,cy-s.offsetHeight/2+(Math.cos(i*5)*14)))+"px";
+  s.style.transform=`rotate(${(Math.sin(i*3)*8).toFixed(1)}deg)`})}
+scatter();addEventListener("resize",scatter);
+let drag=null,dx=0,dy=0,z=10;
+board.addEventListener("pointerdown",e=>{const s=e.target.closest(".stk");if(!s)return;drag=s;s.setPointerCapture(e.pointerId);const r=s.getBoundingClientRect();dx=e.clientX-r.left;dy=e.clientY-r.top;s.style.zIndex=++z;s.style.transform+=" scale(1.06)"});
+board.addEventListener("pointermove",e=>{if(!drag)return;const b=board.getBoundingClientRect();drag.style.left=Math.max(0,Math.min(b.width-drag.offsetWidth,e.clientX-b.left-dx))+"px";drag.style.top=Math.max(0,Math.min(b.height-drag.offsetHeight,e.clientY-b.top-dy))+"px"});
+board.addEventListener("pointerup",()=>{if(drag){drag.style.transform=drag.style.transform.replace(" scale(1.06)","");drag=null}});
+
+/* G — keyboard */
+const kbout=document.getElementById("kbout");
+function press(key){key.classList.add("dn");setTimeout(()=>key.classList.remove("dn"),140);const k=key.dataset.k;kbout.innerHTML=k?`<b>${SK[k].n}</b> — ${SK[k].d}`:`<b>Problem Solving</b> — the key I press the most`}
+document.querySelectorAll(".key").forEach(k=>k.addEventListener("click",()=>press(k)));
+addEventListener("keydown",e=>{if(e.target.closest("input,textarea"))return;const L=e.key.toLowerCase();const k=[...document.querySelectorAll(".key")].find(x=>x.dataset.k&&SK[x.dataset.k].n.toLowerCase()[0]===L);if(k&&document.getElementById("G").getBoundingClientRect().top<innerHeight&&document.getElementById("G").getBoundingClientRect().bottom>0)press(k)});
+
+/* J — mind map dim */
+const mm=document.getElementById("mm");mm.addEventListener("mouseover",e=>mm.classList.toggle("dim",!!e.target.closest(".br")));mm.addEventListener("mouseleave",()=>mm.classList.remove("dim"));
+
+/* K — spotlight */
+document.getElementById("dark").addEventListener("pointermove",e=>{document.querySelectorAll("#dark .dt").forEach(t=>{const r=t.getBoundingClientRect();t.style.setProperty("--x",e.clientX-r.left+"px");t.style.setProperty("--y",e.clientY-r.top+"px")})});
+</script>
+</body>
+</html>

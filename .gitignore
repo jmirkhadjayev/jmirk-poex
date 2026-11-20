@@ -1,0 +1,16 @@
+# Local secrets — never commit
+tg-secret.json
+supabase-secret.json
+.env
+.env.*
+
+# Contains a hardcoded admin token — kept local only
+admin.html
+
+# Editor / OS / tooling
+.vscode/
+node_modules/
+.netlify/
+Thumbs.db
+.DS_Store
+*.log

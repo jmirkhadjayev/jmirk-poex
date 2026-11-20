@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>7 ta g'oya — jonli demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    :root{
+      --accent:#18d26e; --accent-text:#0a7d3f; --accent-dark:#15bb62; --accent-soft:rgba(24,210,110,.13);
+      --ink:#15181d; --muted:#5b6b62; --panel:#fff; --border:rgba(15,23,42,.1);
+      --ease:cubic-bezier(.22,1,.36,1); --mono:"M PLUS 1 Code",ui-monospace,monospace;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:var(--mono);background:linear-gradient(160deg,#e7eeea,#dfeae3);color:var(--ink);
+      padding:0 18px 90px;-webkit-font-smoothing:antialiased}
+    .scrollbar{position:fixed;top:0;left:0;height:4px;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-dark));z-index:1000;transition:width .08s linear}
+    .head{text-align:center;padding:34px 0 8px}
+    h1{font-size:24px;margin:0 0 6px}
+    .sub{color:var(--muted);font-size:13px;margin:0 auto 22px;max-width:620px;line-height:1.6}
+    .wrap{max-width:880px;margin:0 auto}
+    .card{background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:26px;margin-bottom:28px;
+      box-shadow:0 18px 40px -28px rgba(15,23,30,.4)}
+    .num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:9px;
+      background:var(--accent-soft);color:var(--accent-text);font-weight:700;font-size:15px;margin-right:10px}
+    .htitle{display:flex;align-items:center;font-size:18px;font-weight:700;margin:0 0 6px}
+    .hdesc{color:var(--muted);font-size:12.5px;line-height:1.6;margin:0 0 20px}
+    .tag{display:inline-block;font-size:10px;font-weight:700;color:var(--accent-text);background:var(--accent-soft);
+      padding:2px 9px;border-radius:99px;margin-left:auto}
+
+    /* 1 stats */
+    .stats{display:flex;flex-wrap:wrap;gap:16px}
+    .stat{flex:1;min-width:130px;text-align:center;background:#f7faf8;border:1px solid var(--border);border-radius:16px;padding:22px 12px}
+    .stat .n{font-size:38px;font-weight:700;color:var(--accent-text);line-height:1}
+    .stat .l{font-size:12px;color:var(--muted);margin-top:8px}
+
+    /* 2 testimonials */
+    .tcar{position:relative;overflow:hidden;border-radius:16px;background:#f7faf8;border:1px solid var(--border);min-height:170px}
+    .tslide{position:absolute;inset:0;padding:26px 30px;opacity:0;transition:opacity .5s var(--ease);display:flex;flex-direction:column;justify-content:center}
+    .tslide.on{opacity:1;position:relative}
+    .tslide .q{font-size:14.5px;line-height:1.65;color:var(--ink)}
+    .tslide .q i{color:var(--accent);font-size:20px}
+    .tslide .a{margin-top:14px;font-size:12.5px;color:var(--muted)}
+    .tslide .a b{color:var(--ink)}
+    .tdots{display:flex;gap:7px;justify-content:center;margin-top:14px}
+    .tdots span{width:8px;height:8px;border-radius:50%;background:var(--border);cursor:pointer;transition:.2s}
+    .tdots span.on{background:var(--accent);width:22px;border-radius:5px}
+
+    /* 3 badge */
+    .availbadge{display:inline-flex;align-items:center;gap:9px;background:var(--accent-soft);color:var(--accent-text);
+      font-size:13px;font-weight:600;padding:9px 16px;border-radius:999px;border:1px solid rgba(24,210,110,.3)}
+    .pulse{position:relative;width:9px;height:9px;border-radius:50%;background:var(--accent)}
+    .pulse::after{content:"";position:absolute;inset:0;border-radius:50%;background:var(--accent);animation:pg 1.8s var(--ease) infinite}
+    @keyframes pg{0%{transform:scale(1);opacity:.7}100%{transform:scale(3.2);opacity:0}}
+    .heroprev{margin-top:14px;background:radial-gradient(120% 100% at 30% 0%,#0c1512,#06170e 70%);border-radius:14px;padding:22px;color:#eafff3}
+    .heroprev .nm{font-size:18px;font-weight:700}.heroprev .rl{color:var(--accent);font-size:13px;margin:4px 0 12px}
+
+    /* 4 scroll note */
+    .arrow{font-size:13px;color:var(--muted)}
+
+    /* 5 greeting */
+    .greet{display:flex;flex-wrap:wrap;align-items:center;gap:16px}
+    .greet .g{font-size:22px;font-weight:700}
+    .clock{margin-left:auto;background:#0d1117;color:#c9d1d9;font-size:14px;padding:10px 16px;border-radius:12px;border:1px solid #233044}
+    .clock b{color:var(--accent)}
+
+    /* 6 timeline */
+    .tl{position:relative;padding-left:28px}
+    .tl::before{content:"";position:absolute;left:7px;top:6px;bottom:6px;width:2px;background:var(--border)}
+    .tlitem{position:relative;padding-bottom:22px}
+    .tlitem:last-child{padding-bottom:0}
+    .tlitem::before{content:"";position:absolute;left:-27px;top:3px;width:16px;height:16px;border-radius:50%;background:#fff;border:3px solid var(--accent)}
+    .tlitem .yr{font-size:11px;font-weight:700;color:var(--accent-text)}
+    .tlitem .ti{font-size:14px;font-weight:600;margin:2px 0}
+    .tlitem .ds{font-size:12px;color:var(--muted)}
+
+    /* 7 filter */
+    .filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+    .fbtn{font-family:var(--mono);font-size:12.5px;font-weight:600;padding:8px 16px;border-radius:999px;cursor:pointer;
+      border:1px solid var(--border);background:#fff;color:var(--muted);transition:.2s var(--ease)}
+    .fbtn.on{background:var(--accent);color:#06371b;border-color:var(--accent)}
+    .certs{display:flex;flex-wrap:wrap;gap:12px}
+    .cert{flex:1;min-width:160px;background:#f7faf8;border:1px solid var(--border);border-radius:14px;padding:16px;transition:.3s var(--ease)}
+    .cert.hide{display:none}
+    .cert .cat{font-size:10px;font-weight:700;color:var(--accent-text);background:var(--accent-soft);padding:2px 8px;border-radius:99px}
+    .cert .ct{font-size:13.5px;font-weight:600;margin:9px 0 3px}
+    .cert .cm{font-size:11.5px;color:var(--muted)}
+  </style>
+</head>
+<body>
+  <div class="scrollbar" id="sb"></div>
+
+  <div class="head">
+    <h1>7 ta g'oya — jonli demo</h1>
+    <p class="sub">Pastga aylantiring — statistika sanaydi, testimonial o'zi aylanadi, soat ishlaydi, filter va salom jonli. Yoqqanini ayting.</p>
+  </div>
+
+  <div class="wrap">
+
+    <!-- 1 -->
+    <div class="card">
+      <h2 class="htitle"><span class="num">1</span> Animatsion statistika <span class="tag">tez · purecounter</span></h2>
+      <p class="hdesc">Ekranga kelganda raqamlar 0 dan sanab chiqadi.</p>
+      <div class="stats">
+        <div class="stat"><div class="n" data-to="5">0</div><div class="l">+ yil tajriba</div></div>
+        <div class="stat"><div class="n" data-to="20">0</div><div class="l">+ loyiha</div></div>
+        <div class="stat"><div class="n" data-to="6">0</div><div class="l">sertifikat</div></div>
+        <div class="stat"><div class="n" data-to="9">0</div><div class="l">texnologiya</div></div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="card">
+      <h2 class="htitle"><span class="num">2</span> Tavsiyalar (Testimonials) <span class="tag">tez · swiper</span></h2>
+      <p class="hdesc">Hamkasb/rahbarlardan iqtiboslar — o'zi aylanadi, nuqtalardan boshqarsa ham bo'ladi.</p>
+      <div class="tcar" id="tcar">
+        <div class="tslide on"><div class="q"><i class="bi bi-quote"></i> Jamshid jamoani aniq maqsadga yo'naltira oladigan, mas'uliyatli loyiha menejeri. Murakkab vazifalarni soddalashtiradi.</div><div class="a"><b>A. Karimov</b> — CTO, TechCorp</div></div>
+        <div class="tslide"><div class="q"><i class="bi bi-quote"></i> Backend arxitekturasi va jamoa boshqaruvini bir vaqtda uddalaydi. Deadlinega doim rioya qiladi.</div><div class="a"><b>D. Yusupova</b> — Product Lead</div></div>
+        <div class="tslide"><div class="q"><i class="bi bi-quote"></i> Aviatsiya sohasidagi raqamli yechimlarda uning hissasi sezilarli. Ishonchli hamkor.</div><div class="a"><b>S. Rahimov</b> — Operations Director</div></div>
+      </div>
+      <div class="tdots" id="tdots"></div>
+    </div>
+
+    <!-- 3 -->
+    <div class="card">
+      <h2 class="htitle"><span class="num">3</span> "Open to opportunities" badge <span class="tag">recruiter signali</span></h2>
+      <p class="hdesc">Hero'da pulslovchi yashil nuqta bilan holat ko'rsatkichi.</p>
+      <div class="heroprev">
+        <div class="nm">Jamshid Mirkhadjayev</div>
+        <div class="rl">IT Project Manager · Java Backend Developer</div>
+        <span class="availbadge"><span class="pulse"></span> Available for new projects</span>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="card">
+      <h2 class="htitle"><span class="num">4</span> Scroll progress chizig'i <span class="tag">zamonaviy detal</span></h2>
+      <p class="hdesc">Sahifa tepasidagi <b style="color:var(--accent-text)">yashil chiziq</b> ↑ qancha o'qilganini ko'rsatadi.</p>
+      <p class="arrow">↑ Sahifani aylantiring — eng tepadagi chiziq to'lib boradi.</p>
+    </div>
+
+    <!-- 5 -->
+    <div class="card">
+      <h2 class="htitle"><span class="num">5</span> Vaqtga qarab salom + Toshkent vaqti <span class="tag">iliq detal</span></h2>
+      <p class="hdesc">Foydalanuvchi vaqtiga qarab salom va jonli Toshkent soati.</p>
+      <div class="greet">
+        <div class="g" id="greet">👋 …</div>
+        <div class="clock">🇺🇿 Tashkent · <b id="clock">--:--:--</b></div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="card">
+      <h2 class="htitle"><span class="num">6</span> Karyera timeline'i <span class="tag">hikoya</span></h2>
+      <p class="hdesc">Ish va ta'lim bosqichlari sana bilan — vertikal yo'l.</p>
+      <div class="tl">
+        <div class="tlitem"><div class="yr">2023 — hozir</div><div class="ti">IT Project Manager</div><div class="ds">Uzbekistan Airports — raqamli loyihalarni boshqarish</div></div>
+        <div class="tlitem"><div class="yr">2022</div><div class="ti">Java Backend Developer</div><div class="ds">PDP Academy — Spring Boot, REST API, mikroservislar</div></div>
+        <div class="tlitem"><div class="yr">2021</div><div class="ti">Java OOP sertifikati</div><div class="ds">Sololearn — OOP asoslari</div></div>
+        <div class="tlitem"><div class="yr">2020</div><div class="ti">Airport Management (Korea)</div><div class="ds">Young Leaders dasturi</div></div>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="card">
+      <h2 class="htitle"><span class="num">7</span> Sertifikatlarni filtrlash <span class="tag">qulay</span></h2>
+      <p class="hdesc">Tugmalardan toifani tanlang — kartalar filtrlanadi.</p>
+      <div class="filters" id="filters">
+        <button class="fbtn on" data-f="all">Barchasi</button>
+        <button class="fbtn" data-f="it">IT</button>
+        <button class="fbtn" data-f="avia">Aviation</button>
+        <button class="fbtn" data-f="lang">Language</button>
+      </div>
+      <div class="certs" id="certs">
+        <div class="cert" data-c="it"><span class="cat">IT</span><div class="ct">Java Backend Developer</div><div class="cm">PDP Academy</div></div>
+        <div class="cert" data-c="it"><span class="cat">IT</span><div class="ct">SQL Certificate</div><div class="cm">Database design</div></div>
+        <div class="cert" data-c="avia"><span class="cat">Aviation</span><div class="ct">Airport Management</div><div class="cm">Korea · Young Leaders</div></div>
+        <div class="cert" data-c="lang"><span class="cat">Language</span><div class="ct">English Proficiency</div><div class="cm">Communication</div></div>
+        <div class="cert" data-c="it"><span class="cat">IT</span><div class="ct">Java OOP</div><div class="cm">Sololearn</div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    /* 4 scroll progress */
+    function sbar(){const h=document.documentElement;const p=h.scrollTop/(h.scrollHeight-h.clientHeight)*100;document.getElementById('sb').style.width=(p||0)+'%';}
+    document.addEventListener('scroll',sbar);sbar();
+
+    /* 1 count-up (on view) */
+    function countUp(el){const to=+el.dataset.to;let s=null;const dur=1100;
+      function step(t){if(!s)s=t;const p=Math.min((t-s)/dur,1);el.textContent=Math.round(p*to)+(p===1?'':'');if(p<1)requestAnimationFrame(step);else el.textContent=to+'+';}
+      requestAnimationFrame(step);}
+    const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){countUp(e.target);io.unobserve(e.target);}})},{threshold:.5});
+    document.querySelectorAll('.stat .n').forEach(n=>io.observe(n));
+
+    /* 2 testimonials carousel */
+    const slides=[...document.querySelectorAll('.tslide')],dots=document.getElementById('tdots');let ci=0;
+    slides.forEach((_,i)=>{const d=document.createElement('span');if(i===0)d.className='on';d.onclick=()=>go(i);dots.appendChild(d);});
+    function go(i){slides[ci].classList.remove('on');dots.children[ci].classList.remove('on');ci=i;slides[ci].classList.add('on');dots.children[ci].classList.add('on');}
+    setInterval(()=>go((ci+1)%slides.length),3500);
+
+    /* 5 greeting + Tashkent clock */
+    function tashTime(){return new Date(new Date().toLocaleString('en-US',{timeZone:'Asia/Tashkent'}));}
+    function tick(){const d=tashTime();const hh=String(d.getHours()).padStart(2,'0'),mm=String(d.getMinutes()).padStart(2,'0'),ss=String(d.getSeconds()).padStart(2,'0');
+      document.getElementById('clock').textContent=hh+':'+mm+':'+ss;
+      const h=d.getHours();let g='Good evening';if(h<12)g='Good morning';else if(h<18)g='Good afternoon';
+      document.getElementById('greet').textContent='👋 '+g+'!';}
+    tick();setInterval(tick,1000);
+
+    /* 7 filter */
+    document.getElementById('filters').addEventListener('click',e=>{const b=e.target.closest('.fbtn');if(!b)return;
+      document.querySelectorAll('.fbtn').forEach(x=>x.classList.remove('on'));b.classList.add('on');const f=b.dataset.f;
+      document.querySelectorAll('.cert').forEach(c=>c.classList.toggle('hide',!(f==='all'||c.dataset.c===f)));});
+  </script>
+</body>
+</html>

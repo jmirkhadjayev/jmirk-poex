@@ -1,0 +1,101 @@
+/* =======================================================
+ * UI/UX Pro Max — Upgrade Pack
+ * Additive premium effects on top of the Creative Layer.
+ *   1) Top scroll-progress bar
+ *   2) Cursor spotlight sheen on cards
+ *   3) Magnetic buttons / social links
+ * All effects respect prefers-reduced-motion (JS-guarded where needed).
+ * ======================================================= */
+
+/* ---------- 1) Top scroll-progress bar ---------- */
+#pm-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background: linear-gradient(90deg, #18d26e, #4ceb95, #0a7d3f);
+  box-shadow: 0 0 10px -2px rgba(24, 210, 110, 0.7);
+  z-index: 2100;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* ---------- 2) Cursor spotlight sheen on cards ---------- */
+.certificate-box,
+.contact .info-box {
+  position: relative;
+  z-index: 0;          /* establish a stacking context so the glow sits behind text */
+}
+.pm-glow {
+  position: absolute;
+  inset: 0;
+  z-index: -1;         /* above the card background, below its content */
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%),
+              rgba(24, 210, 110, 0.20), transparent 60%);
+}
+.certificate-box:hover .pm-glow,
+.contact .info-box:hover .pm-glow { opacity: 1; }
+
+/* ---------- 3) Magnetic elements ---------- */
+.pm-magnetic {
+  transition: transform 0.25s cubic-bezier(.22, 1, .36, 1);
+  will-change: transform;
+}
+
+/* keep effects out of the way for reduced-motion users */
+@media (prefers-reduced-motion: reduce) {
+  #pm-progress { display: none; }
+}
+
+/* =======================================================
+ * Anonymous message form — centered, comfortable layout
+ * (web: narrower & centered; mobile: tighter padding)
+ * ======================================================= */
+.contact .anon-box {
+  max-width: 640px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 28px 30px 30px !important;
+}
+.contact .anon-box .anon-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  text-align: center;
+  font-size: 18px;
+  margin: 0 0 6px;
+}
+.contact .anon-box .anon-title i { color: var(--accent); }
+.contact .anon-box .anon-sub {
+  text-align: center;
+  max-width: 430px;
+  margin: 0 auto 20px;
+  line-height: 1.55;
+}
+.contact .anon-box .php-email-form { max-width: 520px; margin: 0 auto; }
+
+/* keep the floating contact label on a single line */
+#feedbackForm .cfield label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 52px);
+}
+
+/* center & size the submit button nicely */
+#feedbackForm button[type="submit"] { min-width: 200px; justify-content: center; }
+
+@media (max-width: 575px) {
+  .contact .anon-box { padding: 22px 15px 24px !important; }
+  .contact .anon-box .anon-title { font-size: 15.5px; gap: 7px; }
+  .contact .anon-box .anon-sub { font-size: 12.5px; }
+  #feedbackForm button[type="submit"] { width: 100%; }
+}

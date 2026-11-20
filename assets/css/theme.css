@@ -1,0 +1,47 @@
+/* =======================================================
+ * Enhancements Layer
+ *  - Language switcher cluster (UZ/RU/EN)
+ *  - Hero particle-network canvas
+ * Additive — loaded after creative.css and the inline <style>.
+ * ======================================================= */
+
+/* ---------- Language switcher (top-right) ---------- */
+#uiControls {
+  position: fixed;
+  top: 72px;            /* below the top menu, not too low */
+  right: 14px;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.45);   /* more transparent */
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 6px 18px -14px rgba(15, 23, 30, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+#uiControls:hover { background: rgba(255, 255, 255, 0.8); }  /* clearer on hover */
+#uiControls .lang-group { display: flex; gap: 1px; }
+#uiControls .lang-btn {
+  border: 0;
+  background: transparent;
+  color: #454b54;
+  font: 600 10px/1 "M PLUS 1 Code", ui-monospace, monospace;
+  padding: 4px 6px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+#uiControls .lang-btn:hover { color: #15181d; }
+#uiControls .lang-btn.active { background: #18d26e; color: #06371b; }
+
+/* Mobile (≤991px): nav becomes a bottom dock and the sticky header keeps
+   the name on the LEFT, so the top-right corner is free — stay there,
+   just a touch smaller. */
+@media (max-width: 991px) {
+  #uiControls { top: 72px; right: 10px; gap: 4px; padding: 3px; }
+  #uiControls .lang-btn { padding: 4px 6px; font-size: 9.5px; }
+}
+

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Joylashuv — 3 usul (jonli demo)</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    :root{
+      --accent:#18d26e; --accent-text:#0a7d3f; --accent-dark:#15bb62; --accent-soft:rgba(24,210,110,.13);
+      --ink:#15181d; --muted:#5b6b62; --panel:#fff; --border:rgba(15,23,42,.1);
+      --ease:cubic-bezier(.22,1,.36,1); --mono:"M PLUS 1 Code",ui-monospace,monospace;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:var(--mono);background:linear-gradient(160deg,#e7eeea,#dfeae3);color:var(--ink);
+      padding:32px 18px 80px;-webkit-font-smoothing:antialiased}
+    h1{text-align:center;font-size:23px;margin:0 0 6px}
+    .sub{text-align:center;color:var(--muted);font-size:13px;margin:0 auto 28px;max-width:640px;line-height:1.6}
+    .wrap{max-width:760px;margin:0 auto}
+    .card{background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:22px;margin-bottom:22px;
+      box-shadow:0 18px 40px -28px rgba(15,23,30,.4)}
+    .htitle{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:700;margin:0 0 6px;flex-wrap:wrap}
+    .num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:8px;
+      background:var(--accent-soft);color:var(--accent-text);font-weight:700;font-size:14px;flex:none}
+    .tag{margin-left:auto;font-size:10px;font-weight:700;padding:3px 10px;border-radius:99px}
+    .tag.auto{color:#9a3412;background:#fff7ed} .tag.btn{color:var(--accent-text);background:var(--accent-soft)}
+    .tag.ip{color:#0b5a82;background:rgba(42,171,238,.12)}
+    .hdesc{color:var(--muted);font-size:12.5px;line-height:1.6;margin:0 0 14px}
+    .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:13px;font-weight:600;
+      padding:10px 18px;border-radius:12px;cursor:pointer;border:0;text-decoration:none;
+      background:var(--accent);color:#06371b;box-shadow:0 10px 22px -12px rgba(24,210,110,.7);transition:transform .2s var(--ease)}
+    .btn:hover{transform:translateY(-2px)} .btn:disabled{opacity:.6;cursor:default;transform:none}
+    .box{margin-top:14px;font-size:12.5px;color:var(--muted)}
+    .res .coord{font-size:18px;font-weight:700;color:var(--ink)}
+    .res .sub2{font-size:12px;color:var(--accent-text);font-weight:600;margin:3px 0 10px}
+    .map{width:100%;height:200px;border:1px solid var(--border);border-radius:12px;display:block}
+    .maplink{display:inline-block;margin-top:10px;font-size:12px;color:var(--accent-text);font-weight:600}
+    .cmp{width:100%;border-collapse:collapse;font-size:12px;margin-top:6px}
+    .cmp th,.cmp td{border:1px solid var(--border);padding:8px 10px;text-align:left;vertical-align:top}
+    .cmp th{background:var(--accent-soft);color:var(--accent-text);font-weight:700}
+    .ok{color:var(--accent-text);font-weight:700}.no{color:#b91c1c;font-weight:700}
+    .legend{text-align:center;font-size:11.5px;color:var(--muted);margin-top:2px}
+    .countdown{color:#9a3412;font-weight:600}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>📍 Joylashuv — 3 usul</h1>
+    <p class="sub">Har birini sinab ko'ring va <b>farqini</b> ko'ring: IP (taxminiy, ruxsatsiz) · GPS avtomatik (sahifa ochilganda so'raydi) · GPS tugma (bosilganda so'raydi).</p>
+
+    <!-- 1: IP -->
+    <div class="card">
+      <div class="htitle"><span class="num">1</span> IP orqali (taxminiy) <span class="tag ip">ruxsat kerak emas</span></div>
+      <p class="hdesc">Sahifa ochilishi bilan <b>jim</b> ishlaydi, ruxsat so'ramaydi. Lekin faqat <b>shahar darajasi</b> — provayder joyini ko'rsatadi (uy emas).</p>
+      <div class="box" id="ipBox">⏳ IP aniqlanmoqda…</div>
+    </div>
+
+    <!-- 2: Auto GPS -->
+    <div class="card">
+      <div class="htitle"><span class="num">2</span> GPS — avtomatik <span class="tag auto">sahifa ochilganda</span></div>
+      <p class="hdesc">Saytda <b>sahifa ochilishi bilan darrov</b> ruxsat so'raydi. Aniq (metr darajasi), lekin ba'zi foydalanuvchini cho'chitadi.</p>
+      <div class="box" id="autoBox"><span class="countdown" id="cd">⏱ 2 soniyadan keyin avtomatik so'raydi…</span></div>
+    </div>
+
+    <!-- 3: Button GPS -->
+    <div class="card">
+      <div class="htitle"><span class="num">3</span> GPS — tugma orqali <span class="tag btn">bosilganda</span></div>
+      <p class="hdesc">Faqat foydalanuvchi <b>tugmani bossa</b> so'raydi. Aniq (metr darajasi) va yumshoqroq, ishonchliroq.</p>
+      <button class="btn" id="btnReq"><i class="bi bi-geo-alt-fill"></i> Joylashuvni ulashish</button>
+      <div class="box" id="btnBox"></div>
+      <p class="legend" style="text-align:left;margin-top:10px">ℹ️ Ruxsatni bir marta bergach, brauzer eslab qoladi — 2 va 3 da qayta so'ramasligi mumkin.</p>
+    </div>
+
+    <!-- 4: compare -->
+    <div class="card">
+      <div class="htitle"><span class="num">4</span> Farqi — qisqacha</div>
+      <table class="cmp">
+        <tr><th></th><th>IP (taxminiy)</th><th>GPS avtomatik</th><th>GPS tugma</th></tr>
+        <tr><td>Aniqlik</td><td>Shahar darajasi</td><td class="ok">Metr darajasi</td><td class="ok">Metr darajasi</td></tr>
+        <tr><td>Ruxsat so'raladi</td><td class="ok">Yo'q</td><td class="no">Ha (darrov)</td><td>Ha (bosilganda)</td></tr>
+        <tr><td>Foydalanuvchi taassuroti</td><td class="ok">Sezilmaydi</td><td class="no">Cho'chitishi mumkin</td><td class="ok">Yumshoq</td></tr>
+        <tr><td>Ulashish foizi</td><td>—</td><td>Yuqori</td><td>Pastroq</td></tr>
+        <tr><td>Eng mos</td><td>Umumiy statistika</td><td>Maksimal ma'lumot</td><td class="ok">Muvozanat (tavsiya)</td></tr>
+      </table>
+    </div>
+
+    <p class="legend">Saytda hozir <b>3-usul (tugma)</b> qo'yilgan. Qaysi birini xohlasangiz — asosiy saytga o'rnatib beraman.</p>
+  </div>
+
+  <script>
+  (function(){
+    "use strict";
+    function osm(lat, lon){
+      var d = 0.006;
+      return "https://www.openstreetmap.org/export/embed.html?bbox=" +
+        (lon-d)+","+(lat-d)+","+(lon+d)+","+(lat+d)+"&layer=mapnik&marker="+lat+","+lon;
+    }
+    function show(boxId, lat, lon, sub){
+      var b = document.getElementById(boxId);
+      b.innerHTML =
+        '<div class="res">' +
+          '<div class="coord">'+lat.toFixed(6)+', '+lon.toFixed(6)+'</div>' +
+          '<div class="sub2">'+sub+'</div>' +
+          '<iframe class="map" src="'+osm(lat,lon)+'"></iframe>' +
+          '<a class="maplink" target="_blank" rel="noopener" href="https://maps.google.com/?q='+lat+','+lon+'">Google Maps\'da ochish →</a>' +
+        '</div>';
+    }
+    function reqGPS(boxId, btn){
+      var b = document.getElementById(boxId);
+      if(!navigator.geolocation){ b.textContent = "Brauzer qo'llab-quvvatlamaydi."; return; }
+      b.innerHTML = "⏳ Ruxsat so'ralmoqda… (brauzer oynasiga ruxsat bering)";
+      navigator.geolocation.getCurrentPosition(function(p){
+        show(boxId, p.coords.latitude, p.coords.longitude, "🎯 GPS · aniqlik ±"+Math.round(p.coords.accuracy)+" m");
+        if(btn){ btn.disabled=false; btn.innerHTML='<i class="bi bi-check-circle-fill"></i> Ulashildi'; }
+      }, function(e){
+        b.innerHTML = "❌ Rad etildi yoki imkonsiz ("+(e && e.message ? e.message : "")+")";
+        if(btn){ btn.disabled=false; btn.innerHTML='<i class="bi bi-geo-alt-fill"></i> Qayta urinish'; }
+      }, { enableHighAccuracy:true, timeout:15000, maximumAge:0 });
+    }
+    // 1) IP — silent on load
+    fetch("/.netlify/functions/geo").then(function(r){return r.json();}).then(function(g){
+      if(g && g.latitude != null){
+        show("ipBox", parseFloat(g.latitude), parseFloat(g.longitude),
+          "🌍 IP (taxminiy) · "+(g.city||"?")+", "+(g.country||"?")+(g.connection&&g.connection.isp?" · "+g.connection.isp:""));
+      } else {
+        document.getElementById("ipBox").textContent = "IP ma'lumoti topilmadi.";
+      }
+    }).catch(function(){
+      document.getElementById("ipBox").textContent = "IP xizmati ishlamadi (localhost'da /geo kerak — server.js).";
+    });
+    // 2) Auto GPS — countdown then fire on load
+    var n = 2, cd = document.getElementById("cd");
+    var t = setInterval(function(){
+      n--; if(cd) cd.textContent = "⏱ "+n+" soniyadan keyin avtomatik so'raydi…";
+      if(n<=0){ clearInterval(t); reqGPS("autoBox", null); }
+    }, 1000);
+    // 3) Button GPS
+    var btn = document.getElementById("btnReq");
+    btn.addEventListener("click", function(){
+      btn.disabled = true; btn.innerHTML = '<i class="bi bi-hourglass-split"></i> …';
+      reqGPS("btnBox", btn);
+    });
+  })();
+  </script>
+</body>
+</html>

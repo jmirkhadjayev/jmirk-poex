@@ -1,0 +1,30 @@
+# Netlify configuration — static site + Telegram proxy function.
+# No build step: index.html is served straight from the deploy root.
+# (No `publish` here on purpose — let Netlify use the upload root,
+#  which is where index.html lives. Setting publish can mis-resolve.)
+
+[functions]
+  directory = "netlify/functions"
+
+# Optional cleaner alias: /api/tg → the function
+[[redirects]]
+  from = "/api/tg"
+  to = "/.netlify/functions/tg"
+  status = 200
+
+# SECURITY: never serve local-dev secret files, even if they get uploaded.
+# force = true makes these win over the actual files on disk → always 404.
+[[redirects]]
+  from = "/tg-secret.json"
+  to = "/"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/supabase-secret.json"
+  to = "/"
+  status = 404
+  force = true
+
+[build]
+  functions = "netlify/functions"

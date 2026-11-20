@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>10 ta kamyob g'oya — jonli demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    :root{
+      --accent:#18d26e; --accent-text:#0a7d3f; --accent-dark:#15bb62; --accent-soft:rgba(24,210,110,.13);
+      --ink:#15181d; --muted:#5b6b62; --panel:#fff; --border:rgba(15,23,42,.1);
+      --ease:cubic-bezier(.22,1,.36,1); --mono:"M PLUS 1 Code",ui-monospace,monospace;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:var(--mono);background:linear-gradient(160deg,#e7eeea,#dfeae3);color:var(--ink);padding:32px 18px 90px;-webkit-font-smoothing:antialiased}
+    h1{text-align:center;font-size:24px;margin:0 0 6px}
+    .sub{text-align:center;color:var(--muted);font-size:13px;margin:0 auto 30px;max-width:640px;line-height:1.6}
+    .wrap{max-width:900px;margin:0 auto}
+    .card{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:22px;margin-bottom:22px;box-shadow:0 18px 40px -28px rgba(15,23,30,.4)}
+    .num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;background:var(--accent-soft);color:var(--accent-text);font-weight:700;font-size:14px;margin-right:10px}
+    .htitle{display:flex;align-items:center;font-size:16.5px;font-weight:700;margin:0 0 5px}
+    .hdesc{color:var(--muted);font-size:12px;line-height:1.55;margin:0 0 16px}
+    .tag{display:inline-block;font-size:9.5px;font-weight:700;color:var(--accent-text);background:var(--accent-soft);padding:2px 8px;border-radius:99px;margin-left:auto}
+
+    /* 1 spotlight cursor card */
+    .spot{position:relative;overflow:hidden;border-radius:14px;border:1px solid var(--border);background:#0d1117;color:#c9d1d9;padding:30px;min-height:120px}
+    .spot::before{content:"";position:absolute;inset:0;background:radial-gradient(220px circle at var(--mx,50%) var(--my,50%),rgba(24,210,110,.22),transparent 60%);transition:background .08s}
+    .spot b{color:#eafff3;font-size:15px}.spot p{font-size:12.5px;color:#8b949e;margin:8px 0 0;position:relative}
+
+    /* 2 magnetic button */
+    .mag-wrap{display:flex;justify-content:center;padding:14px 0}
+    .mag{display:inline-flex;align-items:center;gap:9px;background:var(--accent);color:#06371b;font-family:var(--mono);font-weight:600;font-size:14px;border:0;padding:14px 26px;border-radius:999px;cursor:pointer;transition:transform .15s var(--ease);box-shadow:0 12px 24px -10px rgba(24,210,110,.6)}
+
+    /* 3 tilt card */
+    .tilt{width:230px;margin:0 auto;border-radius:16px;background:linear-gradient(135deg,#0c1512,#0f211a);color:#eafff3;padding:22px;transition:transform .12s var(--ease);transform-style:preserve-3d}
+    .tilt .jm{font-size:30px;font-weight:800;color:var(--accent)}.tilt .r{font-size:12px;color:#8fe9b6;margin-top:6px}
+
+    /* 4 text scramble */
+    .scr{font-size:22px;font-weight:700;text-align:center;color:var(--accent-text);letter-spacing:1px;min-height:30px}
+
+    /* 5 marquee skills */
+    .mq{overflow:hidden;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:12px 0;-webkit-mask:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)}
+    .mq-track{display:inline-flex;gap:34px;white-space:nowrap;animation:mq 16s linear infinite;font-size:15px;color:var(--muted)}
+    .mq-track span{display:inline-flex;align-items:center;gap:7px}.mq-track i{color:var(--accent)}
+    @keyframes mq{to{transform:translateX(-50%)}}
+
+    /* 6 theme accent switcher */
+    .sw{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    .dot{width:30px;height:30px;border-radius:50%;cursor:pointer;border:2px solid #fff;box-shadow:0 0 0 1px var(--border)}
+    .swprev{margin-top:14px;border:1px solid var(--border);border-radius:12px;padding:16px;font-size:13px}
+    .swprev .chip{display:inline-block;background:var(--accent-soft);color:var(--accent-text);padding:5px 12px;border-radius:99px;font-weight:600;margin-right:8px}
+    .swprev .bt{background:var(--accent);color:#fff;border:0;padding:8px 16px;border-radius:99px;font-family:var(--mono);font-weight:600;font-size:12px}
+
+    /* 7 confetti */
+    .cf-btn{background:var(--accent);color:#06371b;border:0;font-family:var(--mono);font-weight:600;font-size:13.5px;padding:12px 22px;border-radius:999px;cursor:pointer}
+    canvas.cf{position:fixed;inset:0;pointer-events:none;z-index:1200}
+
+    /* 8 sound toggle (visual) */
+    .eq{display:inline-flex;align-items:flex-end;gap:3px;height:22px}
+    .eq i{width:4px;background:var(--accent);border-radius:2px;animation:eq 1s ease-in-out infinite}
+    .eq i:nth-child(2){animation-delay:.2s}.eq i:nth-child(3){animation-delay:.4s}.eq i:nth-child(4){animation-delay:.1s}
+    @keyframes eq{0%,100%{height:6px}50%{height:22px}}
+    .paused i{animation-play-state:paused;height:8px}
+
+    /* 9 keyboard hint / focus mode */
+    .keys{display:flex;gap:8px;flex-wrap:wrap}
+    .kbd{font-size:12px;font-weight:700;background:#eef3f0;border:1px solid var(--border);border-bottom-width:2px;border-radius:7px;padding:5px 11px}
+    .keylog{margin-top:12px;font-size:12.5px;color:var(--muted)}.keylog b{color:var(--accent-text)}
+
+    /* 10 live github-style heatmap */
+    .heat{display:grid;grid-template-columns:repeat(20,1fr);gap:4px;max-width:520px}
+    .heat span{aspect-ratio:1;border-radius:3px;background:#e4ece8}
+    .heat .l1{background:#a9e6c4}.heat .l2{background:#5ed197}.heat .l3{background:#27c074}.heat .l4{background:#15912f}
+    .heat .l4{background:#0f9d4f}
+    .leg{display:flex;align-items:center;gap:6px;font-size:11px;color:var(--muted);margin-top:10px}
+    .leg span{width:11px;height:11px;border-radius:3px;display:inline-block}
+
+    .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#eafff3;padding:11px 20px;border-radius:12px;font-size:13px;opacity:0;pointer-events:none;transition:all .3s var(--ease);z-index:1300}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}.toast b{color:var(--accent)}
+  </style>
+</head>
+<body>
+  <h1>10 ta zamonaviy / kamyob g'oya — jonli demo</h1>
+  <p class="sub">Hammasi yangi (oldin taklif qilmaganlarim). Sichqonchani yuriting, bosing, harflarni yozing — jonli his qiling. Yoqqanini ayting.</p>
+
+  <div class="wrap">
+
+    <div class="card">
+      <h2 class="htitle"><span class="num">1</span> Spotlight kursor effekti <span class="tag">premium</span></h2>
+      <p class="hdesc">Sichqonchani karta ustida yuriting — yashil nur kursorni kuzatadi.</p>
+      <div class="spot" id="spot"><b>Hover me ✨</b><p>Kartalar (Skills, Certificates) ustида nozik yashil yorug'lik kursor bilan harakatlanadi.</p></div>
+    </div>
+
+    <div class="card">
+      <h2 class="htitle"><span class="num">2</span> Magnit tugma <span class="tag">mikro-interaksiya</span></h2>
+      <p class="hdesc">Tugma kursorga "tortiladi" — jonli, qimmat his.</p>
+      <div class="mag-wrap"><button class="mag" id="mag"><i class="bi bi-send"></i> Get in touch</button></div>
+    </div>
+
+    <div class="card">
+      <h2 class="htitle"><span class="num">3</span> 3D tilt karta <span class="tag">chuqurlik</span></h2>
+      <p class="hdesc">Sichqoncha bilan karta 3D egiladi (hero yoki sertifikatlarga).</p>
+      <div class="tilt" id="tilt"><div class="jm">JM</div><div class="r">IT Project Manager</div></div>
+    </div>
+
+    <div class="card">
+      <h2 class="htitle"><span class="num">4</span> Matn "scramble" effekti <span class="tag">coder</span></h2>
+      <p class="hdesc">Harflar tasodifiy belgilardan to'g'ri so'zga "yig'iladi".</p>
+      <div class="scr" id="scr">&nbsp;</div>
+    </div>
+
+    <div class="card">
+      <h2 class="htitle"><span class="num">5</span> Aylanuvchi skill lentasi <span class="tag">dinamik</span></h2>
+      <p class="hdesc">Texnologiyalar cheksiz oqim bo'lib suriladi (marquee).</p>
+      <div class="mq"><div class="mq-track" id="mqt"></div></div>
+    </div>
+
+    <div class="card">
+      <h2 class="htitle"><span class="num">6</span> Urg'u rangini almashtirish <span class="tag">shaxsiy</span></h2>
+      <p class="hdesc">Mehmon yashil o'rniga boshqa urg'u rangini tanlay oladi (light tema saqlanadi).</p>
+      <div class="sw" id="sw">
+        <span class="dot" style="background:#18d26e" data-c="#18d26e" data-t="#0a7d3f"></span>
+        <span class="dot" style="background:#2563eb" data-c="#2563eb" data-t="#1d4ed8"></span>
+        <span class="dot" style="background:#e0529c" data-c="#e0529c" data-t="#b21e6a"></span>
+        <span class="dot" style="background:#f5961e" data-c="#f5961e" data-t="#b96907"></span>
+        <span class="dot" style="background:#9b5de5" data-c="#9b5de5" data-t="#6d33b8"></span>
+      </div>
+      <div class="swprev"><span class="chip">Skill</span> <button class="bt">Contact</button> — urg'u jonli o'zgaradi</div>
+    </div>
+
+    <div class="card">
+      <h2 class="htitle"><span class="num">7</span> Konfetti effekti <span class="tag">quvonch</span></h2>
+      <p class="hdesc">Xabar yuborilganda yoki CV yuklanganda konfetti otiladi.</p>
+      <button class="cf-btn" id="cfBtn"><i class="bi bi-stars"></i> Otib ko'ring 🎉</button>
+    </div>
+
+    <div class="card">
+      <h2 class="htitle"><span class="num">8</span> Ovozli mikro-feedback <span class="tag">noyob</span></h2>
+      <p class="hdesc">Tugma/yuborishda nozik "click/success" tovush (yoqib-o'chiriladi).</p>
+      <div class="eq" id="eq"><i></i><i></i><i></i><i></i></div>
+      <p class="hdesc" style="margin-top:10px">Bu vizual ekvalayzer — haqiqiy saytda WebAudio bilan yumshoq signal qo'shaman, foydalanuvchi o'chira oladi.</p>
+    </div>
+
+    <div class="card">
+      <h2 class="htitle"><span class="num">9</span> Klaviatura bilan navigatsiya <span class="tag">a11y + pro</span></h2>
+      <p class="hdesc">Raqam bossangiz bo'limga sakraydi (1–5). Pastdagi maydonni bosib sinang:</p>
+      <div class="keys">
+        <span class="kbd">1 Home</span><span class="kbd">2 About</span><span class="kbd">3 Resume</span><span class="kbd">4 Certs</span><span class="kbd">5 Contact</span>
+      </div>
+      <div class="keylog" tabindex="0" id="keybox" style="outline:none;cursor:text">Bu yerni bosing va 1–5 raqam bosing → <b id="keyout">—</b></div>
+    </div>
+
+    <div class="card">
+      <h2 class="htitle"><span class="num">10</span> Faollik "heatmap" <span class="tag">GitHub uslubi</span></h2>
+      <p class="hdesc">GitHub'dagidek yillik faollik to'ri — kasbiy/coder taassurot.</p>
+      <div class="heat" id="heat"></div>
+      <div class="leg">Kam <span style="background:#e4ece8"></span><span style="background:#a9e6c4"></span><span style="background:#5ed197"></span><span style="background:#27c074"></span><span style="background:#0f9d4f"></span> Ko'p</div>
+    </div>
+
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    /* 1 spotlight */
+    const sp=document.getElementById('spot');
+    sp.addEventListener('pointermove',e=>{const r=sp.getBoundingClientRect();sp.style.setProperty('--mx',(e.clientX-r.left)+'px');sp.style.setProperty('--my',(e.clientY-r.top)+'px');});
+
+    /* 2 magnetic */
+    const mag=document.getElementById('mag');
+    mag.addEventListener('pointermove',e=>{const r=mag.getBoundingClientRect();const x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;mag.style.transform='translate('+x*.35+'px,'+y*.45+'px)';});
+    mag.addEventListener('pointerleave',()=>mag.style.transform='');
+
+    /* 3 tilt */
+    const tl=document.getElementById('tilt');
+    tl.addEventListener('pointermove',e=>{const r=tl.getBoundingClientRect();const px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;tl.style.transform='perspective(700px) rotateY('+px*16+'deg) rotateX('+(-py*16)+'deg)';});
+    tl.addEventListener('pointerleave',()=>tl.style.transform='');
+
+    /* 4 scramble */
+    const target='> building portfolio...';const ch='!<>-_\\/[]{}=+*^?#';const el=document.getElementById('scr');
+    function scramble(){let frame=0;const dur=40;const map=target.split('').map(()=>Math.floor(Math.random()*dur));
+      (function run(){let out='';for(let i=0;i<target.length;i++){if(frame>map[i])out+=target[i];else out+=ch[Math.floor(Math.random()*ch.length)];}el.textContent=out;frame++;if(frame<dur+10)requestAnimationFrame(run);else setTimeout(scramble,2200);})();}
+    scramble();
+
+    /* 5 marquee */
+    const techs=['Java','Spring Boot','Python','JavaScript','PostgreSQL','HTML','CSS','Cloud','Git','Claude'];
+    const mqt=document.getElementById('mqt');const one=techs.map(t=>`<span><i class="bi bi-hexagon-fill"></i>${t}</span>`).join('');mqt.innerHTML=one+one;
+
+    /* 6 accent switch */
+    document.getElementById('sw').addEventListener('click',e=>{const d=e.target.closest('.dot');if(!d)return;document.documentElement.style.setProperty('--accent',d.dataset.c);document.documentElement.style.setProperty('--accent-text',d.dataset.t);document.documentElement.style.setProperty('--accent-soft',d.dataset.c+'22');toast('Urg\\'u rangi o\\'zgardi');});
+
+    /* 7 confetti */
+    document.getElementById('cfBtn').addEventListener('click',confetti);
+    function confetti(){const cv=document.createElement('canvas');cv.className='cf';const x=cv.getContext('2d');cv.width=innerWidth;cv.height=innerHeight;document.body.appendChild(cv);
+      const cols=['#18d26e','#4ceb95','#e3b341','#58a6ff','#fff'];const P=[];for(let i=0;i<140;i++)P.push({x:innerWidth/2,y:innerHeight/3,vx:(Math.random()-.5)*12,vy:Math.random()*-14-4,c:cols[i%cols.length],s:Math.random()*6+3,r:Math.random()*6});
+      let t=0;(function fr(){x.clearRect(0,0,cv.width,cv.height);P.forEach(p=>{p.vy+=.4;p.x+=p.vx;p.y+=p.vy;p.r+=.2;x.save();x.translate(p.x,p.y);x.rotate(p.r);x.fillStyle=p.c;x.fillRect(-p.s/2,-p.s/2,p.s,p.s);x.restore();});t++;if(t<120)requestAnimationFrame(fr);else cv.remove();})();}
+
+    /* 8 eq toggle */
+    const eq=document.getElementById('eq');eq.style.cursor='pointer';eq.addEventListener('click',()=>{eq.classList.toggle('paused');toast(eq.classList.contains('paused')?'Ovoz: o\\'chirildi':'Ovoz: yoqildi');});
+
+    /* 9 keyboard */
+    const kb=document.getElementById('keybox'),ko=document.getElementById('keyout');const names={'1':'Home','2':'About','3':'Resume','4':'Certificates','5':'Contact'};
+    kb.addEventListener('keydown',e=>{if(names[e.key]){ko.textContent='→ '+names[e.key];}});
+
+    /* 10 heatmap */
+    const heat=document.getElementById('heat');const lv=['','l1','l2','l3','l4'];for(let i=0;i<20*7;i++){const s=document.createElement('span');const r=Math.random();const c=r>.8?4:r>.62?3:r>.4?2:r>.2?1:0;if(c)s.className=lv[c];heat.appendChild(s);}
+
+    /* toast */
+    let tt;function toast(h){const el=document.getElementById('toast');el.innerHTML=h;el.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>el.classList.remove('show'),2200);}
+  </script>
+</body>
+</html>

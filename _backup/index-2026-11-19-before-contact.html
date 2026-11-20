@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Jamshid Mirkhadjayev — IT Project Manager</title> 
+  <meta content="IT Project Manager and Java Backend Developer based in Tashkent. Portfolio, certificates, and contact." name="description">
+  <meta content="Jamshid Mirkhadjayev, IT Project Manager, Java Backend Developer, Tashkent, portfolio, certificates" name="keywords">
+  <meta content="Jamshid Mirkhadjayev" name="author">
+  <link rel="canonical" href="https://mirkhadjayev.uz/">
+
+  <!-- Open Graph (Telegram / LinkedIn / Facebook share card) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mirkhadjayev.uz/">
+  <meta property="og:title" content="Jamshid Mirkhadjayev — IT Project Manager">
+  <meta property="og:description" content="IT Project Manager and Java Backend Developer based in Tashkent. Portfolio, certificates, and contact.">
+  <meta property="og:image" content="https://mirkhadjayev.uz/assets/img/og-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:alt" content="Jamshid Mirkhadjayev — IT Project Manager · Java Backend Developer">
+  <meta property="og:site_name" content="Jamshid Mirkhadjayev">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter / X card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Jamshid Mirkhadjayev — IT Project Manager">
+  <meta name="twitter:description" content="IT Project Manager and Java Backend Developer based in Tashkent. Portfolio, certificates, and contact.">
+  <meta name="twitter:image" content="https://mirkhadjayev.uz/assets/img/og-card.png">
+
+  <!-- Structured data (Google rich result) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Jamshid Mirkhadjayev",
+    "jobTitle": "IT Project Manager",
+    "description": "IT Project Manager and Java Backend Developer based in Tashkent.",
+    "url": "https://mirkhadjayev.uz/",
+    "image": "https://mirkhadjayev.uz/assets/img/11111.jpg",
+    "address": { "@type": "PostalAddress", "addressLocality": "Tashkent", "addressCountry": "UZ" },
+    "sameAs": [
+      "https://www.linkedin.com/in/jmirkhadjayev",
+      "https://www.facebook.com/jmirkhadjayev",
+      "https://www.instagram.com/jmirkhadjayev",
+      "https://t.me/jmirkhadjayev",
+      "https://x.com/mirkhadjayev"
+    ]
+  }
+  </script>
+
+  <!-- Favicons -->
+  <link href="assets/img/favicon.png" rel="icon">
+  <link href="assets/img/favicon.png" rel="apple-touch-icon">
+
+  <!-- PWA (installable app + offline) -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0c1512">
+
+  <!-- Fonts: self-hosted M PLUS 1 Code (see creative.css). The old Open Sans / Raleway / Poppins
+       link was overridden by creative.css and never shown — removed. Preload the Latin subset. -->
+  <link rel="preload" href="assets/fonts/mplus1code-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+  <!-- Vendor CSS Files (critical) -->
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+
+  <!-- Non-critical CSS: only needed after the first screen (interests icons, lightbox) -->
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet" media="print" onload="this.media='all'">
+  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript>
+    <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  </noscript>
+
+  <!-- Template Main CSS File -->
+  <link href="assets/css/style.css" rel="stylesheet">
+
+  <!-- Creative Layer (UI/UX Pro Max enhancement) -->
+  <link href="assets/css/creative.css" rel="stylesheet">
+
+  <!-- Language switcher -->
+  <link href="assets/css/theme.css" rel="stylesheet">
+
+  <!-- UI/UX Pro Max — upgrade pack -->
+  <link href="assets/css/promax.css" rel="stylesheet">
+
+  <style>
+    #feedbackForm input,
+    #feedbackForm textarea {
+      background-color: rgba(255, 255, 255, 0.9) !important;
+      color: #0f172a !important;
+      border: 1px solid rgba(15, 23, 42, 0.12);
+      border-radius: 12px;
+    }
+    #feedbackForm input:focus,
+    #feedbackForm textarea:focus {
+      background-color: #fff !important;
+      color: #0f172a !important;
+      border-color: rgba(37, 99, 235, 0.45);
+      box-shadow: 0 0 0 0.25rem rgba(37, 99, 235, 0.15);
+    }
+    #feedbackForm input::placeholder,
+    #feedbackForm textarea::placeholder {
+      color: #666 !important;
+    }
+    #feedbackForm button[type="submit"] {
+      position: relative;
+      overflow: hidden;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: linear-gradient(135deg, #3b82f6, #2563eb) !important;
+      color: #fff !important;
+      border: 0 !important;
+      border-radius: 14px 14px 14px 4px;   /* unusual asymmetric corner */
+      padding: 7px 18px !important;
+      min-height: 44px;                      /* comfortable touch target */
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .3px;
+      box-shadow: 0 8px 18px -9px rgba(37, 99, 235, 0.6);
+      transition: transform .2s ease, box-shadow .25s ease, border-radius .3s ease;
+    }
+    /* moving light "shine" sweep — the unusual touch */
+    #feedbackForm button[type="submit"]::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -130%;
+      width: 55%;
+      height: 100%;
+      background: linear-gradient(110deg, transparent, rgba(255, 255, 255, .5), transparent);
+      transform: skewX(-20deg);
+      transition: left .6s ease;
+    }
+    #feedbackForm button[type="submit"]:hover::before { left: 150%; }
+    #feedbackForm button[type="submit"] i {
+      font-size: 13px;
+      transition: transform .35s cubic-bezier(.22, 1, .36, 1);
+    }
+    #feedbackForm button[type="submit"]:hover {
+      transform: translateY(-2px);
+      border-radius: 14px;                   /* morphs to even pill on hover */
+      box-shadow: 0 14px 26px -11px rgba(37, 99, 235, 0.8);
+    }
+    #feedbackForm button[type="submit"]:hover i {
+      transform: translate(4px, -4px) rotate(14deg);   /* paper plane launches */
+    }
+    #feedbackForm button[type="submit"]:active {
+      transform: scale(.95);
+    }
+    /* Contact section icons size increase */
+    .contact .info-box i {
+      font-size: 2.5rem;
+    }
+    .contact .social-links a i {
+      font-size: 1.8rem;
+    }
+    /* Visitor Counter Styles */
+    .visitor-counter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.85);
+      color: #1e293b;
+      margin: 0 4px;
+      transition: all 0.3s ease;
+      position: relative;
+      border: 1px solid rgba(15, 23, 42, 0.12);
+    }
+    .visitor-counter:hover {
+      background: #2563eb;
+      color: #fff;
+    }
+    .visitor-counter i {
+      font-size: 18px;
+      line-height: 0;
+    }
+    #visitorCount {
+      font-size: 14px;
+      font-weight: bold;
+      margin-left: 4px;
+      position: absolute;
+      right: -20px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    .certificates .certificate-box {
+      padding: 22px;
+      height: 100%;
+      width: 100%;
+    }
+    .certificates .certificate-badge {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 12px;
+      margin-bottom: 12px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.12);
+      color: #1d4ed8;
+      border: 1px solid rgba(37, 99, 235, 0.2);
+    }
+    .certificates .certificate-img-container {
+      overflow: hidden;
+      height: 200px;
+      margin-bottom: 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(15, 23, 42, 0.1);
+      background: rgba(255, 255, 255, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .certificates .certificate-img-container img {
+      max-height: 100%;
+      max-width: 100%;
+      object-fit: contain;
+    }
+    .certificates .certificate-meta {
+      font-size: 14px;
+      font-weight: 600;
+      color: #475569 !important;
+      margin-bottom: 8px;
+    }
+    /* Resume sub-headings (were <h5> inside <ul> → looked like date pills) */
+    .resume .resume-item ul li.rs-h {
+      list-style: none;
+      margin: 14px 0 6px -20px;
+      padding-bottom: 0;
+      font-weight: 700;
+      font-size: 14.5px;
+      color: var(--c-text, #0f172a) !important;
+    }
+    .resume .resume-item ul li.rs-h:first-child { margin-top: 4px; }
+    .about-me .content ul a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+    .mobile-nav-toggle:focus-visible { outline: 2px solid #18d26e; outline-offset: 4px; border-radius: 6px; }
+    /* Certificate titles: h4 → h3 (correct heading order), same look as before */
+    .certificates .certificate-box h3.cert-title { color: var(--c-text, #111827) !important; font-weight: 600; font-size: 17px; margin: 0 0 .5rem; line-height: 1.2; }
+    /* Decorative terminal title: drawn via CSS so it is not read / contrast-checked as text */
+    #hero-term .ht-name::after { content: attr(data-label); }
+    /* Language buttons: ≥24px tap targets */
+    #uiControls .lang-btn { min-width: 28px; min-height: 26px; }
+    @media (max-width: 575px) { #uiControls .lang-btn { min-width: 26px; min-height: 24px; padding: 4px 6px; } }
+    .certificates .certificate-desc {
+      font-size: 14px;
+      line-height: 1.55;
+      margin-bottom: 0;
+      color: #334155 !important;
+    }
+  </style>
+
+  <!-- =======================================================
+  * Template Name: Personal
+  * Template URL: https://bootstrapmade.com/personal-free-resume-bootstrap-template/
+  * Updated: Mar 17 2024 with Bootstrap v5.3.3
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- Floating language switcher (UZ/RU/EN) -->
+  <div id="uiControls" role="toolbar" aria-label="Language">
+    <div class="lang-group" role="group" aria-label="Language">
+      <button type="button" class="lang-btn active" data-lang="en">EN</button>
+      <button type="button" class="lang-btn" data-lang="uz">UZ</button>
+      <button type="button" class="lang-btn" data-lang="ru">RU</button>
+    </div>
+  </div>
+
+  <!-- ======= Header ======= -->
+  <header id="header">
+
+    <!-- Live coding terminal (hero background) -->
+    <div id="hero-term" aria-hidden="true">
+      <div class="ht-bar"><span class="ht-dot" style="background:#ff5f56"></span><span class="ht-dot" style="background:#ffbd2e"></span><span class="ht-dot" style="background:#27c93f"></span><span class="ht-name" data-label="jamshid@portfolio: ~/dev — zsh"></span></div>
+      <pre id="hero-termText"></pre>
+    </div>
+
+    <div class="container">
+
+      <h1><a href="index.html">Jamshid Mirkhadjayev</a></h1>
+      <h2 data-i18n="hero_sub">I'm <span>an IT Project Manager</span> from Tashkent</h2>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link active" href="#header"><i class="bi bi-house-door-fill"></i><span data-i18n="nav_home">Home</span></a></li>
+          <li><a class="nav-link" href="#about"><i class="bi bi-person-fill"></i><span data-i18n="nav_about">About</span></a></li>
+          <li><a class="nav-link" href="#resume"><i class="bi bi-file-earmark-text-fill"></i><span data-i18n="nav_resume">Resume</span></a></li>
+          <li><a class="nav-link" href="#certificates"><i class="bi bi-award-fill"></i><span data-i18n="nav_certs">Certificates</span></a></li>
+          <li><a class="nav-link" href="#contact"><i class="bi bi-envelope-fill"></i><span data-i18n="nav_contact">Contact</span></a></li>
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle" role="button" tabindex="0" aria-label="Open menu" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();this.click();}"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+
+  <!-- ======= About Section ======= -->
+  <section id="about" class="about">
+
+    <!-- ======= About Me ======= -->
+    <div class="about-me container">
+
+      <div class="section-title">
+        <h2 data-i18n="about_h">About</h2>
+        <p data-i18n="about_p">Learn more about me</p>
+      </div>
+
+      <!-- About — centered profile (design A2) -->
+      <div class="ab-ctr" data-aos="fade-up">
+        <img src="assets/img/opt/11111.webp" class="ab-av" alt="Jamshid Mirkhadjayev — portrait" width="900" height="900" fetchpriority="high">
+        <h3 class="ab-role" data-i18n="about_role">IT Project Manager &amp; Java Backend Developer</h3>
+        <p class="ab-lead" id="aboutLead" data-blurin data-i18n="about_lead">I am an IT Project Manager in the aviation industry, implementing modern solutions. Currently, I am working on the implementation of Awery Aero software at Tashkent International Airport. Previously, I served as a specialist at monitoring and accounting department at the Bureau of Compulsory Enforcement (BCE) in Uzbekistan.</p>
+        <ul class="ab-chips">
+          <li title="Website"><i class="bi bi-globe2"></i><a href="https://mirkhadjayev.uz/">www.mirkhadjayev.uz</a></li>
+          <li title="Phone"><i class="bi bi-telephone"></i><span>+99890 998 (383x13)</span></li>
+          <li title="City"><i class="bi bi-geo-alt"></i><span>Tashkent, Uzbekistan</span></li>
+          <li title="Degree"><i class="bi bi-mortarboard"></i><span>Bachelor</span></li>
+          <li title="Email"><i class="bi bi-envelope"></i><a href="mailto:jmirkhadjayev@gmail.com">jmirkhadjayev@gmail.com</a></li>
+          <li title="Freelance"><i class="bi bi-briefcase"></i><span>Freelance:</span> <span>Available</span></li>
+          <li title="Languages"><i class="bi bi-translate"></i><span>Uzbek, English, Russian</span></li>
+        </ul>
+        <p class="ab-pass">My passion for the guitar since childhood has made me a devoted fan of rock music. I have a deep passion for hiking and football, as they energize me and brighten my mood.</p>
+      </div>
+
+    </div><!-- End About Me -->
+
+   
+
+    <!-- ======= Skills  ======= -->
+    <div class="skills container">
+
+      <div class="section-title">
+        <h2 data-i18n="skills_h">Skills</h2>
+      </div>
+
+      <!-- Skills datasheet (design R1): stack by group + technical / leadership competencies -->
+      <div class="skills-ds reveal">
+        <div class="ds-hd"><span>Datasheet · Skills</span><span>JM · IT PM &amp; Java Backend</span></div>
+        <div class="ds-bd">
+          <div class="ds-col">
+            <h4 class="ds-h">Stack</h4>
+            <div class="ds-rw"><b><i style="background:#0f9d4f"></i>Backend</b><span>
+              <em><img src="assets/img/skills/java.svg" alt="" width="15" height="15">Java</em>
+              <em><img src="assets/img/skills/spring.svg" alt="" width="15" height="15">Spring Boot</em>
+              <em><img src="assets/img/skills/spring-security.svg" alt="" width="15" height="15">Spring Security</em>
+              <em><img src="assets/img/skills/hibernate.svg" alt="" width="15" height="15">Hibernate / JPA</em>
+              <em><img src="assets/img/skills/python.svg" alt="" width="15" height="15">Python</em>
+            </span></div>
+            <div class="ds-rw"><b><i style="background:#8b5cf6"></i>Data</b><span>
+              <em><img src="assets/img/skills/postgresql.svg" alt="" width="15" height="15">PostgreSQL</em>
+            </span></div>
+            <div class="ds-rw"><b><i style="background:#3b82f6"></i>Frontend</b><span>
+              <em><img src="assets/img/skills/html5.svg" alt="" width="15" height="15">HTML</em>
+              <em><img src="assets/img/skills/css3.svg" alt="" width="15" height="15">CSS</em>
+              <em><img src="assets/img/skills/javascript.svg" alt="" width="15" height="15">JavaScript</em>
+            </span></div>
+            <div class="ds-rw"><b><i style="background:#0ea5e9"></i>Cloud &amp; DevOps</b><span>
+              <em><img src="assets/img/skills/aws.svg" alt="" width="15" height="15">AWS</em>
+              <em><img src="assets/img/skills/cloudflare.svg" alt="" width="15" height="15">Cloudflare</em>
+              <em><img src="assets/img/skills/github.svg" alt="" width="15" height="15">GitHub</em>
+            </span></div>
+            <div class="ds-rw"><b><i style="background:#f59e0b"></i>API &amp; AI tools</b><span>
+              <em><img src="assets/img/skills/postman.svg" alt="" width="15" height="15">Postman</em>
+              <em><img src="assets/img/skills/claude.svg" alt="" width="15" height="15">Claude</em>
+            </span></div>
+            <div class="ds-rw"><b><i style="background:#ec4899"></i>Project Mgmt</b><span>
+              <em><img src="assets/img/skills/jira.svg" alt="" width="15" height="15">Jira</em>
+              <em><img src="assets/img/skills/trello.svg" alt="" width="15" height="15">Trello</em>
+              <em><img src="assets/img/skills/notion.svg" alt="" width="15" height="15">Notion</em>
+            </span></div>
+          </div>
+          <div class="ds-col ds-side">
+            <h4 class="ds-h">Technical</h4>
+            <ul>
+              <li>Programming Proficiency</li>
+              <li>System Design</li>
+              <li>API Integration</li>
+              <li>Database Management</li>
+              <li>Debugging Skills</li>
+              <li>Code Testing</li>
+              <li>Version Control</li>
+              <li>Basic Security Knowledge</li>
+              <li>Prompt Engineering</li>
+            </ul>
+            <h4 class="ds-h">Leadership</h4>
+            <ul>
+              <li>Stakeholder Communication</li>
+              <li>Requirements Analysis</li>
+              <li>Risk Management</li>
+              <li>Technical Documentation</li>
+              <li>Problem Solving</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- End Skills -->
+
+    <!-- ======= Interests ======= -->
+    <div class="interests container">
+
+      <div class="section-title">
+        <h2 data-i18n="interests_h">INTERESTS and HOBBIES</h2>
+      </div>
+
+      <!-- Interests — editorial statement + three columns (design Y17) -->
+      <div class="int-ed reveal">
+        <p class="int-st">I recharge in the mountains, think in books and history, <span>and unwind with a guitar and a rock playlist.</span></p>
+        <div class="int-cols">
+          <div>
+            <h4 class="int-h" style="color:#3b82f6">Mind</h4>
+            <div class="int-it"><i class="ri-book-open-line"></i><span>Reading (Self-help books)</span></div>
+            <div class="int-it"><i class="ri-robot-2-line"></i><span>Artificial Intelligence</span></div>
+            <div class="int-it"><i class="ri-line-chart-line"></i><span>Economic and Political research</span></div>
+            <div class="int-it"><i class="ri-ancient-gate-line"></i><span>Historical research and reading</span></div>
+          </div>
+          <div>
+            <h4 class="int-h" style="color:#0f9d4f">Body</h4>
+            <div class="int-it"><i class="ri-walk-line"></i><span>Hiking</span></div>
+            <div class="int-it"><i class="ri-football-line"></i><span>Football</span></div>
+            <div class="int-it"><i class="ri-compass-3-line"></i><span>Outdoor Activities</span></div>
+          </div>
+          <div>
+            <h4 class="int-h" style="color:#db2777">Creative</h4>
+            <div class="int-it"><i class="ri-music-2-line"></i><span>Playing an instrument (guitar, piano)</span></div>
+            <div class="int-it"><i class="ri-palette-line"></i><span>Graphic and Motion design</span></div>
+            <div class="int-it"><i class="ri-mic-line"></i><span>Singing</span></div>
+          </div>
+        </div>
+      </div>
+    </div><!-- End Interests -->
+
+
+  </section><!-- End About Section -->
+
+  <!-- ======= Resume Section ======= -->
+  <section id="resume" class="resume">
+    <div class="container">
+
+      <div class="section-title">
+        <h2 data-i18n="resume_h">Resume</h2>
+        <p data-i18n="resume_p">Check My Resume</p>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <h3 class="resume-title">Education</h3>
+          <div class="resume-item">
+            <h4>Java Backend Developer</h4>
+            <h5>2021 - 2022</h5>
+            <p><em>PDP ACADEMY, Tashkent</em></p>
+            
+          </div>
+          <div class="resume-item">
+            <h4>Bachelor of Technology, Engineer, Service Technician</h4>
+            <h5>2018 - 2023</h5>
+            <p><em>Tashkent State Technical University named after Islam Karimov, Tashkent</em></p>
+            
+          </div>
+          <h3 class="resume-title">Professional Experience</h3>
+          <div class="resume-item">
+            <h4>IT Project Manager</h4>
+            <h5>2025.12 - Present</h5>
+            <p><em>Tashkent International Airport, Tashkent, Uzbekistan</em></p>
+            <ul>
+              <li class="rs-h">Project Planning and Strategic Lifecycle Management</li>
+              <li>Leading digitalization projects from conception to completion (e.g., implementing Biometric Gates, Smart Baggage Systems, or Airport Collaborative Decision Making).</li>
+              <li>Defining project scopes, managing budgets, setting milestones, and ensuring strict adherence to deadlines.</li>
+              <li class="rs-h">Systems Integration and Global Standards</li>
+              <li>Integrating international aviation platforms (such as SITA or Amadeus) with the airport's internal management systems.</li>
+              <li>Ensuring seamless data synchronization across all passenger terminals and ground handling units.</li>
+              <li>Adaptation of the latest technologies to solve business problems.</li>
+              <li>Integration of cloud solutions, improvement of performance and security.</li>
+              <li class="rs-h">Developing Technical Specifications</li>
+              <li>Drafting comprehensive Technical Requirements for software developers and external vendors.</li>
+              <li>Translating operational airport needs (security, logistics, passenger flow) into functional IT solutions, particularly incorporating AI and IoT.</li>
+              <li class="rs-h">Stakeholder and Vendor Management</li>
+              <li>Supervising external IT contractors and internal technical teams to ensure deliverables meet quality standards.</li>
+              <li>Serving as the primary bridge between airport administration, airlines, and technical engineering departments.</li>
+              <li class="rs-h">Compliance, Security, and Quality Assurance</li>
+              <li>Ensuring all IT projects comply with international aviation regulations (ICAO and IATA) and local cybersecurity laws.</li>
+              <li>Overseeing the protection of sensitive passenger data and the resilience of the airport's critical network infrastructure.</li>
+            </ul>
+          </div>
+          <div class="resume-item">
+            <h4>IT specialist &amp; PM</h4>
+            <h5>2023.06 - 2025.12</h5>
+            <p><em>Uzbekistan Airports Cargo LLC, Tashkent, Uzbekistan</em></p>
+            <ul>
+              <li class="rs-h">Implementation of Awery ERP</li>
+              <li>Implemented Awery ERP — aviation business management software.</li>
+              <li>Adaptation of the latest technologies to solve business problems.</li>
+              <li>Integration of cloud solutions, improvement of performance and security.</li>
+            </ul>
+          </div>
+          <div class="resume-item">
+            <h4>Software Technician Specialist</h4>
+            <h5>2023.02 - 2023.06</h5>
+            <p><em>Uzbekistan Airports Cargo LLC, Tashkent, Uzbekistan</em></p>
+            <ul>
+              <li class="rs-h">Designing network infrastructure</li>
+              <li>Building and configuring networks for corporate use.</li>
+              <li>Ensuring security and monitoring network operations.</li>
+              <li>Developing backup schemes to prevent data loss.</li>
+              <li class="rs-h">Training and technical support</li>
+              <li>Conducting training for employees and users on working with software.</li>
+              <li>Constant technical support for clients and prompt resolution of their requests.</li>
+              <li>Developing documentation for the effective use of the created software.</li>
+              <li class="rs-h">Support and optimization of server systems</li>
+              <li>Diagnostics and troubleshooting of server systems.</li>
+              <li>Optimization and configuration of systems to increase productivity.</li>
+              <li>Ensuring uninterrupted operation and updating software.</li>
+            </ul>
+          </div>
+          <div class="resume-item">
+            <h4>  
+              Software Engineer (Online Intern Developer)
+            </h4>
+            <h5>2022.06 - 2022.08</h5>
+            <p><em>Itransition Group LTD ,  Decatur, Georgia</em></p></div>
+          <div class="resume-item">
+            <h4> Employee at monitoring and accounting department</h4>
+            <h5>2019 - 2021</h5>
+            <p><em>BUREAU OF COMPULSORY ENFORCEMENT UNDER THE GENERAL PROSECUTION OF THE REPUBLIC OF UZBEKISTAN (BCE), Tashkent, Uzbekistan</em></p>
+            <ul>
+              <li>Data Analysis and Oversight: Monitoring the "MIB-Portal" and billing systems in real-time to track collected funds and the status of enforcement documents.</li>
+              <li>Compliance Control: Analyzing whether field inspectors are meeting their daily targets and following legal procedures.</li>
+              <li>Discrepancy Identification: Detecting gaps (losses) between utility consumption and actual payments to pinpoint problematic areas.</li>
+              <li>Reporting: Preparing daily, weekly, and monthly statistical reports for the management.</li>
+              <li>Performance Evaluation (KPI): Measuring the efficiency of state inspectors — tracking how many cases were closed and the volume of funds recovered.</li>
+              <li>Database Management: Reconciling (verifying) data received from utility supply companies with the Bureau's internal database.</li>
+            </ul>
+          </div>
+          <div class="resume-item">
+            <h4>State Inspector</h4>
+            <h5>2017 - 2019</h5>
+            <p><em>BUREAU OF COMPULSORY ENFORCEMENT UNDER THE GENERAL PROSECUTION OF THE REPUBLIC OF UZBEKISTAN (BCE), Tashkent, Uzbekistan</em></p>
+            <ul>
+              <li>Collected and reduced consumer debts.</li>
+            </ul>
+          </div>
+          <div class="resume-item">
+            <h4>Specialist at inspection department</h4>
+            <h5>2016 - 2017</h5>
+            <p><em>"Hududgaz Poytaxt" GTF, Tashkent, Uzbekistan</em></p>
+            <ul>
+              <li>Handled customer complaints and researched each case.</li>
+              <li>Calculated all debts in balance sheets and prepayments.</li>
+            </ul>
+          </div>
+        </div><!-- .col-12 -->
+      </div><!-- .row -->
+    </div><!-- .container -->
+  </section><!-- End Resume Section -->
+
+
+  <!-- ======= Certificates Section ======= -->
+  <section id="certificates" class="certificates">
+    <div class="container">
+
+      <div class="section-title">
+        <h2 data-i18n="certs_h">Certificates</h2>
+        <p data-i18n="certs_p">My Certificates & Achievements</p>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-4">
+          <div class="certificate-box">
+            <span class="certificate-badge">AIRPORT MANAGEMENT</span>
+            <div class="certificate-img-container">
+              <a href="assets/img/korea.jpg" class="portfolio-lightbox" data-gallery="certificatesGallery" title="Airport Management">
+                <img src="assets/img/opt/korea.webp" width="1000" height="1414" class="img-fluid" alt="Airport Management Course for Young Leaders" loading="lazy" decoding="async">
+              </a>
+            </div>
+            <h3 class="cert-title">Airport Management Course for Young Leaders</h3>
+            <p class="certificate-meta">Incheon Airport Aviation Academy (South Korea) • 2025</p>
+            <p class="certificate-desc">Certified in Airport Management Course for Young Leaders by Incheon Airport Aviation Academy (December 2025). Focused on modern airport operations and global aviation leadership.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-4">
+          <div class="certificate-box">
+            <span class="certificate-badge">JAVA BACKEND</span>
+            <div class="certificate-img-container">
+              <a href="assets/img/pdp.jpg" class="portfolio-lightbox" data-gallery="certificatesGallery" title="Java Backend Developer - PDP Academy">
+                <img src="assets/img/opt/pdp.webp" width="1000" height="706" class="img-fluid" alt="PDP Academy Certificate" loading="lazy" decoding="async">
+              </a>
+            </div>
+            <h3 class="cert-title">Java Backend Developer Certificate</h3>
+            <p class="certificate-meta">PDP ACADEMY • 2022</p>
+            <p class="certificate-desc">Professional Java development training covering Spring Framework, Spring Boot, RESTful APIs, database design, and microservices architecture.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-4">
+          <div class="certificate-box">
+            <span class="certificate-badge">SQL</span>
+            <div class="certificate-img-container">
+              <a href="assets/img/sql.png" class="portfolio-lightbox" data-gallery="certificatesGallery" title="SQL Certificate">
+                <img src="assets/img/opt/sql.webp" width="1000" height="706" class="img-fluid" alt="SQL Certificate" loading="lazy" decoding="async">
+              </a>
+            </div>
+            <h3 class="cert-title">SQL (Structured Query Language) Database</h3>
+            <p class="certificate-meta">Sololearn • 2022</p>
+            <p class="certificate-desc">SQL Course Certificate by Sololearn (January 2022). Demonstrated theoretical and practical understanding of database management, relational databases, and data querying.</p>
+          </div>
+        </div>
+
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-4">
+          <div class="certificate-box">
+            <span class="certificate-badge">JAVA OOP</span>
+            <div class="certificate-img-container">
+              <a href="assets/img/java.jpg" class="portfolio-lightbox" data-gallery="certificatesGallery" title="Java Object-Oriented Programming (OOP)">
+                <img src="assets/img/opt/java.webp" width="1000" height="706" class="img-fluid" alt="Java OOP Certificate" loading="lazy" decoding="async">
+              </a>
+            </div>
+            <h3 class="cert-title">Java Object-Oriented Programming (OOP)</h3>
+            <p class="certificate-meta">Sololearn • 2021</p>
+            <p class="certificate-desc">Java Course Certificate by Sololearn (November 2021). Confirmed theoretical and practical understanding of Java programming language and Object-Oriented Programming (OOP) concepts.</p>
+          </div>
+        </div>
+        
+        
+        
+        
+         <div class="col-lg-4 col-md-6 d-flex align-items-stretch mb-4">
+          <div class="certificate-box">
+            <span class="certificate-badge">PROGRAMMING FOUNDATION</span>
+            <div class="certificate-img-container">
+              <a href="assets/img/pdp-foundation.jpg" class="portfolio-lightbox" data-gallery="certificatesGallery" title="Certificate of Foundation Studies">
+                <img src="assets/img/opt/pdp-foundation.webp" width="1000" height="682" class="img-fluid" alt="Programming Foundations Certificate" loading="lazy" decoding="async">
+              </a>
+            </div>
+            <h3 class="cert-title">Programming Foundations</h3>
+            <p class="certificate-meta">PDP ACADEMY • 2021</p>
+            <p class="certificate-desc">Foundation Course Certificate by PDP Academy (August 2021). Confirmed theoretical and practical understanding of programming fundamentals, algorithmic thinking, and core problem-solving methodologies.</p>
+          </div>
+        </div>
+        
+        
+        
+        
+      </div>
+
+    </div>
+  </section><!-- End Certificates Section -->
+
+
+  <!-- ======= Contact Section ======= -->
+  <section id="contact" class="contact">
+    <div class="container">
+
+      <div class="section-title">
+        <h2 data-i18n="contact_h">Contact</h2>
+        <p data-i18n="contact_p">Contact Me</p>
+      </div>
+
+      <div class="row mt-2">
+
+        <div class="col-md-6 d-flex align-items-stretch">
+          <div class="info-box">
+            <i class="bx bi bi-geo-alt"></i>
+            <h3>My Address</h3>
+            <p>Shaykhontohur District, Tashkent, Uzbekistan 100027</p>
+          </div>
+        </div>
+
+        <div class="col-md-6 mt-4 mt-md-0 d-flex align-items-stretch">
+          <div class="info-box">
+            <i class="bx bi bi-share"></i>
+            <h3>Social Profiles</h3>
+            <div class="social-links">
+              <a href="https://www.facebook.com/jmirkhadjayev" class="facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+              <a href="https://www.instagram.com/jmirkhadjayev" class="instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+              <a href="https://t.me/jmirkhadjayev" class="telegram" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="bi bi-telegram"></i></a>
+              <a href="https://www.linkedin.com/in/jmirkhadjayev" class="linkedin" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a>
+              <a href="https://x.com/mirkhadjayev" class="twitter" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><i class="bi bi-twitter-x"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 mt-4 d-flex align-items-stretch">
+          <div class="info-box">
+            <i class="bx bi bi-envelope"></i>
+            <h3>E-mail (WORK)</h3>
+            <p>j.mirkhadjayev@uzairports.com</p>
+          </div>
+        </div>
+        <div class="col-md-6 mt-4 d-flex align-items-stretch">
+          <div class="info-box">
+            <i class="bx bi bi-telephone"></i>
+            <h3>Phone Number (WORK)</h3>
+            <p>+99855 501-47-00 (3033)</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Save My Contact (vCard + QR) -->
+      <div class="row mt-4">
+        <div class="col-lg-12 d-flex align-items-stretch">
+          <div class="info-box vcard-box">
+            <div class="vcard-text">
+              <h3><i class="bi bi-person-vcard"></i> Save My Contact</h3>
+              <p>Add me to your phone in one tap — or scan the QR code to save my details instantly.</p>
+              <button type="button" id="saveVcardBtn" class="vcard-btn"><i class="bi bi-download"></i> Save Contact (.vcf)</button>
+            </div>
+            <div class="vcard-qr" id="vcardQr" aria-hidden="true"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Feedback Form Section -->
+      <div class="row mt-4">
+        <div class="col-lg-12">
+          <div class="info-box anon-box">
+            <h3 class="anon-title"><i class="bi bi-incognito"></i> Send me an anonymous message</h3>
+            <p class="anon-sub">No name, no email — your message is 100% anonymous. Say anything 🤫</p>
+            <form id="feedbackForm" class="php-email-form">
+              <div class="mb-3">
+                <div class="cfield cfield-area">
+                  <i class="bi bi-incognito"></i>
+                  <textarea class="form-control" name="message" id="feedbackMessage" rows="5" placeholder=" " required></textarea>
+                  <label for="feedbackMessage">Type your anonymous message…</label>
+                </div>
+              </div>
+              <div class="mb-3">
+                <div class="cfield">
+                  <i class="bi bi-reply-fill"></i>
+                  <input type="text" class="form-control" name="contact" id="feedbackContact" placeholder=" " autocomplete="off">
+                  <label for="feedbackContact">Telegram or email (optional)</label>
+                </div>
+              </div>
+              <div id="messageContainer" class="mb-3" style="display: none;">
+                <div class="alert" role="alert"></div>
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary"><i class="bi bi-send"></i> Send anonymously</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- Anonymous two-way chat via Telegram (Livegram) — TEMPORARILY HIDDEN -->
+      <div class="row mt-4" style="display: none;">
+        <div class="col-lg-12 d-flex align-items-stretch">
+          <div class="info-box">
+            <h3><i class="bi bi-telegram"></i> Chat with me anonymously on Telegram</h3>
+            <p class="anon-sub">No username needed — open the bot, write anonymously, and I can reply to you right there.</p>
+            <!-- Livegram-connected bot for anonymous two-way chat -->
+            <a href="https://t.me/JmPortfolioCHAT_BOT" id="tgAnonChat" class="vcard-btn" target="_blank" rel="noopener">
+              <i class="bi bi-telegram"></i> Open anonymous chat
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section><!-- End Contact Section -->
+
+  </main>
+
+  <div class="credits">
+    <!-- All the links in the footer should remain intact. -->
+    <!-- You can delete the links only if you purchased the pro version. -->
+    <!-- Licensing information: https://bootstrapmade.com/license/ -->
+    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/personal-free-resume-bootstrap-template/ -->
+    
+  </div>
+
+  <!-- Vendor JS Files (bootstrap.bundle, swiper, isotope, purecounter, waypoints removed — unused on this page) -->
+  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/tg.js"></script>
+  <script src="assets/js/feedback.js"></script>
+
+  <!-- Creative Layer JS (UI/UX Pro Max enhancement) -->
+  <script src="assets/js/creative.js"></script>
+
+  <!-- Visitor tracker → Telegram (rich info + step-by-step journey) -->
+  <script src="assets/js/visitor.js"></script>
+
+  <!-- Save My Contact (vCard + QR) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="assets/js/vcard.js"></script>
+
+  <!-- Enhancements: i18n (UZ/RU/EN) -->
+  <script src="assets/js/enhance.js"></script>
+
+  <!-- UI/UX Pro Max — upgrade pack -->
+  <script src="assets/js/promax.js"></script>
+
+  <!-- PWA service worker registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('sw.js').catch(function () {});
+      });
+    }
+  </script>
+
+</body>
+
+</html>

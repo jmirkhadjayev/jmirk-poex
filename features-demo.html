@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kreativ funksiyalar — jonli demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js"></script>
+  <style>
+    :root{
+      --accent:#18d26e; --accent-text:#0a7d3f; --accent-dark:#15bb62; --accent-soft:rgba(24,210,110,.13);
+      --ink:#15181d; --muted:#5b6b62; --panel:#fff; --border:rgba(15,23,42,.1);
+      --ease:cubic-bezier(.22,1,.36,1); --mono:"M PLUS 1 Code",ui-monospace,monospace;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:var(--mono);background:linear-gradient(160deg,#e7eeea,#dfeae3);color:var(--ink);
+      padding:32px 18px 80px;-webkit-font-smoothing:antialiased}
+    h1{text-align:center;font-size:24px;margin:0 0 6px}
+    .sub{text-align:center;color:var(--muted);font-size:13px;margin:0 auto 34px;max-width:620px;line-height:1.6}
+    .wrap{max-width:880px;margin:0 auto}
+    .card{background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:24px;margin-bottom:28px;
+      box-shadow:0 18px 40px -28px rgba(15,23,30,.4)}
+    .num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:9px;
+      background:var(--accent-soft);color:var(--accent-text);font-weight:700;font-size:15px;margin-right:10px}
+    .htitle{display:flex;align-items:center;font-size:18px;font-weight:700;margin:0 0 6px}
+    .hdesc{color:var(--muted);font-size:12.5px;line-height:1.6;margin:0 0 18px}
+    .tag{display:inline-block;font-size:10px;font-weight:700;color:var(--accent-text);background:var(--accent-soft);
+      padding:2px 9px;border-radius:99px;margin-left:auto}
+
+    /* ---- 1. interactive terminal ---- */
+    .term{background:#0d1117;border:1px solid #233044;border-radius:13px;overflow:hidden}
+    .term .bar{background:#161b22;padding:9px 12px;display:flex;align-items:center;gap:7px;border-bottom:1px solid #233044}
+    .term .dot{width:11px;height:11px;border-radius:50%}
+    .term .nm{margin-left:auto;font-size:11px;color:#8b949e}
+    .term .body{padding:14px 16px;font-size:13px;line-height:1.65;color:#c9d1d9;height:260px;overflow-y:auto}
+    .term .line{white-space:pre-wrap;word-break:break-word}
+    .term .ps{color:#18d26e}.term .pu{color:#58a6ff}
+    .term .g{color:#18d26e}.term .y{color:#e3b341}.term .m{color:#d2a8ff}.term .b{color:#58a6ff}.term .d{color:#8b949e}
+    .term .err{color:#f85149}
+    .term .inrow{display:flex;align-items:center;padding:2px 16px 14px;font-size:13px}
+    .term .inrow .ps{margin-right:8px;white-space:nowrap}
+    .term input{flex:1;background:transparent;border:0;outline:0;color:#c9d1d9;font-family:var(--mono);font-size:13px;caret-color:#18d26e}
+    .hint{font-size:11px;color:var(--muted);margin-top:9px}.hint code{background:#eef3f0;padding:1px 6px;border-radius:5px;color:var(--ink)}
+
+    /* ---- 2. vCard + QR ---- */
+    .vc{display:flex;flex-wrap:wrap;gap:24px;align-items:center}
+    .vc .info{flex:1;min-width:220px}
+    .vc .info .nm{font-size:18px;font-weight:700}
+    .vc .info .rl{color:var(--accent-text);font-size:13px;margin:3px 0 14px}
+    .vc .info .row{display:flex;align-items:center;gap:9px;font-size:12.5px;color:var(--muted);margin:7px 0}
+    .vc .info .row i{color:var(--accent);font-size:15px}
+    .qrbox{text-align:center}
+    #qr{display:inline-block;padding:12px;background:#fff;border:1px solid var(--border);border-radius:14px}
+    .qrbox small{display:block;color:var(--muted);font-size:11px;margin-top:8px}
+    .btn{display:inline-flex;align-items:center;gap:9px;font-family:var(--mono);font-size:13.5px;font-weight:600;
+      padding:11px 20px;border-radius:999px;cursor:pointer;border:0;text-decoration:none;margin-top:14px;
+      background:var(--accent);color:#06371b;box-shadow:0 10px 22px -10px rgba(24,210,110,.7);transition:all .25s var(--ease)}
+    .btn:hover{background:var(--accent-dark);transform:translateY(-2px)}
+    .copied{color:var(--accent-text);font-size:12px;font-weight:600;margin-left:10px;opacity:0;transition:opacity .2s}
+    .copied.show{opacity:1}
+
+    /* ---- 3. command palette ---- */
+    .kbtn{display:inline-flex;align-items:center;gap:10px;background:#fff;border:1px solid var(--border);border-radius:12px;
+      padding:11px 16px;font-family:var(--mono);font-size:13px;color:var(--muted);cursor:pointer;transition:all .2s var(--ease)}
+    .kbtn:hover{border-color:var(--accent);color:var(--ink)}
+    .kbd{font-size:11px;font-weight:700;background:#eef3f0;border:1px solid var(--border);border-radius:6px;padding:2px 7px;color:var(--ink)}
+    .pal-overlay{position:fixed;inset:0;background:rgba(10,20,15,.45);backdrop-filter:blur(3px);z-index:999;
+      display:none;align-items:flex-start;justify-content:center;padding-top:14vh}
+    .pal-overlay.open{display:flex}
+    .pal{width:min(520px,92vw);background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;
+      box-shadow:0 30px 70px -20px rgba(6,24,16,.5);animation:palIn .18s var(--ease)}
+    @keyframes palIn{from{opacity:0;transform:translateY(-10px) scale(.98)}to{opacity:1;transform:none}}
+    .pal .search{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--border)}
+    .pal .search i{color:var(--muted);font-size:17px}
+    .pal .search input{flex:1;border:0;outline:0;font-family:var(--mono);font-size:15px;color:var(--ink);background:transparent}
+    .pal ul{list-style:none;margin:0;padding:8px;max-height:320px;overflow-y:auto}
+    .pal li{display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:10px;cursor:pointer;font-size:14px}
+    .pal li i{font-size:17px;color:var(--muted);width:20px;text-align:center}
+    .pal li .sub2{margin-left:auto;font-size:11px;color:var(--muted)}
+    .pal li.sel{background:var(--accent-soft)}
+    .pal li.sel i{color:var(--accent-text)}
+    .pal .empty{padding:22px;text-align:center;color:var(--muted);font-size:13px}
+
+    .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#eafff3;
+      padding:12px 20px;border-radius:12px;font-size:13px;opacity:0;pointer-events:none;transition:all .3s var(--ease);z-index:1100}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    .toast b{color:var(--accent)}
+  </style>
+</head>
+<body>
+  <h1>3 ta kreativ funksiya — jonli demo</h1>
+  <p class="sub">Hammasi <b>haqiqatan ishlaydi</b>: terminalga buyruq yozing, <span class="kbd">Ctrl</span>+<span class="kbd">K</span> bosing, QR'ni skaner qiling. Yoqqanini ayting — saytga qo'shaman.</p>
+
+  <div class="wrap">
+
+    <!-- 1 -->
+    <div class="card">
+      <h2 class="htitle"><span class="num">1</span> Jonli interaktiv terminal <span class="tag">eng mos</span></h2>
+      <p class="hdesc">Foydalanuvchi haqiqiy buyruq yozadi va javob oladi — saytingizning coder ruhiga 100% mos.</p>
+      <div class="term">
+        <div class="bar"><span class="dot" style="background:#ff5f56"></span><span class="dot" style="background:#ffbd2e"></span><span class="dot" style="background:#27c93f"></span><span class="nm">jamshid@portfolio: ~</span></div>
+        <div class="body" id="tbody"></div>
+        <form class="inrow" id="tform" autocomplete="off">
+          <span class="ps">jamshid<span style="color:#c9d1d9">@</span><span class="pu">portfolio</span> $</span>
+          <input id="tinput" autofocus spellcheck="false" aria-label="terminal">
+        </form>
+      </div>
+      <p class="hint">Sinab ko'ring: <code>help</code> <code>about</code> <code>skills</code> <code>contact</code> <code>cv</code> <code>social</code> <code>clear</code></p>
+    </div>
+
+    <!-- 2 -->
+    <div class="card">
+      <h2 class="htitle"><span class="num">2</span> Save Contact — vCard + QR <span class="tag">kam uchraydi</span></h2>
+      <p class="hdesc">Bir bosishda telefon kontaktiga qo'shiladigan fayl, yoki QR'ni skaner qilib darhol saqlash.</p>
+      <div class="vc">
+        <div class="info">
+          <div class="nm">Jamshid Mirkhadjayev</div>
+          <div class="rl">IT Project Manager · Java Backend Developer</div>
+          <div class="row"><i class="bi bi-geo-alt-fill"></i> Tashkent, Uzbekistan</div>
+          <div class="row"><i class="bi bi-envelope-fill"></i> j.mirkhadjayev@uzairports.com
+            <span class="copied" id="cp">Copied!</span></div>
+          <div class="row"><i class="bi bi-globe"></i> mirkhadjayev.uz</div>
+          <div>
+            <button class="btn" id="vcfBtn"><i class="bi bi-person-vcard"></i> Save Contact (.vcf)</button>
+          </div>
+        </div>
+        <div class="qrbox">
+          <div id="qr"></div>
+          <small>📷 Skaner qiling → kontakt saqlanadi</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="card">
+      <h2 class="htitle"><span class="num">3</span> Command palette (⌘K) <span class="tag">professional</span></h2>
+      <p class="hdesc">VS Code uslubidagi tez navigatsiya. Istalgan joyda klaviaturadan ochiladi.</p>
+      <button class="kbtn" id="openPal"><i class="bi bi-command"></i> Ochish uchun bosing yoki <span class="kbd">Ctrl</span>+<span class="kbd">K</span></button>
+    </div>
+
+  </div>
+
+  <!-- command palette overlay -->
+  <div class="pal-overlay" id="palOverlay">
+    <div class="pal" role="dialog" aria-label="Command palette">
+      <div class="search"><i class="bi bi-search"></i><input id="palInput" placeholder="Qidiring yoki bo'lim tanlang…" spellcheck="false"></div>
+      <ul id="palList"></ul>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    /* ============ 1. interactive terminal ============ */
+    const tbody=document.getElementById('tbody'),tin=document.getElementById('tinput'),tform=document.getElementById('tform');
+    function out(html){const d=document.createElement('div');d.className='line';d.innerHTML=html;tbody.appendChild(d);tbody.scrollTop=tbody.scrollHeight;}
+    const CMDS={
+      help:()=>`Buyruqlar:\n  <span class="g">about</span>    — men haqimda\n  <span class="g">skills</span>   — texnologiyalar\n  <span class="g">contact</span>  — bog'lanish\n  <span class="g">cv</span>       — CV yuklash\n  <span class="g">social</span>   — ijtimoiy tarmoqlar\n  <span class="g">clear</span>    — tozalash`,
+      about:()=>`<span class="y">Jamshid Mirkhadjayev</span>\nIT Project Manager &amp; Java Backend Developer\n📍 Tashkent, Uzbekistan`,
+      skills:()=>`<span class="b">Lang:</span> Java · Python · JavaScript\n<span class="b">Web:</span>  HTML · CSS · Spring Boot\n<span class="b">Data:</span> PostgreSQL · Cloud\n<span class="b">Tools:</span> Git · Claude`,
+      contact:()=>`📧 j.mirkhadjayev@uzairports.com\n🌐 mirkhadjayev.uz\n✈️  Telegram: @jmirkhadjayev`,
+      cv:()=>`<span class="g">↓</span> CV (PDF) yuklanmoqda… <span class="d">(demo)</span>`,
+      social:()=>`<span class="m">LinkedIn</span>  /in/jmirkhadjayev\n<span class="m">GitHub</span>    /jmirkhadjayev\n<span class="m">X</span>         @mirkhadjayev`,
+      whoami:()=>`guest@visitor — welcome 👋`,
+      ls:()=>`about/  skills/  resume.pdf  certificates/  contact/`,
+      clear:()=>{tbody.innerHTML='';return null;}
+    };
+    function run(raw){
+      const cmd=raw.trim().toLowerCase();
+      out(`<span class="ps">jamshid@portfolio $</span> ${raw.replace(/</g,'&lt;')}`);
+      if(!cmd)return;
+      if(CMDS[cmd]){const r=CMDS[cmd]();if(r!==null)out(r);}
+      else out(`<span class="err">command not found: ${cmd.replace(/</g,'&lt;')}</span> — yozing <span class="g">help</span>`);
+    }
+    tform.addEventListener('submit',e=>{e.preventDefault();run(tin.value);tin.value='';});
+    out(`<span class="d">Welcome! Yozing</span> <span class="g">help</span> <span class="d">— boshlash uchun.</span>`);
+
+    /* ============ 2. vCard + QR ============ */
+    const VCARD=`BEGIN:VCARD
+VERSION:3.0
+N:Mirkhadjayev;Jamshid;;;
+FN:Jamshid Mirkhadjayev
+TITLE:IT Project Manager
+EMAIL;TYPE=WORK:j.mirkhadjayev@uzairports.com
+URL:https://www.mirkhadjayev.uz
+ADR;TYPE=WORK:;;Tashkent;;;;Uzbekistan
+END:VCARD`;
+    document.getElementById('vcfBtn').addEventListener('click',()=>{
+      const blob=new Blob([VCARD],{type:'text/vcard'});
+      const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Jamshid_Mirkhadjayev.vcf';a.click();
+      toast('Contact saqlandi: <b>Jamshid_Mirkhadjayev.vcf</b>');
+    });
+    try{ new QRCode(document.getElementById('qr'),{text:VCARD,width:148,height:148,colorDark:'#15181d',colorLight:'#ffffff',correctLevel:QRCode.CorrectLevel.M}); }catch(e){document.getElementById('qr').textContent='QR (CDN kerak)';}
+    // copy email
+    document.querySelector('.bi-envelope-fill').parentElement.style.cursor='pointer';
+    document.querySelector('.bi-envelope-fill').parentElement.addEventListener('click',()=>{
+      navigator.clipboard?.writeText('j.mirkhadjayev@uzairports.com');
+      const cp=document.getElementById('cp');cp.classList.add('show');setTimeout(()=>cp.classList.remove('show'),1500);
+    });
+
+    /* ============ 3. command palette ============ */
+    const NAV=[
+      {i:'house-door-fill',t:'Home',s:'#header'},
+      {i:'person-fill',t:'About',s:'#about'},
+      {i:'file-earmark-text-fill',t:'Resume',s:'#resume'},
+      {i:'award-fill',t:'Certificates',s:'#certificates'},
+      {i:'envelope-fill',t:'Contact',s:'#contact'},
+      {i:'download',t:'Download CV',s:'cv'},
+      {i:'github',t:'GitHub',s:'github'},
+      {i:'linkedin',t:'LinkedIn',s:'linkedin'}
+    ];
+    const ov=document.getElementById('palOverlay'),pin=document.getElementById('palInput'),plist=document.getElementById('palList');
+    let sel=0,filtered=NAV;
+    function render(){
+      plist.innerHTML='';
+      if(!filtered.length){plist.innerHTML='<div class="empty">Hech narsa topilmadi</div>';return;}
+      filtered.forEach((it,n)=>{
+        const li=document.createElement('li');if(n===sel)li.className='sel';
+        li.innerHTML=`<i class="bi bi-${it.i}"></i> ${it.t} <span class="sub2">${it.s}</span>`;
+        li.addEventListener('click',()=>choose(n));
+        li.addEventListener('mousemove',()=>{sel=n;render();});
+        plist.appendChild(li);
+      });
+    }
+    function openPal(){ov.classList.add('open');pin.value='';filtered=NAV;sel=0;render();setTimeout(()=>pin.focus(),30);}
+    function closePal(){ov.classList.remove('open');}
+    function choose(n){const it=filtered[n];if(!it)return;closePal();toast(`Navigating to <b>${it.t}</b> →`);}
+    document.getElementById('openPal').addEventListener('click',openPal);
+    ov.addEventListener('click',e=>{if(e.target===ov)closePal();});
+    pin.addEventListener('input',()=>{const q=pin.value.toLowerCase();filtered=NAV.filter(x=>x.t.toLowerCase().includes(q));sel=0;render();});
+    document.addEventListener('keydown',e=>{
+      if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();ov.classList.contains('open')?closePal():openPal();return;}
+      if(!ov.classList.contains('open'))return;
+      if(e.key==='Escape')closePal();
+      else if(e.key==='ArrowDown'){e.preventDefault();sel=(sel+1)%filtered.length;render();}
+      else if(e.key==='ArrowUp'){e.preventDefault();sel=(sel-1+filtered.length)%filtered.length;render();}
+      else if(e.key==='Enter'){e.preventDefault();choose(sel);}
+    });
+
+    /* toast */
+    let tt;
+    function toast(html){const el=document.getElementById('toast');el.innerHTML=html;el.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>el.classList.remove('show'),2600);}
+  </script>
+</body>
+</html>

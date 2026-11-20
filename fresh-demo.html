@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>10 ta yangi g'oya — jonli demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    :root{
+      --accent:#18d26e; --accent-text:#0a7d3f; --accent-dark:#15bb62; --accent-soft:rgba(24,210,110,.13);
+      --ink:#15181d; --muted:#5b6b62; --panel:#fff; --border:rgba(15,23,42,.1);
+      --ease:cubic-bezier(.22,1,.36,1); --mono:"M PLUS 1 Code",ui-monospace,monospace;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:var(--mono);background:linear-gradient(160deg,#e7eeea,#dfeae3);color:var(--ink);padding:32px 18px 120px;-webkit-font-smoothing:antialiased}
+    @media(hover:hover) and (pointer:fine){*{cursor:none}}
+    h1{text-align:center;font-size:24px;margin:0 0 6px}
+    .sub{text-align:center;color:var(--muted);font-size:13px;margin:0 auto 30px;max-width:640px;line-height:1.6}
+    .wrap{max-width:880px;margin:0 auto}
+    .card{background:var(--panel);border:1px solid var(--border);border-radius:18px;padding:24px;margin-bottom:24px;box-shadow:0 18px 40px -28px rgba(15,23,30,.4);scroll-margin-top:20px}
+    .num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;background:var(--accent-soft);color:var(--accent-text);font-weight:700;font-size:14px;margin-right:10px}
+    .htitle{display:flex;align-items:center;font-size:16.5px;font-weight:700;margin:0 0 5px}
+    .hdesc{color:var(--muted);font-size:12px;line-height:1.55;margin:0 0 16px}
+    .tag{display:inline-block;font-size:9.5px;font-weight:700;color:var(--accent-text);background:var(--accent-soft);padding:2px 8px;border-radius:99px;margin-left:auto}
+    .mini{font-family:var(--mono);font-size:12px;font-weight:600;border:1px solid var(--border);background:#fff;color:var(--muted);border-radius:99px;padding:6px 13px;cursor:pointer}
+
+    /* 1 custom cursor */
+    .cur-dot,.cur-ring{position:fixed;top:0;left:0;border-radius:50%;pointer-events:none;z-index:9999;mix-blend-mode:normal}
+    .cur-dot{width:7px;height:7px;background:var(--accent);transform:translate(-50%,-50%)}
+    .cur-ring{width:34px;height:34px;border:2px solid rgba(24,210,110,.55);transform:translate(-50%,-50%);transition:transform .12s var(--ease),width .15s,height .15s,border-color .15s}
+    .cur-ring.big{width:54px;height:54px;border-color:var(--accent)}
+    @media(hover:none){.cur-dot,.cur-ring{display:none}}
+
+    /* 2 dot nav */
+    .dotnav{position:fixed;right:18px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:11px;z-index:500}
+    .dotnav b{width:11px;height:11px;border-radius:50%;background:var(--border);cursor:pointer;transition:.25s var(--ease);display:block}
+    .dotnav b.on{background:var(--accent);transform:scale(1.35)}
+    @media(max-width:680px){.dotnav{display:none}}
+
+    /* 3 blur-in words */
+    .blurin{font-size:16px;line-height:1.7;color:var(--ink)}
+    .blurin span{display:inline-block;opacity:0;filter:blur(8px);transform:translateY(6px);transition:opacity .5s var(--ease),filter .5s var(--ease),transform .5s var(--ease)}
+    .blurin span.show{opacity:1;filter:blur(0);transform:none}
+
+    /* 4 signature */
+    .sig svg{width:280px;max-width:100%;height:auto}
+    .sig path{fill:none;stroke:var(--accent-text);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1400;stroke-dashoffset:1400;animation:draw 2.6s var(--ease) forwards}
+    @keyframes draw{to{stroke-dashoffset:0}}
+
+    /* 5 bento */
+    .bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:78px;gap:12px}
+    .bento>div{background:#f7faf8;border:1px solid var(--border);border-radius:14px;padding:14px;display:flex;flex-direction:column;justify-content:space-between;transition:.25s var(--ease)}
+    .bento>div:hover{border-color:rgba(24,210,110,.5);transform:translateY(-3px)}
+    .bento .b-name{grid-column:span 2;grid-row:span 2;background:radial-gradient(120% 100% at 30% 0%,#0c1512,#06170e);color:#eafff3}
+    .bento .b-name .big{font-size:19px;font-weight:700}.bento .b-name .r{color:var(--accent);font-size:12px;margin-top:4px}
+    .bento .wide{grid-column:span 2}
+    .bento i{font-size:20px;color:var(--accent-text)}.bento .lab{font-size:12px;color:var(--muted)}.bento .v{font-size:17px;font-weight:700;color:var(--ink)}
+    @media(max-width:560px){.bento{grid-template-columns:repeat(2,1fr)}.bento .b-name,.bento .wide{grid-column:span 2}}
+
+    /* 6 rings */
+    .rings{display:flex;flex-wrap:wrap;gap:18px;justify-content:center}
+    .ring{text-align:center;width:104px}
+    .ring svg{transform:rotate(-90deg)}
+    .ring .trk{fill:none;stroke:#e4ece8;stroke-width:9}
+    .ring .val{fill:none;stroke:var(--accent);stroke-width:9;stroke-linecap:round;stroke-dasharray:251;stroke-dashoffset:251;transition:stroke-dashoffset 1.2s var(--ease)}
+    .ring .pct{font-size:15px;font-weight:700;fill:var(--ink);transform:rotate(90deg);transform-origin:center}
+    .ring .nm{font-size:12px;color:var(--muted);margin-top:6px}
+
+    /* 7 flip */
+    .flips{display:flex;flex-wrap:wrap;gap:14px}
+    .flip{width:180px;height:130px;perspective:900px}
+    .flip .in{position:relative;width:100%;height:100%;transition:transform .6s var(--ease);transform-style:preserve-3d}
+    .flip:hover .in{transform:rotateY(180deg)}
+    .flip .fc,.flip .bk{position:absolute;inset:0;border-radius:14px;backface-visibility:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid var(--border);padding:14px;text-align:center}
+    .flip .fc{background:#f7faf8}.flip .fc i{font-size:30px;color:var(--accent-text)}.flip .fc b{font-size:13px;margin-top:8px}
+    .flip .bk{background:radial-gradient(120% 100% at 30% 0%,#0c1512,#06170e);color:#eafff3;transform:rotateY(180deg)}
+    .flip .bk small{color:#9fe9bf;font-size:11px;line-height:1.5}
+
+    /* 8 gradient text */
+    .gradtext{font-size:34px;font-weight:800;background:linear-gradient(90deg,#0a7d3f,#18d26e,#4ceb95,#18d26e,#0a7d3f);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:gradmove 4s linear infinite}
+    @keyframes gradmove{to{background-position:200% center}}
+
+    /* 9 accordion */
+    .acc{border:1px solid var(--border);border-radius:12px;overflow:hidden}
+    .acc+.acc{margin-top:10px}
+    .acc .q{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;cursor:pointer;font-size:13.5px;font-weight:600;background:#fff}
+    .acc .q i{transition:transform .25s var(--ease);color:var(--accent-text)}
+    .acc.open .q i{transform:rotate(180deg)}
+    .acc .a{max-height:0;overflow:hidden;transition:max-height .3s var(--ease);font-size:12.5px;color:var(--muted);line-height:1.6}
+    .acc .a p{margin:0;padding:0 16px 14px}
+    .acc.open .a{max-height:120px}
+
+    /* 10 back to top */
+    .totop{position:fixed;right:20px;bottom:24px;width:48px;height:48px;z-index:600;cursor:pointer;opacity:0;transform:translateY(14px);transition:.3s var(--ease)}
+    .totop.show{opacity:1;transform:none}
+    .totop svg{position:absolute;inset:0}.totop .tt-trk{fill:none;stroke:var(--border);stroke-width:3}
+    .totop .tt-val{fill:none;stroke:var(--accent);stroke-width:3;stroke-linecap:round;stroke-dasharray:138;stroke-dashoffset:138}
+    .totop .ic{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--accent-text);font-size:18px}
+
+    .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#eafff3;padding:11px 20px;border-radius:12px;font-size:13px;opacity:0;pointer-events:none;transition:all .3s var(--ease);z-index:9000}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  </style>
+</head>
+<body>
+  <div class="cur-dot" id="cd"></div><div class="cur-ring" id="cr"></div>
+  <nav class="dotnav" id="dotnav"></nav>
+
+  <h1>10 ta yangi g'oya — jonli demo</h1>
+  <p class="sub">Hammasi avval ko'rsatmagan yangi g'oyalar. Sichqonchani yuriting (maxsus kursor), pastga aylantiring (o'ng dot-nav + back-to-top), kartalarni hover qiling.</p>
+
+  <div class="wrap">
+
+    <section class="card" id="s1">
+      <h2 class="htitle"><span class="num">1</span> Maxsus kursor (dot + ring) <span class="tag">signature</span></h2>
+      <p class="hdesc">Sichqoncha o'rniga nozik yashil nuqta + uni kuzatuvchi halqa. Tugma/havola ustида halqa kattalashadi.</p>
+      <button class="mini" data-big>Ustimga keling — halqa kattalashadi</button>
+    </section>
+
+    <section class="card" id="s2">
+      <h2 class="htitle"><span class="num">2</span> Yon dot-navigatsiya <span class="tag">scroll-spy</span></h2>
+      <p class="hdesc">O'ng tomonda nuqtalar — joriy bo'lim yashil bo'lib belgilanadi, bosib o'tasiz. (Pastga aylantiring)</p>
+    </section>
+
+    <section class="card" id="s3">
+      <h2 class="htitle"><span class="num">3</span> So'zma-so'z "blur-in" matn <span class="tag">premium</span></h2>
+      <p class="hdesc">Matn so'zlar ketma-ket fokusga kelib paydo bo'ladi.</p>
+      <p class="blurin" id="blur">IT Project Manager and Java Backend Developer crafting reliable digital solutions in aviation.</p>
+      <button class="mini" id="blurReplay" data-big>↻ Qayta o'ynatish</button>
+    </section>
+
+    <section class="card" id="s4">
+      <h2 class="htitle"><span class="num">4</span> O'zini chizadigan imzo (SVG) <span class="tag">kamyob · shaxsiy</span></h2>
+      <p class="hdesc">Hero'da imzoyingiz qalam bilan yozilayotgandek chiziladi.</p>
+      <div class="sig" id="sig">
+        <svg viewBox="0 0 380 110">
+          <path d="M20,80 C30,30 50,30 55,55 C60,80 45,95 40,75 C36,58 70,40 95,70 M110,40 L100,85 M105,52 C120,40 135,52 120,68 C140,60 155,62 150,82 M170,45 C158,55 160,80 178,72 C196,64 188,40 172,48 M205,30 L195,85 M225,52 C212,52 210,78 228,74 C242,70 240,52 226,54 M255,52 L248,84 M250,60 C262,46 280,50 274,66 M300,30 C292,70 300,90 315,78 M330,52 C320,54 318,80 335,74 C350,68 346,50 332,54"/>
+        </svg>
+      </div>
+      <button class="mini" id="sigReplay" data-big>↻ Qayta chizish</button>
+    </section>
+
+    <section class="card" id="s5">
+      <h2 class="htitle"><span class="num">5</span> Bento grid layout <span class="tag">2024 trend</span></h2>
+      <p class="hdesc">About/Skills'ni zamonaviy "bento" kataklar shaklida joylash.</p>
+      <div class="bento">
+        <div class="b-name"><div class="big">Jamshid M.</div><div class="r">IT Project Manager</div></div>
+        <div><i class="bi bi-geo-alt"></i><span class="lab">Tashkent</span></div>
+        <div><i class="bi bi-translate"></i><span class="lab">UZ · RU · EN</span></div>
+        <div class="wide"><span class="lab">Experience</span><span class="v">5+ years</span></div>
+        <div><i class="bi bi-cup-hot"></i><span class="lab">Java</span></div>
+        <div><i class="bi bi-cloud"></i><span class="lab">Cloud</span></div>
+        <div class="wide"><span class="lab">Certificates</span><span class="v">6 earned</span></div>
+        <div><i class="bi bi-github"></i><span class="lab">GitHub</span></div>
+      </div>
+    </section>
+
+    <section class="card" id="s6">
+      <h2 class="htitle"><span class="num">6</span> Doiraviy progress ringlar <span class="tag">gauge</span></h2>
+      <p class="hdesc">Skill darajalari aylana shaklida to'ladi (radar/statistikadan farqli).</p>
+      <div class="rings" id="rings"></div>
+    </section>
+
+    <section class="card" id="s7">
+      <h2 class="htitle"><span class="num">7</span> 3D flip kartalar <span class="tag">interaktiv</span></h2>
+      <p class="hdesc">Sertifikat ustiga kelsangiz orqasi ochiladi (tafsilot). Tilt'ga muqobil.</p>
+      <div class="flips">
+        <div class="flip"><div class="in"><div class="fc"><i class="bi bi-cup-hot-fill"></i><b>Java Backend</b></div><div class="bk"><small>PDP Academy · Spring Boot, REST, microservices · 2022</small></div></div></div>
+        <div class="flip"><div class="in"><div class="fc"><i class="bi bi-database-fill"></i><b>SQL</b></div><div class="bk"><small>Database design, queries, optimization</small></div></div></div>
+        <div class="flip"><div class="in"><div class="fc"><i class="bi bi-airplane-fill"></i><b>Airport Mgmt</b></div><div class="bk"><small>Korea · Young Leaders program · 2020</small></div></div></div>
+      </div>
+    </section>
+
+    <section class="card" id="s8">
+      <h2 class="htitle"><span class="num">8</span> Animatsion gradient sarlavha <span class="tag">subtil</span></h2>
+      <p class="hdesc">Sarlavhada yashil gradient sekin oqib turadi.</p>
+      <div class="gradtext">Jamshid Mirkhadjayev</div>
+    </section>
+
+    <section class="card" id="s9">
+      <h2 class="htitle"><span class="num">9</span> FAQ akkordeon <span class="tag">foydali</span></h2>
+      <p class="hdesc">Tez-tez so'raladigan savollar — bosib ochiladi.</p>
+      <div class="acc" data-acc><div class="q">Loyihalarni qanday boshqarasiz? <i class="bi bi-chevron-down"></i></div><div class="a"><p>Agile yondashuv, aniq milestone'lar va stakeholder bilan doimiy aloqa orqali.</p></div></div>
+      <div class="acc" data-acc><div class="q">Qaysi texnologiyalarda ishlaysiz? <i class="bi bi-chevron-down"></i></div><div class="a"><p>Java, Spring Boot, PostgreSQL, cloud yechimlari va aviatsiya platformalari.</p></div></div>
+      <div class="acc" data-acc><div class="q">Yangi loyihaga ochiqmisiz? <i class="bi bi-chevron-down"></i></div><div class="a"><p>Ha — qiziqarli loyihalar uchun Contact bo'limidan yozing.</p></div></div>
+    </section>
+
+    <section class="card" id="s10">
+      <h2 class="htitle"><span class="num">10</span> Back-to-top (progress ring) <span class="tag">mikro</span></h2>
+      <p class="hdesc">Pastga aylantirsangiz o'ng-pastda tugma paydo bo'lib, halqasi scroll bilan to'ladi → bosib tepaga.</p>
+    </section>
+
+  </div>
+
+  <div class="totop" id="totop" title="Tepaga">
+    <svg viewBox="0 0 48 48"><circle class="tt-trk" cx="24" cy="24" r="22"/><circle class="tt-val" id="ttVal" cx="24" cy="24" r="22"/></svg>
+    <div class="ic"><i class="bi bi-arrow-up"></i></div>
+  </div>
+  <div class="toast" id="toast"></div>
+
+  <script>
+    /* 1 custom cursor */
+    const cd=document.getElementById('cd'),cr=document.getElementById('cr');let rx=0,ry=0,tx=0,ty=0;
+    addEventListener('pointermove',e=>{tx=e.clientX;ty=e.clientY;cd.style.left=tx+'px';cd.style.top=ty+'px';});
+    (function loop(){rx+=(tx-rx)*.18;ry+=(ty-ry)*.18;cr.style.left=rx+'px';cr.style.top=ry+'px';requestAnimationFrame(loop);})();
+    document.querySelectorAll('[data-big]').forEach(el=>{el.addEventListener('pointerenter',()=>cr.classList.add('big'));el.addEventListener('pointerleave',()=>cr.classList.remove('big'));});
+
+    /* 2 dot nav */
+    const secs=[...document.querySelectorAll('.card')],dn=document.getElementById('dotnav');
+    secs.forEach((s,i)=>{const b=document.createElement('b');b.dataset.big='';b.title='Bo\\'lim '+(i+1);b.onclick=()=>s.scrollIntoView({behavior:'smooth'});dn.appendChild(b);});
+    const dots=[...dn.children];
+    new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const i=secs.indexOf(e.target);dots.forEach(d=>d.classList.remove('on'));dots[i]&&dots[i].classList.add('on');}}),{threshold:.55}).observe&&secs.forEach(s=>new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){const i=secs.indexOf(e.target);dots.forEach(d=>d.classList.remove('on'));if(dots[i])dots[i].classList.add('on');}}),{threshold:.55}).observe(s));
+    document.querySelectorAll('.dotnav b').forEach(b=>{b.addEventListener('pointerenter',()=>cr.classList.add('big'));b.addEventListener('pointerleave',()=>cr.classList.remove('big'));});
+
+    /* 3 blur-in */
+    const blur=document.getElementById('blur');const words=blur.textContent.trim().split(' ');
+    function blurIn(){blur.innerHTML=words.map(w=>'<span>'+w+'</span>').join(' ');const sp=blur.querySelectorAll('span');sp.forEach((s,i)=>setTimeout(()=>s.classList.add('show'),i*90));}
+    blurIn();document.getElementById('blurReplay').onclick=blurIn;
+
+    /* 4 signature replay */
+    document.getElementById('sigReplay').onclick=()=>{const s=document.getElementById('sig');const c=s.innerHTML;s.innerHTML='';void s.offsetWidth;s.innerHTML=c;};
+
+    /* 6 rings */
+    const skills=[['Java',90],['Spring',82],['SQL',85],['Cloud',75]];const rc=document.getElementById('rings');
+    skills.forEach(([n,v])=>{const off=251-(251*v/100);
+      rc.insertAdjacentHTML('beforeend','<div class="ring"><svg width="92" height="92" viewBox="0 0 92 92"><circle class="trk" cx="46" cy="46" r="40"/><circle class="val" cx="46" cy="46" r="40" data-off="'+off+'"/><text class="pct" x="46" y="46" dominant-baseline="central" text-anchor="middle">'+v+'%</text></svg><div class="nm">'+n+'</div></div>');});
+    new IntersectionObserver((es,o)=>es.forEach(e=>{if(e.isIntersecting){rc.querySelectorAll('.val').forEach(c=>c.style.strokeDashoffset=c.dataset.off);o.disconnect();}}),{threshold:.4}).observe(rc);
+
+    /* 9 accordion */
+    document.querySelectorAll('[data-acc]').forEach(a=>a.querySelector('.q').addEventListener('click',()=>a.classList.toggle('open')));
+
+    /* 10 back to top */
+    const tt=document.getElementById('totop'),ttv=document.getElementById('ttVal');
+    addEventListener('scroll',()=>{const h=document.documentElement;const max=h.scrollHeight-h.clientHeight;const p=max>0?h.scrollTop/max:0;ttv.style.strokeDashoffset=138-(138*p);tt.classList.toggle('show',h.scrollTop>300);},{passive:true});
+    tt.onclick=()=>scrollTo({top:0,behavior:'smooth'});
+    tt.addEventListener('pointerenter',()=>cr.classList.add('big'));tt.addEventListener('pointerleave',()=>cr.classList.remove('big'));
+
+    function toast(h){const el=document.getElementById('toast');el.innerHTML=h;el.classList.add('show');setTimeout(()=>el.classList.remove('show'),2200);}
+  </script>
+</body>
+</html>

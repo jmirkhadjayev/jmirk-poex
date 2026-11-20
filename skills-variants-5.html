@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Skills — beshinchi 15 ta variant (yangilangan ro'yxat)</title>
+<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+<style>
+@font-face{font-family:"M PLUS 1 Code";font-weight:300 700;font-display:swap;src:url("assets/fonts/mplus1code-latin.woff2") format("woff2");unicode-range:U+0000-00FF,U+2000-206F}
+@font-face{font-family:"M PLUS 1 Code";font-weight:300 700;font-display:swap;src:url("assets/fonts/mplus1code-latin-ext.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BB-02FF}
+:root{
+  --bg:#e7eeea;--panel:#fff;--surface:#f3f6f8;--surface2:#e9eef1;--border:rgba(15,23,30,.12);
+  --text:#15181d;--muted:#454b54;--accent:#0f9d4f;--accent-text:#0a7d3f;--fill:#18d26e;--soft:rgba(24,210,110,.14);
+  --ease:cubic-bezier(.22,1,.36,1);--font:"M PLUS 1 Code",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--font);color:var(--text);background:var(--bg);
+  background-image:linear-gradient(rgba(15,157,79,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(15,157,79,.06) 1px,transparent 1px);background-size:24px 24px;-webkit-font-smoothing:antialiased}
+img{display:block}
+.top{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.top .in{max-width:1180px;margin:0 auto;padding:12px 18px;display:flex;align-items:center;gap:14px}
+.top h1{font-size:16px;margin:0;white-space:nowrap}.top h1 b{color:var(--accent)}
+.top .prev{font-size:12px;color:var(--muted);white-space:nowrap}
+.jump{display:flex;gap:5px;overflow-x:auto;scrollbar-width:none;margin-left:auto}
+.jump::-webkit-scrollbar{display:none}
+.jump a{flex:none;font-size:12px;font-weight:600;text-decoration:none;color:var(--muted);padding:6px 10px;border-radius:99px;border:1px solid var(--border);background:var(--panel)}
+.jump a:hover,.jump a.on{background:var(--text);color:#fff;border-color:var(--text)}
+.wrap{max-width:1180px;margin:0 auto;padding:22px 18px 80px}
+.intro{font-size:13px;color:var(--muted);line-height:1.6;margin:0 0 14px;max-width:900px}.intro b{color:var(--text)}
+.newlist{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 22px}
+.newlist span{font-size:11.5px;font-weight:600;padding:4px 9px;border-radius:99px;background:#fff;border:1px dashed rgba(15,157,79,.5);color:var(--accent-text)}
+.var{background:var(--panel);border-radius:20px;margin-bottom:24px;position:relative;overflow:hidden;box-shadow:0 18px 40px -30px rgba(15,23,30,.45);scroll-margin-top:70px}
+.var::before{content:"";position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,var(--fill),#9be8c0 60%,transparent);z-index:3}
+.vh{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:14px 22px 12px;border-bottom:1px dashed var(--border);background:#fbfcfb}
+.vh .n{min-width:34px;height:28px;padding:0 6px;border-radius:9px;background:var(--soft);color:var(--accent-text);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}
+.vh h2{font-size:16px;margin:0}
+.vh .tag{font-size:10.5px;font-weight:700;color:var(--accent-text);background:var(--soft);padding:3px 9px;border-radius:99px}
+.vh p{width:100%;margin:0 0 0 44px;font-size:12px;color:var(--muted);line-height:1.5}
+.vb{padding:20px 22px 24px;position:relative}
+.ttl{display:flex;align-items:center;gap:12px;margin:0 0 16px;position:relative;z-index:2}
+.ttl h3{font-size:26px;font-weight:700;margin:0;text-transform:uppercase}
+.ttl::after{content:"";width:44px;height:3px;background:var(--accent);border-radius:2px}
+.ttl.light h3{color:#fff}
+@media(max-width:640px){.vh p{margin-left:0}.vb{padding:16px 14px 20px}.ttl h3{font-size:22px}}
+.ico{width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.ico img{width:100%;height:100%;object-fit:contain}
+.pill{display:inline-flex;align-items:center;gap:7px;padding:6px 11px 6px 7px;border-radius:10px;background:#fff;border:1px solid var(--border);font-size:12.5px;font-weight:600;white-space:nowrap;transition:opacity .3s,transform .3s var(--ease),filter .3s}
+.pill .ico{width:18px;height:18px}
+.cp{display:inline-flex;align-items:center;gap:6px;padding:6px 11px;border-radius:99px;font-size:12px;font-weight:600;white-space:nowrap;background:var(--soft);color:var(--accent-text);transition:opacity .3s,filter .3s}
+.cp.m{background:rgba(236,72,153,.1);color:#be185d}
+
+/* R1 datasheet */
+.ds{border:2px solid var(--text);border-radius:6px;overflow:hidden}
+.ds .hd{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;padding:10px 16px;background:var(--text);color:#fff;font-size:12px;letter-spacing:.18em;font-weight:700}
+.ds .bd{display:grid;grid-template-columns:1.35fr 1fr}
+.ds .col{padding:14px 16px}
+.ds .col+.col{border-left:2px solid var(--text);background:#fafbfa}
+.ds h5{margin:0 0 8px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.ds .rw{display:flex;align-items:baseline;gap:8px;padding:6px 0;font-size:12.5px;border-bottom:1px dotted rgba(15,23,30,.25)}
+.ds .rw:last-child{border:0}
+.ds .rw b{flex:none;min-width:118px;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+.ds .rw b i{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:6px;vertical-align:1px}
+.ds .rw span{display:flex;flex-wrap:wrap;gap:4px 12px}
+.ds .rw span em{font-style:normal;display:inline-flex;align-items:center;gap:5px}
+.ds .rw span .ico{width:15px;height:15px}
+.ds ul{list-style:none;margin:0 0 12px;padding:0;columns:1;font-size:12.5px}
+.ds li{padding:3px 0}.ds li::before{content:"▸ ";color:var(--accent)}
+@media(max-width:760px){.ds .bd{grid-template-columns:1fr}.ds .col+.col{border-left:0;border-top:2px solid var(--text)}}
+
+/* R2 receipt */
+.rc{width:min(860px,100%);margin:0 auto;background:#fffefb;padding:22px 26px 34px;box-shadow:0 16px 30px -20px rgba(0,0,0,.4);position:relative;font-size:12.5px;
+  -webkit-mask:linear-gradient(#000 0 0) top/100% calc(100% - 10px) no-repeat,conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/16px 10px repeat-x;
+  mask:linear-gradient(#000 0 0) top/100% calc(100% - 10px) no-repeat,conic-gradient(from -45deg at bottom,#0000,#000 1deg 89deg,#0000 90deg) bottom/16px 10px repeat-x}
+.rc .c{text-align:center}
+.rc h4{margin:0;font-size:18px;letter-spacing:.2em}
+.rc .sm{color:var(--muted);font-size:11px;letter-spacing:.1em}
+.rc hr{border:0;border-top:1px dashed #9ca3af;margin:10px 0}
+.rc .cols{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0 26px}
+.rc .grp{font-size:10.5px;letter-spacing:.16em;color:var(--muted);margin:6px 0 2px}
+.rc .it{display:flex;align-items:center;gap:6px;line-height:1.85}
+.rc .it .ico{width:14px;height:14px}
+.rc .it::after{content:"";flex:1;border-bottom:1px dotted #9ca3af;margin:0 4px;transform:translateY(-3px);order:2}
+.rc .it .ok{order:3;color:var(--accent);font-weight:700}
+.rc .free{line-height:1.7}
+.rc .tot{display:flex;justify-content:space-between;font-weight:700;font-size:14px}
+.rc .bar{height:38px;margin:10px auto 4px;width:70%;background:repeating-linear-gradient(90deg,#111 0 2px,transparent 2px 4px,#111 4px 5px,transparent 5px 8px,#111 8px 11px,transparent 11px 12px)}
+@media(max-width:560px){.rc .cols{grid-template-columns:1fr}}
+
+/* R3 fanned cards */
+.fans{display:grid;grid-template-columns:repeat(3,1fr);gap:8px 14px}
+.fan{height:170px;position:relative;display:flex;justify-content:center;cursor:pointer}
+.fan .fc{position:absolute;bottom:34px;width:70px;height:96px;border-radius:10px;background:#fff;border:1px solid var(--border);box-shadow:0 8px 16px -10px rgba(0,0,0,.35);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:6px;transform-origin:50% 140%;transition:transform .5s var(--ease)}
+.fan .fc .ico{width:30px;height:30px}
+.fan .fc small{font-size:9px;font-weight:700;text-align:center;line-height:1.15}
+.fan .fn{position:absolute;bottom:4px;font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+.fan .fc:first-child{border-top:4px solid var(--c)}
+@media(max-width:720px){.fans{grid-template-columns:repeat(2,1fr)}}
+
+/* R4 filter */
+.flt{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.flt button{font-family:inherit;font-size:12px;font-weight:600;padding:7px 12px;border-radius:99px;border:1px solid var(--border);background:#fff;cursor:pointer;color:var(--muted);display:inline-flex;align-items:center;gap:6px}
+.flt button i{width:8px;height:8px;border-radius:50%}
+.flt button.on{background:var(--text);color:#fff;border-color:var(--text)}
+.fgrid{display:flex;flex-wrap:wrap;gap:7px;min-height:130px;align-content:flex-start}
+.fgrid>*{animation:pop .35s var(--ease) both}
+.fgrid .hide{display:none}
+@keyframes pop{from{opacity:0;transform:scale(.85)}}
+
+/* R5 business card */
+.bcw{display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:center}
+.bc{width:min(500px,86vw);aspect-ratio:1.75;perspective:1200px;cursor:pointer}
+.bc .inr{position:relative;width:100%;height:100%;transition:transform .8s var(--ease);transform-style:preserve-3d}
+.bc:hover .inr,.bc.f .inr{transform:rotateY(180deg)}
+.bc .face{position:absolute;inset:0;border-radius:14px;backface-visibility:hidden;box-shadow:0 20px 34px -20px rgba(0,0,0,.5);overflow:hidden}
+.bc .front{background:linear-gradient(140deg,#0e1512,#0b2a1b);color:#fff;padding:26px;display:flex;flex-direction:column;justify-content:space-between}
+.bc .front .mono{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,var(--fill),var(--accent));display:flex;align-items:center;justify-content:center;font-weight:700}
+.bc .front h4{margin:0;font-size:24px}.bc .front p{margin:4px 0 0;font-size:12px;color:#9be8c0;letter-spacing:.08em}
+.bc .front .ct{display:flex;gap:14px;font-size:11.5px;color:#cfd8d3;flex-wrap:wrap}
+.bc .back{background:#fff;transform:rotateY(180deg);padding:16px 18px;display:flex;flex-direction:column;gap:7px;border:1px solid var(--border)}
+.bc .back .row{display:flex;align-items:center;gap:8px;font-size:11px}
+.bc .back .row b{min-width:84px;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.bc .back .ics{display:flex;gap:7px;flex-wrap:wrap}
+.bc .back .ics .ico{width:20px;height:20px}
+.bc .back .cm{font-size:10.5px;color:var(--accent-text);line-height:1.5;margin-top:auto;border-top:1px dashed var(--border);padding-top:7px}
+.bcw .side h4{font-size:24px;margin:0 0 8px}.bcw .side p{margin:0;font-size:13px;color:var(--muted);line-height:1.6;max-width:360px}
+@media(max-width:860px){.bcw{grid-template-columns:1fr;justify-items:center;text-align:center}}
+
+/* R6 JM monogram */
+.mgw{display:grid;grid-template-columns:auto 1fr;gap:30px;align-items:center}
+.mg{display:flex;gap:26px}
+.mgl{display:grid;grid-template-columns:repeat(5,40px);grid-auto-rows:40px;gap:4px}
+.mgl .cl{border-radius:9px;display:flex;align-items:center;justify-content:center;transition:transform .25s var(--ease),background .25s}
+.mgl .cl.on{background:#fff;border:1px solid var(--border);box-shadow:0 4px 10px -6px rgba(0,0,0,.3);cursor:pointer}
+.mgl .cl.on .ico{width:24px;height:24px}
+.mgl .cl.dot{background:var(--soft);border:1px solid rgba(15,157,79,.25);cursor:pointer}
+.mgl .cl.dot::after{content:"";width:12px;height:12px;border-radius:50%;background:var(--fill)}
+.mgl .cl.dot.m::after{background:#ec4899}
+.mgl .cl.on:hover,.mgl .cl.dot:hover{transform:scale(1.18);z-index:2}
+.mgcap{min-height:44px}
+.mgcap b{font-size:22px;display:block}.mgcap small{font-size:12px;color:var(--muted)}
+.mglg{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px;font-size:11.5px;color:var(--muted)}
+.mglg span{display:inline-flex;align-items:center;gap:6px}
+.mglg i{width:12px;height:12px;border-radius:50%}
+@media(max-width:820px){.mgw{grid-template-columns:1fr;justify-items:center;text-align:center}.mgl{grid-template-columns:repeat(5,30px);grid-auto-rows:30px}.mgl .cl.on .ico{width:18px;height:18px}.mglg{justify-content:center}}
+
+/* R7 browser */
+.brw{border-radius:12px;border:1px solid #d6dbd8;overflow:hidden;box-shadow:0 20px 34px -24px rgba(0,0,0,.4)}
+.brw .tb{display:flex;align-items:flex-end;gap:2px;padding:8px 10px 0;background:#dfe5e1;overflow-x:auto}
+.brw .tb .dots{display:flex;gap:6px;padding:0 10px 10px 2px}.brw .tb .dots i{width:11px;height:11px;border-radius:50%}
+.brw .tb button{font-family:inherit;font-size:12px;font-weight:600;border:0;padding:8px 14px;border-radius:9px 9px 0 0;background:transparent;color:var(--muted);cursor:pointer;display:flex;align-items:center;gap:7px;white-space:nowrap}
+.brw .tb button i.c{width:8px;height:8px;border-radius:50%}
+.brw .tb button.on{background:#fff;color:var(--text)}
+.brw .ab{display:flex;align-items:center;gap:10px;padding:8px 12px;background:#fff;border-bottom:1px solid #e5e7eb;font-size:12px;color:var(--muted)}
+.brw .ab .url{flex:1;background:#f1f4f2;border-radius:99px;padding:6px 14px}
+.brw .ab .url b{color:var(--text)}
+.brw .pg{padding:18px;background:#fff;min-height:170px}
+.brw .pg h5{margin:0 0 4px;font-size:18px}.brw .pg p{margin:0 0 14px;font-size:12.5px;color:var(--muted)}
+.brw .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;animation:pop .35s var(--ease)}
+.brw .cd{display:flex;gap:10px;align-items:center;padding:10px 12px;border-radius:12px;background:var(--surface);border:1px solid var(--border)}
+.brw .cd .ico{width:28px;height:28px}
+.brw .cd b{display:block;font-size:13px}.brw .cd small{font-size:11px;color:var(--muted)}
+
+/* R8 vinyl */
+.vinyls{display:grid;grid-template-columns:repeat(3,1fr);gap:18px 26px}
+.vn{display:flex;flex-direction:column;gap:8px}
+.vn .sl{position:relative;height:130px;width:130px}
+.vn .rec{position:absolute;top:6px;left:6px;width:118px;height:118px;border-radius:50%;background:repeating-radial-gradient(#111 0 2px,#1d1d1d 2px 4px);transition:transform .6s var(--ease);display:flex;align-items:center;justify-content:center}
+.vn .rec::after{content:"";width:40px;height:40px;border-radius:50%;background:var(--c);box-shadow:inset 0 0 0 16px var(--c),inset 0 0 0 20px #111}
+.vn .slv{position:absolute;inset:0;border-radius:6px;background:linear-gradient(150deg,var(--c),color-mix(in srgb,var(--c),#000 35%));box-shadow:0 12px 20px -12px rgba(0,0,0,.5);padding:12px;color:#fff;display:flex;flex-direction:column;justify-content:space-between;z-index:2}
+.vn .slv b{font-size:13px;line-height:1.1}.vn .slv small{font-size:9px;letter-spacing:.16em;opacity:.85}
+.vn:hover .rec{transform:translateX(62px) rotate(200deg)}
+.vn .tr{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:11.5px}
+.vn .tr em{font-style:normal;display:inline-flex;align-items:center;gap:4px}
+.vn .tr .ico{width:14px;height:14px}
+.vrow{display:flex;gap:10px;align-items:flex-start}
+@media(max-width:760px){.vinyls{grid-template-columns:1fr 1fr}}
+
+/* R9 legend highlight */
+.lgd{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.lgd span{font-size:11.5px;font-weight:700;padding:6px 11px;border-radius:99px;border:1.5px solid var(--c);color:var(--c);cursor:pointer;transition:.2s}
+.lgd span:hover{background:var(--c);color:#fff}
+.hl{display:flex;flex-wrap:wrap;gap:7px}
+.hl.dim>*:not(.lit){opacity:.18;filter:grayscale(1)}
+.hl .lit{transform:translateY(-2px)}
+.hl .pill{border-left:3px solid var(--c)}
+
+/* R10 tetris */
+.well{display:grid;grid-template-columns:repeat(20,1fr);grid-auto-flow:row dense;gap:4px;padding:8px;border-radius:12px;background:#0f1512;border:3px solid #1f2a24}
+.blk{height:34px;border-radius:6px;display:flex;align-items:center;gap:6px;padding:0 8px;color:#fff;font-size:11.5px;font-weight:700;white-space:nowrap;overflow:hidden;
+  box-shadow:inset 0 3px 0 rgba(255,255,255,.3),inset 0 -4px 0 rgba(0,0,0,.25);transform:translateY(-420px);opacity:0}
+.in .blk{animation:drop .7s cubic-bezier(.3,1.5,.6,1) forwards}
+@keyframes drop{to{transform:none;opacity:1}}
+.blk .ico{width:20px;height:20px;background:#fff;border-radius:5px;padding:2px}
+.blk.cm{background:#2a3530!important;color:#9be8c0;font-weight:600}
+@media(max-width:900px){.well{grid-template-columns:repeat(10,1fr)}}
+
+/* R11 sunburst */
+.sbw{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:center}
+.sb{width:min(420px,88vw);height:auto}
+.sb path{stroke:#fff;stroke-width:2;transition:transform .25s var(--ease),filter .25s;transform-origin:210px 210px;cursor:pointer}
+.sb path:hover{transform:scale(1.04);filter:brightness(1.08)}
+.sb text{font-family:var(--font);font-size:10px;font-weight:700;fill:#fff;pointer-events:none}
+.sbinfo h4{font-size:26px;margin:0 0 6px}
+.sbinfo .g{font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+.sbinfo p{margin:8px 0 14px;font-size:13px;color:var(--muted)}
+.sbinfo .cps{display:flex;flex-wrap:wrap;gap:6px}
+@media(max-width:820px){.sbw{grid-template-columns:1fr;justify-items:center}}
+
+/* R12 matrix */
+.mx{display:grid;grid-template-columns:26px 1fr 1fr;grid-template-rows:1fr 1fr 26px;gap:8px}
+.mx .ax{font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);font-weight:700;display:flex;align-items:center;justify-content:center}
+.mx .ay{writing-mode:vertical-rl;transform:rotate(180deg)}
+.mx .q{border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:8px}
+.mx .q h5{margin:0;font-size:14px;display:flex;align-items:center;gap:8px}
+.mx .q h5 small{font-size:10.5px;color:var(--muted);font-weight:500}
+.mx .q .its{display:flex;flex-wrap:wrap;gap:6px}
+.mx .q1{background:#ecfbf2}.mx .q2{background:#eef5ff}.mx .q3{background:#f4f0ff}.mx .q4{background:#fdf0f7}
+.mx .ax.bx{grid-column:2/4;justify-content:space-between;padding:0 10px}
+@media(max-width:760px){.mx{grid-template-columns:1fr;grid-template-rows:auto}.mx .ay,.mx .ax.bx{display:none}}
+
+/* R13 dock */
+.desk{border-radius:16px;overflow:hidden;background:linear-gradient(135deg,#9be8c0,#5eead4 35%,#93c5fd 70%,#c4b5fd);position:relative;padding:0 0 18px}
+.menubar{display:flex;gap:16px;align-items:center;padding:7px 16px;background:rgba(255,255,255,.55);backdrop-filter:blur(10px);font-size:11.5px;font-weight:600;overflow-x:auto;white-space:nowrap}
+.menubar b{font-size:13px}
+.menubar span{color:#1f2937;opacity:.85}
+.deskmid{height:120px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#0f3b27;font-weight:600;text-align:center;padding:0 10px}
+.dockbar{display:flex;align-items:flex-end;gap:6px;width:max-content;max-width:calc(100% - 24px);margin:0 auto;padding:8px 10px;border-radius:20px;background:rgba(255,255,255,.4);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.6);overflow:visible}
+.di{position:relative;width:46px;height:46px;border-radius:12px;background:#fff;display:flex;align-items:center;justify-content:center;transition:width .15s,height .15s,margin .15s;box-shadow:0 6px 12px -6px rgba(0,0,0,.35);cursor:pointer;flex:none}
+.di .ico{width:62%;height:62%}
+.di .tip{position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:rgba(17,24,39,.85);color:#fff;font-size:11px;padding:4px 8px;border-radius:6px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s}
+.di:hover .tip{opacity:1}
+.dsep{width:1px;align-self:stretch;background:rgba(0,0,0,.15);margin:4px 2px}
+@media(max-width:700px){.dockbar{flex-wrap:wrap;justify-content:center;width:auto}}
+
+/* R14 git log */
+.gl{border-radius:12px;background:#0d1117;color:#c9d1d9;padding:14px 16px;font-size:12.5px;overflow-x:auto}
+.gl .row{display:grid;grid-template-columns:90px 70px 1fr;align-items:center;gap:12px;min-height:40px;position:relative}
+.gl .graph{position:relative;height:40px}
+.gl .graph i{position:absolute;top:0;bottom:0;width:2px}
+.gl .graph b{position:absolute;top:50%;width:12px;height:12px;border-radius:50%;transform:translate(-5px,-50%);border:2px solid #0d1117;box-shadow:0 0 0 2px currentColor}
+.gl .hash{color:#e3b341;font-size:12px}
+.gl .msg{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.gl .msg .ty{color:#7ee787}.gl .msg .sc{color:#79c0ff}
+.gl .msg em{font-style:normal;display:inline-flex;align-items:center;gap:4px;background:#161b22;border:1px solid #30363d;border-radius:6px;padding:2px 7px 2px 4px;font-size:11.5px}
+.gl .msg em .ico{width:14px;height:14px;background:#fff;border-radius:3px;padding:1px}
+.gl .tagp{background:#1f6feb33;color:#79c0ff;border:1px solid #1f6feb66;border-radius:99px;padding:2px 8px;font-size:11px}
+.gl .tagp.m{background:#db277733;color:#f9a8d4;border-color:#db277766}
+.gl .head{background:#238636;color:#fff;border-radius:99px;padding:2px 8px;font-size:11px}
+
+/* R15 sphere */
+.sph{position:relative;height:420px;border-radius:18px;background:radial-gradient(circle at 50% 50%,#effcf4,#fff 70%);overflow:hidden;cursor:grab;touch-action:none}
+.sph .w{position:absolute;left:50%;top:50%;white-space:nowrap;will-change:transform,opacity;display:inline-flex;align-items:center;gap:6px;font-weight:700;user-select:none}
+.sph .w .ico{width:1.3em;height:1.3em}
+.sph .w.c{color:var(--accent-text);font-weight:600}
+.sph .w.c.m{color:#be185d}
+.sphcap{text-align:center;font-size:11.5px;color:var(--muted);margin-top:8px}
+</style>
+</head>
+<body>
+<div class="top"><div class="in">
+  <h1>Skills — yana <b>15</b> variant</h1>
+  <a class="prev" href="skills-variants-6.html">S1–S15 →</a>
+  <nav class="jump" id="jump"></nav>
+</div></div>
+<div class="wrap">
+  <p class="intro">Beshinchi to'plam — <b>yangilangan ro'yxat</b> bilan, ixchamroq va kreativ. Raqam, foiz yoki daraja yo'q. Yangi qo'shilganlar o'z guruhiga joylashtirildi; <b>Cloud → AWS</b>. Variantlar R1–R15.</p>
+  <div class="newlist" id="newlist"></div>
+  <div id="variants"></div>
+</div>
+
+<script>
+/* ===== data — new items marked with nw ===== */
+const SK={
+ java:{n:"Java",ic:"java",g:"be",d:"Core language, OOP"},
+ spring:{n:"Spring Boot",ic:"spring",g:"be",d:"REST APIs & microservices"},
+ sec:{n:"Spring Security",ic:"spring-security",g:"be",d:"Authentication & authorization",nw:1},
+ jpa:{n:"Hibernate / JPA",ic:"hibernate",g:"be",d:"ORM & data access",nw:1},
+ py:{n:"Python",ic:"python",g:"be",d:"Scripting & automation"},
+ pg:{n:"PostgreSQL",ic:"postgresql",g:"da",d:"Relational design & SQL"},
+ html:{n:"HTML",ic:"html5",g:"fe",d:"Semantic markup"},
+ css:{n:"CSS",ic:"css3",g:"fe",d:"Responsive layouts"},
+ js:{n:"JavaScript",ic:"javascript",g:"fe",d:"Interactive UI"},
+ aws:{n:"AWS",ic:"aws",g:"op",d:"Cloud services & hosting",nw:1},
+ cf:{n:"Cloudflare",ic:"cloudflare",g:"op",d:"DNS, CDN & edge security",nw:1},
+ gh:{n:"GitHub",ic:"github",g:"op",d:"Version control & reviews"},
+ postman:{n:"Postman",ic:"postman",g:"ai",d:"API testing & collections",nw:1},
+ claude:{n:"Claude",ic:"claude",g:"ai",d:"AI-assisted work"},
+ jira:{n:"Jira",ic:"jira",g:"pm",d:"Sprints & issue tracking",nw:1},
+ trello:{n:"Trello",ic:"trello",g:"pm",d:"Boards & quick planning",nw:1},
+ notion:{n:"Notion",ic:"notion",g:"pm",d:"Docs & knowledge base",nw:1}
+};
+const ALL=Object.keys(SK);
+const G={
+ be:{n:"Backend",c:"#0f9d4f",soft:"#e7f8ee",d:"Server-side logic, security and data access."},
+ da:{n:"Data",c:"#8b5cf6",soft:"#f2edff",d:"Storing, shaping and querying data."},
+ fe:{n:"Frontend",c:"#3b82f6",soft:"#eaf2ff",d:"Everything the user sees and touches."},
+ op:{n:"Cloud & DevOps",c:"#0ea5e9",soft:"#e6f6fd",d:"Hosting, delivery and version control."},
+ ai:{n:"API & AI tools",c:"#f59e0b",soft:"#fff5e0",d:"Testing APIs and working with AI."},
+ pm:{n:"Project Mgmt",c:"#ec4899",soft:"#fdeef6",d:"Planning, tracking and documenting work."}
+};
+const GK=Object.keys(G);
+const CT=["Programming Proficiency","System Design","API Integration","Database Management","Debugging Skills","Code Testing","Version Control","Basic Security Knowledge","Prompt Engineering"];
+const CM=["Stakeholder Communication","Requirements Analysis","Risk Management","Technical Documentation","Problem Solving"];
+const NEWC=["System Design","Prompt Engineering","Stakeholder Communication","Requirements Analysis","Risk Management","Technical Documentation"];
+const ico=k=>`<span class="ico"><img src="assets/img/skills/${SK[k].ic}.svg" alt=""></span>`;
+const pill=(k,ex="")=>`<span class="pill" style="--c:${G[SK[k].g].c}" ${ex}>${ico(k)}${SK[k].n}</span>`;
+const cpT=c=>`<span class="cp">${c}</span>`, cpM=c=>`<span class="cp m">${c}</span>`;
+const title=(t,c="")=>`<div class="ttl ${c}"><h3>${t}</h3></div>`;
+const byG=g=>ALL.filter(k=>SK[k].g===g);
+
+document.getElementById("newlist").innerHTML="<span style='border-style:solid;background:var(--soft)'>Yangi:</span>"+ALL.filter(k=>SK[k].nw).map(k=>`<span>${SK[k].n}</span>`).join("")+NEWC.map(c=>`<span>${c}</span>`).join("");
+
+const V=[
+ {id:"R1",t:"Texnik pasport",tag:"ixcham · professional",d:"Uskunaning texnik pasporti (datasheet) kabi: chapda stack guruhlar bo'yicha nuqtali qatorlarda, o'ngda imkoniyatlar — texnik va boshqaruv. Hammasi bir qarashda, juda ixcham.",
+  h:()=>title("Skills")+`<div class="ds"><div class="hd"><span>DATASHEET · SKILLS</span><span>JM · IT PM & JAVA BACKEND</span></div><div class="bd">
+   <div class="col"><h5>Stack</h5>${GK.map(g=>`<div class="rw"><b><i style="background:${G[g].c}"></i>${G[g].n}</b><span>${byG(g).map(k=>`<em>${ico(k)}${SK[k].n}</em>`).join("")}</span></div>`).join("")}</div>
+   <div class="col"><h5>Technical</h5><ul>${CT.map(c=>`<li>${c}</li>`).join("")}</ul><h5>Leadership</h5><ul style="margin:0">${CM.map(c=>`<li>${c}</li>`).join("")}</ul></div></div></div>`},
+
+ {id:"R2",t:"Kassa cheki",tag:"hazil · eslab qolinadi",d:"“JM Skill Store” cheki: har bir texnologiya — xarid qilingan mahsulot (narx o'rniga ✓), kompetensiyalar — “bepul qo'shimcha”. Pastda shtrix-kod. Recruiter jilmayadi.",
+  h:()=>title("Skills")+`<div class="rc"><div class="c"><h4>JM SKILL STORE</h4><div class="sm">TASHKENT · OPEN FOR HIRE</div></div><hr>
+   <div class="cols">${[["be","da"],["fe","op"],["ai","pm"]].map(col=>`<div>${col.map(g=>`<div class="grp">${G[g].n.toUpperCase()}</div>${byG(g).map(k=>`<div class="it">${ico(k)}<span>${SK[k].n}</span><span class="ok">✓</span></div>`).join("")}`).join("")}</div>`).join("")}</div><hr>
+   <div class="grp">INCLUDED FREE</div><div class="free">${[...CT,...CM].join(" · ")}</div><hr>
+   <div class="tot"><span>TOTAL</span><span>FULL-STACK + PM</span></div><hr><div class="c sm">THANK YOU FOR HIRING ✦ COME AGAIN</div><div class="bar"></div></div>`},
+
+ {id:"R3",t:"Kartalar yelpig'i",tag:"o'yinli · ixcham",d:"Har bir guruh — qo'ldagi kartalar yelpig'i. Ustiga borilsa kartalar yoyiladi va har biri o'qiladi. Olti guruh kichik joyda.",
+  h:()=>title("Skills")+`<div class="fans">${GK.map(g=>{const ks=byG(g);return `<div class="fan" style="--c:${G[g].c}" data-n="${ks.length}">${ks.map((k,i)=>`<div class="fc" data-i="${i}">${ico(k)}<small>${SK[k].n}</small></div>`).join("")}<span class="fn" style="color:${G[g].c}">${G[g].n}</span></div>`}).join("")}</div>`},
+
+ {id:"R4",t:"Filtr chiplari",tag:"qulay · tejamkor",d:"Bitta ixcham blok: tepada guruh filtrlari, pastda chiplar. Filtr bosilsa faqat o'sha guruh qoladi. Kompetensiyalar ham alohida filtr.",
+  h:()=>title("Skills")+`<div class="flt" id="flt"><button class="on" data-f="all">All</button>${GK.map(g=>`<button data-f="${g}"><i style="background:${G[g].c}"></i>${G[g].n}</button>`).join("")}<button data-f="ct"><i style="background:var(--fill)"></i>Technical</button><button data-f="cm"><i style="background:#ec4899"></i>Leadership</button></div>
+   <div class="fgrid" id="fgrid">${ALL.map(k=>pill(k,`data-f="${SK[k].g}"`)).join("")}${CT.map(c=>`<span class="cp" data-f="ct">${c}</span>`).join("")}${CM.map(c=>`<span class="cp m" data-f="cm">${c}</span>`).join("")}</div>`},
+
+ {id:"R5",t:"Vizitka",tag:"shaxsiy · elegant",d:"Ikki tomonlama vizitka: old tomonida ism va rol, orqasida — butun stack guruhlar bo'yicha ikonkalarda. Ustiga borilsa yoki bosilsa aylanadi.",
+  h:()=>title("Skills")+`<div class="bcw"><div class="bc" id="bc"><div class="inr"><div class="face front"><div style="display:flex;justify-content:space-between;align-items:flex-start"><div class="mono">JM</div><i class="bi bi-arrow-repeat" style="opacity:.6"></i></div><div><h4>Jamshid Mirkhadjayev</h4><p>IT PROJECT MANAGER · JAVA BACKEND</p></div><div class="ct"><span><i class="bi bi-geo-alt"></i> Tashkent</span><span><i class="bi bi-telegram"></i> jmirkhadjayev</span><span><i class="bi bi-globe"></i> mirkhadjayev.uz</span></div></div>
+   <div class="face back">${GK.map(g=>`<div class="row"><b style="color:${G[g].c}">${G[g].n}</b><span class="ics">${byG(g).map(k=>`<span title="${SK[k].n}">${ico(k)}</span>`).join("")}</span></div>`).join("")}<div class="cm">${[...CT.slice(0,4),...CM.slice(0,3)].join(" · ")} …</div></div></div></div>
+   <div class="side"><h4>Turn me over.</h4><p>Old tomoni — siz kimsiz, orqa tomoni — nima qila olasiz. Recruiter uchun eng tanish format, joy esa juda kam.</p></div></div>`},
+
+ {id:"R6",t:"“JM” monogramma",tag:"kreativ · signature",d:"Ikonkalar va nuqtalardan “JM” harflari yig'ilgan: M — texnologiyalar, J — kompetensiyalar (yashil — texnik, pushti — boshqaruv). Katakka borilsa nomi chiqadi.",
+  h:()=>{const J=["#####","...#.","...#.","...#.","#..#.","#..#.",".##.."],M=["#...#","##.##","#.#.#","#...#","#...#","#...#","#...#"];
+   const comps=[...CT.map(c=>[c,0]),...CM.map(c=>[c,1])];let ci=0,si=0;
+   const grid=(pat,fn)=>`<div class="mgl">${pat.join("").split("").map(ch=>ch==="#"?fn():`<span class="cl"></span>`).join("")}</div>`;
+   const j=grid(J,()=>{const [c,m]=comps[ci++]||["",0];return `<span class="cl dot ${m?"m":""}" data-t="${c}" data-s="${m?"Leadership":"Technical"}"></span>`});
+   const m=grid(M,()=>{const k=ALL[si++];return k?`<span class="cl on" data-t="${SK[k].n}" data-s="${G[SK[k].g].n}">${ico(k)}</span>`:`<span class="cl"></span>`});
+   return title("Skills")+`<div class="mgw"><div class="mg" id="mg">${j}${m}</div><div><div class="mgcap" id="mgcap"><b>Hover a tile</b><small>J — strengths · M — stack</small></div><div class="mglg"><span><i style="background:var(--fill)"></i>Technical</span><span><i style="background:#ec4899"></i>Leadership</span><span><i style="background:#fff;border:1px solid var(--border)"></i>Tools & tech</span></div></div></div>`}},
+
+ {id:"R7",t:"Brauzer tablari",tag:"tanish · interaktiv",d:"Brauzer oynasi: har bir guruh — alohida tab, manzil satrida yo'l o'zgaradi. Bitta oyna ichida hammasi — juda ixcham.",
+  h:()=>title("Skills")+`<div class="brw"><div class="tb" id="btabs"><span class="dots"><i style="background:#ff5f56"></i><i style="background:#ffbd2e"></i><i style="background:#27c93f"></i></span>${GK.map((g,i)=>`<button data-g="${g}" class="${i?"":"on"}"><i class="c" style="background:${G[g].c}"></i>${G[g].n}</button>`).join("")}<button data-g="st"><i class="c" style="background:#111"></i>Strengths</button></div>
+   <div class="ab"><i class="bi bi-arrow-left"></i><i class="bi bi-arrow-clockwise"></i><span class="url" id="burl"></span><i class="bi bi-star"></i></div><div class="pg" id="bpg"></div></div>`},
+
+ {id:"R8",t:"Vinil plastinkalar",tag:"musiqiy · retro",d:"Har bir guruh — plastinka g'ilofi, ichidagi texnologiyalar — treklar ro'yxati. Ustiga borilsa plastinka g'ilofdan chiqib aylanadi. Rok musiqaga muhabbatingizga ishora.",
+  h:()=>title("Skills")+`<div class="vinyls">${GK.map(g=>`<div class="vn" style="--c:${G[g].c}"><div class="vrow"><div class="sl"><div class="rec"></div><div class="slv"><small>SIDE ✦ JM</small><b>${G[g].n}</b></div></div></div><div class="tr">${byG(g).map(k=>`<em>${ico(k)}${SK[k].n}</em>`).join("")}</div></div>`).join("")}</div>`},
+
+ {id:"R9",t:"Rangli legenda",tag:"minimal · aniq",d:"Barcha chiplar bitta ixcham bulutda. Tepada legenda: guruh nomiga borilsa faqat o'sha guruh yorishadi, qolganlari xiralashadi.",
+  h:()=>title("Skills")+`<div class="lgd" id="lgd">${GK.map(g=>`<span data-g="${g}" style="--c:${G[g].c}">${G[g].n}</span>`).join("")}<span data-g="ct" style="--c:var(--accent)">Technical</span><span data-g="cm" style="--c:#db2777">Leadership</span></div>
+   <div class="hl" id="hl">${ALL.map(k=>pill(k,`data-g="${SK[k].g}"`)).join("")}${CT.map(c=>`<span class="cp" data-g="ct">${c}</span>`).join("")}${CM.map(c=>`<span class="cp m" data-g="cm">${c}</span>`).join("")}</div>`},
+
+ {id:"R10",t:"Tetris",tag:"o'yin · harakat",d:"Bo'lim ekranga kirganda bloklar yuqoridan tushib, quduqni to'ldiradi. Rangli bloklar — texnologiyalar, to'q bloklar — kompetensiyalar.",
+  h:()=>{const span=t=>t.length>22?6:t.length>16?5:t.length>10?4:3;let d=0;
+   return title("Skills")+`<div class="well">${ALL.map(k=>`<div class="blk" style="grid-column:span ${span(SK[k].n)};background:${G[SK[k].g].c};animation-delay:${(d++*0.06).toFixed(2)}s">${ico(k)}${SK[k].n}</div>`).join("")}${[...CT,...CM].map(c=>`<div class="blk cm" style="grid-column:span ${span(c)};animation-delay:${(d++*0.06).toFixed(2)}s">${c}</div>`).join("")}</div>`}},
+
+ {id:"R11",t:"Sunburst diagramma",tag:"data-viz · raqamsiz",d:"Ichki halqa — guruhlar, tashqi halqa — texnologiyalar. Segmentga borilsa o'ngda batafsil chiqadi. Grafik, lekin hech qanday raqamsiz.",
+  h:()=>{const C=210,R1=70,R2=128,R3=200;const arc=(r0,r1,a0,a1)=>{const p=(r,a)=>[C+r*Math.cos(a),C+r*Math.sin(a)],l=a1-a0>Math.PI?1:0,[x0,y0]=p(r1,a0),[x1,y1]=p(r1,a1),[x2,y2]=p(r0,a1),[x3,y3]=p(r0,a0);return `M${x0},${y0} A${r1},${r1} 0 ${l} 1 ${x1},${y1} L${x2},${y2} A${r0},${r0} 0 ${l} 0 ${x3},${y3}Z`};
+   let s=`<svg class="sb" viewBox="0 0 420 420">`,a=-Math.PI/2,step=2*Math.PI/ALL.length;
+   GK.forEach(g=>{const ks=byG(g),a0=a;ks.forEach(k=>{const b=a,e=a+step,mid=(b+e)/2,ix=C+(R2+R3)/2*Math.cos(mid)-12,iy=C+(R2+R3)/2*Math.sin(mid)-12;
+     s+=`<path d="${arc(R2,R3,b,e)}" fill="${G[g].c}" opacity=".85" data-k="${k}"/><image href="assets/img/skills/${SK[k].ic}.svg" x="${ix}" y="${iy}" width="24" height="24" style="pointer-events:none"/>`;a=e});
+     const mid=(a0+a)/2;s+=`<path d="${arc(R1,R2-4,a0,a)}" fill="${G[g].c}" data-g="${g}"/>`;
+     const tx=C+(R1+R2)/2*Math.cos(mid),ty=C+(R1+R2)/2*Math.sin(mid);let deg=mid*180/Math.PI;if(deg>90&&deg<270)deg+=180;
+     s+=`<text x="${tx}" y="${ty}" text-anchor="middle" dominant-baseline="middle" transform="rotate(${deg} ${tx} ${ty})">${G[g].n.split(" ")[0]}</text>`});
+   s+=`<circle cx="${C}" cy="${C}" r="${R1-6}" fill="#0f1512"/><text x="${C}" y="${C}" text-anchor="middle" dominant-baseline="middle" style="font-size:24px">JM</text></svg>`;
+   return title("Skills")+`<div class="sbw">${s}<div class="sbinfo" id="sbinfo"></div></div>`}},
+
+ {id:"R12",t:"2×2 matritsa",tag:"PM uslubi · strategik",d:"Klassik menejment matritsasi: gorizontal o'q — Texnologiya ↔ Odamlar, vertikal — Amaliy ↔ Strategik. Har bir chorakda tegishli vosita va kompetensiyalar. Siz ham dasturchi, ham menejer ekanligingizni aniq ko'rsatadi.",
+  h:()=>{const T=k=>pill(k),Q=[
+   ["q1","Build","code & ship",[...["java","spring","sec","jpa","py","pg","html","css","js","postman"].map(T),...["Programming Proficiency","Debugging Skills","Code Testing"].map(cpT)]],
+   ["q2","Collaborate","tools & flow",[...["gh","jira","trello","notion","claude"].map(T),...["Version Control","Prompt Engineering"].map(cpT)]],
+   ["q3","Architect","systems & platforms",[...["aws","cf"].map(T),...["System Design","API Integration","Database Management","Basic Security Knowledge"].map(cpT)]],
+   ["q4","Lead","people & delivery",["Stakeholder Communication","Requirements Analysis","Risk Management","Technical Documentation","Problem Solving"].map(cpM)]];
+   return title("Skills")+`<div class="mx"><div class="ax ay">Hands-on</div><div class="q ${Q[0][0]}"><h5>${Q[0][1]}<small>${Q[0][2]}</small></h5><div class="its">${Q[0][3].join("")}</div></div><div class="q ${Q[1][0]}"><h5>${Q[1][1]}<small>${Q[1][2]}</small></h5><div class="its">${Q[1][3].join("")}</div></div>
+    <div class="ax ay">Strategic</div><div class="q ${Q[2][0]}"><h5>${Q[2][1]}<small>${Q[2][2]}</small></h5><div class="its">${Q[2][3].join("")}</div></div><div class="q ${Q[3][0]}"><h5>${Q[3][1]}<small>${Q[3][2]}</small></h5><div class="its">${Q[3][3].join("")}</div></div>
+    <div></div><div class="ax bx"><span>← Technology</span><span>People →</span></div></div>`}},
+
+ {id:"R13",t:"macOS dock",tag:"silliq · tanish",d:"Ish stoli: pastda dock — sichqoncha yaqinlashganda ikonkalar kattalashadi, nomi chiqadi. Tepadagi menyu satrida kompetensiyalar. Ixcham va zamonaviy.",
+  h:()=>title("Skills")+`<div class="desk"><div class="menubar"><b>✦ JM</b>${[...CT,...CM].map(c=>`<span>${c}</span>`).join("")}</div><div class="deskmid">Dock ustiga sichqonchani olib boring ↓</div>
+   <div class="dockbar" id="dockbar">${GK.map((g,gi)=>(gi?`<span class="dsep"></span>`:"")+byG(g).map(k=>`<div class="di">${ico(k)}<span class="tip">${SK[k].n}</span></div>`).join("")).join("")}</div></div>`},
+
+ {id:"R14",t:"Git log",tag:"coder · hikoya",d:"Ko'nikmalar git tarixi sifatida: har bir guruh — alohida branch'dagi commit, kompetensiyalar — teglar. Dasturchi darhol tushunadigan til.",
+  h:()=>{const H=["facedab","bead","cafebab","decaff","badcafe","acedfab","fadebee","beefcab"];
+   const rows=[["pm","chore","pm","adopt",["jira","trello","notion"]],["ai","feat","tools","add",["postman","claude"]],["op","ci","devops","deploy with",["aws","cf","gh"]],["fe","feat","frontend","build UI with",["html","css","js"]],["da","feat","data","model data in",["pg"]],["be","feat","backend","secure & persist with",["sec","jpa"]],["be","feat","backend","init core with",["java","spring","py"]]];
+   const lane={be:10,da:30,fe:50,op:70,ai:30,pm:50};
+   const graph=g=>`<div class="graph">${[10,30,50,70].map(x=>`<i style="left:${x}px;background:${x===lane[g]?G[g].c:"#30363d"}"></i>`).join("")}<b style="left:${lane[g]}px;background:${G[g].c};color:${G[g].c}"></b></div>`;
+   return title("Skills")+`<div class="gl">
+    <div class="row"><div class="graph">${[10,30,50,70].map(x=>`<i style="left:${x}px;background:#30363d"></i>`).join("")}<b style="left:10px;background:#18d26e;color:#18d26e"></b></div><span class="hash">${H[7]}</span><span class="msg"><span class="head">HEAD → main</span><span class="ty">release:</span> tag strengths ${CM.map(c=>`<span class="tagp m">${c}</span>`).join("")}</span></div>
+    <div class="row"><div class="graph">${[10,30,50,70].map(x=>`<i style="left:${x}px;background:#30363d"></i>`).join("")}<b style="left:10px;background:#79c0ff;color:#79c0ff"></b></div><span class="hash">${H[6]}</span><span class="msg"><span class="ty">tag:</span> ${CT.map(c=>`<span class="tagp">${c}</span>`).join("")}</span></div>
+    ${rows.map(([g,ty,sc,verb,ks],i)=>`<div class="row">${graph(g)}<span class="hash">${H[i%6]}</span><span class="msg"><span><span class="ty">${ty}</span>(<span class="sc">${sc}</span>): ${verb}</span> ${ks.map(k=>`<em>${ico(k)}${SK[k].n}</em>`).join("")}</span></div>`).join("")}</div>`}},
+
+ {id:"R15",t:"3D so'zlar sferasi",tag:"hayratli · interaktiv",d:"Barcha texnologiyalar va kompetensiyalar aylanib turuvchi 3D sfera bo'ylab joylashgan. Sichqoncha bilan aylantirish mumkin. Kichik joyda katta taassurot.",
+  h:()=>title("Skills")+`<div class="sph" id="sph">${ALL.map(k=>`<span class="w">${ico(k)}${SK[k].n}</span>`).join("")}${CT.map(c=>`<span class="w c">${c}</span>`).join("")}${CM.map(c=>`<span class="w c m">${c}</span>`).join("")}</div><p class="sphcap">✋ surib aylantiring</p>`}
+];
+
+document.getElementById("jump").innerHTML=V.map(v=>`<a href="#${v.id}">${v.id}</a>`).join("");
+document.getElementById("variants").innerHTML=V.map(v=>`<section class="var" id="${v.id}"><div class="vh"><span class="n">${v.id}</span><h2>${v.t}</h2><span class="tag">${v.tag}</span><p>${v.d}</p></div><div class="vb">${v.h()}</div></section>`).join("");
+const links=[...document.querySelectorAll(".jump a")];
+addEventListener("scroll",()=>{let cur="R1";V.forEach(v=>{if(document.getElementById(v.id).getBoundingClientRect().top<160)cur=v.id});links.forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+cur))},{passive:true});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target)}}),{threshold:.2});
+document.querySelectorAll(".var").forEach(s=>io.observe(s));
+
+/* R3 fans */
+document.querySelectorAll(".fan").forEach(f=>{const cs=[...f.querySelectorAll(".fc")],n=cs.length;
+ const set=open=>cs.forEach((c,i)=>{const mid=(n-1)/2,ang=(i-mid)*(open?(n>2?20:26):(n>2?6:8)),dx=(i-mid)*(open?22:4);c.style.transform=`translateX(${dx}px) rotate(${ang}deg)${open?" translateY(-8px)":""}`;c.style.zIndex=i});
+ set(false);f.addEventListener("mouseenter",()=>set(true));f.addEventListener("mouseleave",()=>set(false));f.addEventListener("click",()=>set(!f._o)||(f._o=!f._o))});
+
+/* R4 filter */
+document.querySelectorAll("#flt button").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll("#flt button").forEach(x=>x.classList.toggle("on",x===b));const f=b.dataset.f;
+ document.querySelectorAll("#fgrid>*").forEach(el=>{const show=f==="all"||el.dataset.f===f;el.classList.toggle("hide",!show);if(show){el.style.animation="none";void el.offsetWidth;el.style.animation=""}})}));
+
+/* R5 */
+document.getElementById("bc").addEventListener("click",e=>e.currentTarget.classList.toggle("f"));
+
+/* R6 */
+const mgcap=document.getElementById("mgcap");
+document.querySelectorAll("#mg .cl[data-t]").forEach(c=>c.addEventListener("mouseenter",()=>{mgcap.innerHTML=`<b>${c.dataset.t}</b><small>${c.dataset.s}</small>`}));
+
+/* R7 */
+const burl=document.getElementById("burl"),bpg=document.getElementById("bpg");
+function btab(g){document.querySelectorAll("#btabs button").forEach(b=>b.classList.toggle("on",b.dataset.g===g));
+ if(g==="st"){burl.innerHTML=`mirkhadjayev.uz/skills/<b>strengths</b>`;bpg.innerHTML=`<h5>Strengths</h5><p>Technical and leadership competencies.</p><div class="cards">${CT.map(c=>`<div class="cd"><i class="bi bi-cpu" style="color:var(--accent);font-size:20px"></i><b>${c}</b></div>`).join("")}${CM.map(c=>`<div class="cd"><i class="bi bi-people" style="color:#db2777;font-size:20px"></i><b>${c}</b></div>`).join("")}</div>`;return}
+ burl.innerHTML=`mirkhadjayev.uz/skills/<b>${G[g].n.toLowerCase().replace(/ & | /g,"-")}</b>`;bpg.innerHTML=`<h5 style="color:${G[g].c}">${G[g].n}</h5><p>${G[g].d}</p><div class="cards">${byG(g).map(k=>`<div class="cd">${ico(k)}<div><b>${SK[k].n}</b><small>${SK[k].d}</small></div></div>`).join("")}</div>`}
+document.querySelectorAll("#btabs button").forEach(b=>b.addEventListener("click",()=>btab(b.dataset.g)));btab("be");
+
+/* R9 */
+const hl=document.getElementById("hl");
+document.querySelectorAll("#lgd span").forEach(s=>{s.addEventListener("mouseenter",()=>{hl.classList.add("dim");hl.querySelectorAll("[data-g]").forEach(el=>el.classList.toggle("lit",el.dataset.g===s.dataset.g))});s.addEventListener("mouseleave",()=>{hl.classList.remove("dim");hl.querySelectorAll(".lit").forEach(el=>el.classList.remove("lit"))})});
+
+/* R11 */
+const sbinfo=document.getElementById("sbinfo");
+function sbShow(k){const s=SK[k],g=G[s.g];sbinfo.innerHTML=`<span class="g" style="color:${g.c}">${g.n}</span><h4>${s.n}</h4><p>${s.d}. ${g.d}</p><div class="cps">${byG(s.g).map(x=>pill(x)).join("")}</div>`}
+function sbGroup(gk){const g=G[gk];sbinfo.innerHTML=`<span class="g" style="color:${g.c}">Group</span><h4>${g.n}</h4><p>${g.d}</p><div class="cps">${byG(gk).map(x=>pill(x)).join("")}</div>`}
+document.querySelectorAll(".sb path[data-k]").forEach(p=>p.addEventListener("mouseenter",()=>sbShow(p.dataset.k)));
+document.querySelectorAll(".sb path[data-g]").forEach(p=>p.addEventListener("mouseenter",()=>sbGroup(p.dataset.g)));sbShow("java");
+
+/* R13 dock magnification */
+const dock=document.getElementById("dockbar"),dis=[...dock.querySelectorAll(".di")];
+dock.addEventListener("mousemove",e=>{dis.forEach(d=>{const r=d.getBoundingClientRect(),c=r.left+r.width/2,dist=Math.abs(e.clientX-c),s=Math.max(46,78-dist*0.32);d.style.width=d.style.height=s+"px"})});
+dock.addEventListener("mouseleave",()=>dis.forEach(d=>d.style.width=d.style.height=""));
+
+/* R15 sphere */
+(function(){const box=document.getElementById("sph"),ws=[...box.querySelectorAll(".w")],N=ws.length;
+ const P=ws.map((_,i)=>{const y=1-(i/(N-1))*2,r=Math.sqrt(1-y*y),t=i*Math.PI*(3-Math.sqrt(5));return[Math.cos(t)*r,y,Math.sin(t)*r]});
+ let ax=.003,ay=.006,drag=false,lx=0,ly=0;const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+ const rot=(p,a,b)=>{let[x,y,z]=p;let c=Math.cos(b),s=Math.sin(b);[x,z]=[x*c+z*s,-x*s+z*c];c=Math.cos(a);s=Math.sin(a);[y,z]=[y*c-z*s,y*s+z*c];return[x,y,z]};
+ function frame(){const R=Math.min(box.clientWidth,box.clientHeight)*.38;if(!reduce||drag)P.forEach((p,i)=>P[i]=rot(p,ax,ay));
+  P.forEach(([x,y,z],i)=>{const sc=(z+2)/3;ws[i].style.transform=`translate(-50%,-50%) translate(${x*R*1.35}px,${y*R}px) scale(${.6+sc*.6})`;ws[i].style.opacity=.25+sc*.75;ws[i].style.zIndex=Math.round(sc*100);ws[i].style.fontSize="13px"});
+  if(!drag){ax*=.98;ay=ay*.98+.006*.02;ax+= .003*.02}requestAnimationFrame(frame)}
+ box.addEventListener("pointerdown",e=>{drag=true;lx=e.clientX;ly=e.clientY;box.setPointerCapture(e.pointerId)});
+ box.addEventListener("pointermove",e=>{if(!drag)return;ay=(e.clientX-lx)*.004;ax=(e.clientY-ly)*.004;lx=e.clientX;ly=e.clientY});
+ box.addEventListener("pointerup",()=>drag=false);frame()})();
+</script>
+</body>
+</html>

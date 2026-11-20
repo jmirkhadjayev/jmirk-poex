@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Skills — to'rtinchi 15 ta variant</title>
+<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+<style>
+@font-face{font-family:"M PLUS 1 Code";font-weight:300 700;font-display:swap;src:url("assets/fonts/mplus1code-latin.woff2") format("woff2");unicode-range:U+0000-00FF,U+2000-206F}
+@font-face{font-family:"M PLUS 1 Code";font-weight:300 700;font-display:swap;src:url("assets/fonts/mplus1code-latin-ext.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BB-02FF}
+:root{
+  --bg:#e7eeea;--panel:#fff;--surface:#f3f6f8;--surface2:#e9eef1;--border:rgba(15,23,30,.12);
+  --text:#15181d;--muted:#454b54;--accent:#0f9d4f;--accent-text:#0a7d3f;--fill:#18d26e;--soft:rgba(24,210,110,.14);
+  --be:#0f9d4f;--fe:#3b82f6;--da:#8b5cf6;--tl:#f59e0b;
+  --ease:cubic-bezier(.22,1,.36,1);--font:"M PLUS 1 Code",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--font);color:var(--text);background:var(--bg);
+  background-image:linear-gradient(rgba(15,157,79,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(15,157,79,.06) 1px,transparent 1px);background-size:24px 24px;-webkit-font-smoothing:antialiased}
+img{display:block}
+.top{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.top .in{max-width:1180px;margin:0 auto;padding:12px 18px;display:flex;align-items:center;gap:14px}
+.top h1{font-size:16px;margin:0;white-space:nowrap}.top h1 b{color:var(--accent)}
+.top .prev{font-size:12px;color:var(--muted);white-space:nowrap}
+.jump{display:flex;gap:5px;overflow-x:auto;scrollbar-width:none;margin-left:auto}
+.jump::-webkit-scrollbar{display:none}
+.jump a{flex:none;font-size:12px;font-weight:600;text-decoration:none;color:var(--muted);padding:6px 10px;border-radius:99px;border:1px solid var(--border);background:var(--panel)}
+.jump a:hover,.jump a.on{background:var(--text);color:#fff;border-color:var(--text)}
+.wrap{max-width:1180px;margin:0 auto;padding:22px 18px 80px}
+.intro{font-size:13px;color:var(--muted);line-height:1.6;margin:0 0 22px;max-width:860px}.intro b{color:var(--text)}
+.var{background:var(--panel);border-radius:20px;margin-bottom:28px;position:relative;overflow:hidden;box-shadow:0 18px 40px -30px rgba(15,23,30,.45);scroll-margin-top:70px}
+.var::before{content:"";position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,var(--fill),#9be8c0 60%,transparent);z-index:3}
+.vh{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:18px 24px 14px;border-bottom:1px dashed var(--border);background:#fbfcfb}
+.vh .n{min-width:34px;height:30px;padding:0 6px;border-radius:9px;background:var(--soft);color:var(--accent-text);font-weight:700;display:flex;align-items:center;justify-content:center}
+.vh h2{font-size:17px;margin:0}
+.vh .tag{font-size:10.5px;font-weight:700;color:var(--accent-text);background:var(--soft);padding:3px 9px;border-radius:99px}
+.vh p{width:100%;margin:2px 0 0 44px;font-size:12.5px;color:var(--muted);line-height:1.55}
+.vb{padding:26px 24px 30px;position:relative}
+.ttl{display:flex;align-items:center;gap:12px;margin:0 0 22px;position:relative;z-index:2}
+.ttl h3{font-size:30px;font-weight:700;margin:0;text-transform:uppercase}
+.ttl::after{content:"";width:48px;height:3px;background:var(--accent);border-radius:2px}
+.ttl.light h3{color:#fff}
+@media(max-width:640px){.vh p{margin-left:0}.vb{padding:20px 16px 24px}.ttl h3{font-size:24px}}
+.ico{width:34px;height:34px;display:inline-flex;align-items:center;justify-content:center;flex:none}
+.ico img{width:100%;height:100%;object-fit:contain}
+.ico i{font-size:30px;line-height:1;color:var(--fe)}
+.pill{display:inline-flex;align-items:center;gap:8px;padding:7px 12px 7px 8px;border-radius:11px;background:#fff;border:1px solid var(--border);font-size:13px;font-weight:600;white-space:nowrap}
+.pill .ico{width:20px;height:20px}.pill .ico i{font-size:17px}
+
+/* Q1 — expanding panels */
+.acc{display:flex;gap:10px;height:380px}
+.pn{flex:1;border-radius:20px;position:relative;overflow:hidden;cursor:pointer;transition:flex .6s var(--ease);color:#fff;min-width:64px}
+.pn.on{flex:4}
+.pn .vt{position:absolute;left:50%;bottom:24px;transform:translateX(-50%) rotate(180deg);writing-mode:vertical-rl;font-size:20px;font-weight:700;letter-spacing:.08em;white-space:nowrap;transition:opacity .3s}
+.pn.on .vt{opacity:0}
+.pn .ct{position:absolute;inset:0;padding:26px;display:flex;flex-direction:column;justify-content:flex-end;gap:14px;opacity:0;transition:opacity .35s .15s;min-width:300px}
+.pn.on .ct{opacity:1}
+.pn .ct h4{font-size:30px;margin:0}
+.pn .ct p{margin:0;font-size:13.5px;opacity:.9;max-width:340px}
+.pn .ct .row{display:flex;flex-wrap:wrap;gap:8px}
+.pn .bgi{position:absolute;right:-30px;top:-30px;width:220px;height:220px;opacity:.15}
+.pn .bgi i{font-size:200px;color:#fff}
+@media(max-width:700px){.acc{flex-direction:column;height:auto}.pn{min-height:64px}.pn.on{min-height:300px}.pn .vt{writing-mode:horizontal-tb;transform:translateX(-50%);bottom:auto;top:20px}}
+
+/* Q2 — tree */
+.tree{width:100%;height:auto;max-height:520px}
+.tree .br{fill:none;stroke:#5b4636;stroke-linecap:round;stroke-dasharray:1000;stroke-dashoffset:1000;transition:stroke-dashoffset 1.8s var(--ease)}
+.in .tree .br{stroke-dashoffset:0}
+.tree .lf{opacity:0;transform:scale(.3);transform-box:fill-box;transform-origin:center;transition:opacity .5s,transform .6s var(--ease)}
+.in .tree .lf{opacity:1;transform:none}
+.tree text{font-family:var(--font);font-size:13px;font-weight:700;fill:var(--text)}
+.tree .cat{font-size:11px;letter-spacing:.14em;fill:var(--muted)}
+
+/* Q3 — puzzle */
+.puz{display:grid;grid-template-columns:repeat(5,1fr);max-width:820px;margin:0 auto;padding:0 18px 18px 0}
+.pz{position:relative;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-size:12.5px;font-weight:700;transition:transform .3s var(--ease),filter .3s;cursor:pointer}
+.pz::before,.pz::after{content:"";position:absolute;width:30%;aspect-ratio:1;border-radius:50%;background:inherit;z-index:1}
+.pz::before{right:-15%;top:35%}
+.pz::after{bottom:-15%;left:35%}
+.pz .ico{width:42%;height:42%;position:relative;z-index:2}
+.pz b{position:relative;z-index:2}
+.pz:hover{transform:translate(-4px,-6px) rotate(-2deg);filter:drop-shadow(0 14px 14px rgba(0,0,0,.25));z-index:5}
+.pz.nr::before{display:none}.pz.nb::after{display:none}
+@media(max-width:600px){.puz{grid-template-columns:repeat(3,1fr)}}
+
+/* Q4 — circuit */
+.pcb{border-radius:18px;background:#0d3b26;background-image:radial-gradient(rgba(255,255,255,.06) 1px,transparent 1px);background-size:14px 14px;padding:22px}
+.pcb svg{width:100%;height:auto}
+.pcb .tr{fill:none;stroke:#c9a227;stroke-width:3;opacity:.75}
+.pcb .pulse{fill:none;stroke:#7ef0b0;stroke-width:3;stroke-dasharray:14 220;animation:run 3s linear infinite;filter:drop-shadow(0 0 4px #18d26e)}
+@keyframes run{to{stroke-dashoffset:-234}}
+.pcb .chip rect{fill:#121417;stroke:#2a2f35}
+.pcb .chip .pin{fill:#c9a227}
+.pcb text{font-family:var(--font);font-size:12px;font-weight:700;fill:#e6efe9}
+.pcb .cpu text{font-size:22px}
+.pcb .chip{transition:transform .25s;transform-box:fill-box;transform-origin:center}
+.pcb .chip:hover{transform:scale(1.06)}
+
+/* Q5 — 3D carousel */
+.car{height:360px;perspective:1100px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.ringc{position:relative;width:170px;height:210px;transform-style:preserve-3d;animation:rot 26s linear infinite}
+.car:hover .ringc{animation-play-state:paused}
+@keyframes rot{to{transform:rotateY(-360deg)}}
+.cc{position:absolute;inset:0;border-radius:20px;background:#fff;border:1px solid var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;backface-visibility:hidden;box-shadow:0 20px 30px -20px rgba(0,0,0,.4)}
+.cc .ico{width:70px;height:70px}.cc .ico i{font-size:60px}
+.cc b{font-size:15px}
+.cc span{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+.carfloor{height:40px;margin:-20px auto 0;width:60%;background:radial-gradient(ellipse,rgba(15,157,79,.25),transparent 70%)}
+
+/* Q6 — phone home screen */
+.phwrap{display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center;justify-content:center}
+.phone{width:290px;height:580px;border-radius:44px;background:#111;padding:12px;box-shadow:0 30px 60px -30px rgba(0,0,0,.6)}
+.scr{position:relative;height:100%;border-radius:34px;overflow:hidden;background:linear-gradient(160deg,#0f9d4f,#0b5d34 45%,#082a1b);padding:46px 18px 18px;display:flex;flex-direction:column}
+.notch{position:absolute;left:50%;top:10px;transform:translateX(-50%);width:90px;height:24px;border-radius:14px;background:#111}
+.sbar{position:absolute;top:14px;left:24px;right:24px;display:flex;justify-content:space-between;color:#fff;font-size:12px;font-weight:700}
+.apps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px 10px;margin-top:10px}
+.app{display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer}
+.app .ai{width:52px;height:52px;border-radius:14px;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 12px -6px rgba(0,0,0,.5);transition:transform .2s}
+.app:active .ai,.app:hover .ai{transform:scale(.92)}
+.app .ai .ico{width:32px;height:32px}.app .ai .ico i{font-size:28px}
+.app small{color:#fff;font-size:10px;font-weight:600;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:62px}
+.widget{margin-top:18px;border-radius:20px;background:rgba(255,255,255,.18);backdrop-filter:blur(10px);padding:14px;color:#fff}
+.widget b{font-size:13px;display:block;margin-bottom:6px}.widget span{font-size:11.5px;opacity:.9;line-height:1.5}
+.dock{margin-top:auto;display:flex;justify-content:space-around;padding:12px;border-radius:24px;background:rgba(255,255,255,.22);backdrop-filter:blur(10px)}
+.dock .app small{display:none}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:24px 24px 0 0;padding:18px 20px 26px;transform:translateY(105%);transition:transform .45s var(--ease);z-index:3}
+.sheet.on{transform:none}
+.sheet .grab{width:40px;height:5px;border-radius:3px;background:#d1d5db;margin:0 auto 14px}
+.sheet .hd{display:flex;align-items:center;gap:12px}
+.sheet .hd .ico{width:44px;height:44px}
+.sheet b{font-size:17px}.sheet p{margin:10px 0 0;font-size:13px;color:var(--muted)}
+.sheet .cat{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.phtxt h4{font-size:28px;margin:0 0 10px}.phtxt p{color:var(--muted);font-size:14px;line-height:1.6;max-width:360px;margin:0}
+@media(max-width:760px){.phwrap{grid-template-columns:1fr;justify-items:center;text-align:center}}
+
+/* Q7 — embroidered patches */
+.patches{display:flex;flex-wrap:wrap;justify-content:center;gap:20px}
+.patch{width:150px;height:150px;border-radius:50%;position:relative;display:flex;align-items:center;justify-content:center;transition:transform .35s var(--ease);
+  box-shadow:0 0 0 6px var(--c),0 0 0 7px rgba(0,0,0,.15),0 14px 22px -12px rgba(0,0,0,.5);background:var(--bgc);
+  background-image:repeating-linear-gradient(45deg,rgba(255,255,255,.06) 0 2px,transparent 2px 4px),repeating-linear-gradient(-45deg,rgba(0,0,0,.05) 0 2px,transparent 2px 4px)}
+.patch::before{content:"";position:absolute;inset:6px;border-radius:50%;border:2px dashed rgba(255,255,255,.7)}
+.patch:hover{transform:rotate(-8deg) scale(1.06)}
+.patch .ico{width:52px;height:52px;background:#fff;border-radius:50%;padding:8px;width:64px;height:64px;box-shadow:0 0 0 3px rgba(255,255,255,.4)}
+.patch .ico i{font-size:38px}
+.patch svg{position:absolute;inset:0;width:100%;height:100%}
+.patch svg text{font-family:var(--font);font-size:12.5px;font-weight:700;fill:#fff;letter-spacing:.1em;text-transform:uppercase}
+.patch .ico{position:relative;top:10px;width:56px!important;height:56px!important}
+
+/* Q8 — swiss poster */
+.poster{display:grid;grid-template-columns:120px repeat(4,1fr);grid-template-rows:auto auto auto;gap:0;border:3px solid var(--text);background:#f7f4ee}
+.poster .vbig{grid-row:1/5;background:var(--accent);color:#fff;writing-mode:vertical-rl;transform:rotate(180deg);font-size:64px;font-weight:700;display:flex;align-items:center;justify-content:center;letter-spacing:.06em;border-left:3px solid var(--text)}
+.pc{border-left:3px solid var(--text);border-bottom:3px solid var(--text);padding:16px;min-height:150px;display:flex;flex-direction:column;justify-content:space-between;transition:background .3s,color .3s}
+.pc:hover{background:var(--text);color:#fff}
+.pc .lb{font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:700}
+.pc b{font-size:clamp(22px,3vw,34px);line-height:1;letter-spacing:-.02em}
+.pc .ico{width:30px;height:30px;align-self:flex-end}
+.pc.red{background:#e2412f;color:#fff}.pc.blk{background:var(--text);color:#fff}.pc.yel{background:#f5c518}
+.pc.wide{grid-column:span 2}
+.pc.last{border-bottom:0}
+.poster .foot{grid-column:2/6;padding:12px 16px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;display:flex;justify-content:space-between;border-left:3px solid var(--text);flex-wrap:wrap;gap:8px}
+@media(max-width:760px){.poster{grid-template-columns:70px 1fr 1fr}.poster .vbig{grid-row:1/8;font-size:40px}.pc.wide{grid-column:span 2}.poster .foot{grid-column:2/4}}
+
+/* Q9 — outline text */
+.otl{display:flex;flex-direction:column;gap:2px}
+.ow{display:flex;align-items:center;gap:20px;cursor:default}
+.ow b{font-size:clamp(40px,8vw,92px);line-height:1;font-weight:700;letter-spacing:-.03em;color:transparent;-webkit-text-stroke:1.5px var(--text);
+  background:linear-gradient(90deg,var(--accent),var(--fill)) no-repeat 0 0/0% 100%;-webkit-background-clip:text;background-clip:text;transition:background-size .6s var(--ease),-webkit-text-stroke-color .3s}
+.ow:hover b{background-size:100% 100%;-webkit-text-stroke-color:transparent}
+.ow .ico{width:58px;height:58px;opacity:0;transform:translateX(-20px) rotate(-20deg);transition:.45s var(--ease)}
+.ow:hover .ico{opacity:1;transform:none}
+.ow small{font-size:13px;color:var(--muted);opacity:0;transition:opacity .4s .1s}
+.ow:hover small{opacity:1}
+@media(max-width:600px){.ow small{display:none}}
+
+/* Q10 — recipe card */
+.rcp{max-width:820px;margin:0 auto;background:#fffdf7;border-radius:6px;box-shadow:0 20px 40px -26px rgba(0,0,0,.45);padding:30px 34px;position:relative;
+  background-image:linear-gradient(transparent 76px,#e2412f 76px,#e2412f 78px,transparent 78px),repeating-linear-gradient(transparent 0 31px,#d8e5f2 31px 32px);background-position:0 0,0 92px}
+.rcp .pin{position:absolute;top:-10px;left:50%;width:22px;height:22px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#ff7a6b,#c0261a);box-shadow:0 4px 6px rgba(0,0,0,.3)}
+.rcp h4{margin:0 0 30px;font-size:24px;line-height:44px}
+.rcp h4 small{font-size:13px;color:var(--muted);font-weight:500;margin-left:8px}
+.rcp .cols{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+.rcp h5{margin:0;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#c0261a;line-height:32px}
+.rcp ul{list-style:none;margin:0;padding:0}
+.rcp li{line-height:32px;font-size:14px;display:flex;align-items:center;gap:8px}
+.rcp li em{color:var(--muted);font-style:normal}
+.rcp li .ico{width:20px;height:20px}.rcp li .ico i{font-size:17px}
+.rcp li.st::before{content:"→";color:var(--accent);font-weight:700}
+.rcp .tip{margin-top:14px;font-size:13px;line-height:32px;color:var(--accent-text)}
+@media(max-width:700px){.rcp .cols{grid-template-columns:1fr;gap:0}}
+
+/* Q11 — LEGO */
+.lego{display:flex;flex-direction:column;align-items:center;gap:0;padding-top:20px;isolation:isolate}
+.brick .studs{z-index:-1}
+.lrow{display:flex}
+.lrow:nth-child(even){margin-left:60px}
+.brick{position:relative;height:74px;margin:0 2px 2px 0;border-radius:6px;display:flex;align-items:center;justify-content:center;gap:10px;color:#fff;font-weight:700;font-size:13px;
+  box-shadow:inset 0 -6px 0 rgba(0,0,0,.18),inset 0 2px 0 rgba(255,255,255,.3);transition:transform .25s var(--ease);cursor:pointer}
+.brick:hover{transform:translateY(-8px)}
+.brick .studs{position:absolute;top:-11px;left:10px;right:10px;display:flex;justify-content:space-around}
+.brick .studs i{width:22px;height:12px;border-radius:5px 5px 0 0;background:inherit;box-shadow:inset 0 3px 0 rgba(255,255,255,.35),inset 0 -2px 0 rgba(0,0,0,.15);display:block}
+.brick .ico{width:30px;height:30px;background:#fff;border-radius:8px;padding:4px}.brick .ico i{font-size:21px}
+.lego .base{width:min(760px,100%);height:20px;border-radius:6px;background:#64748b;box-shadow:inset 0 -5px 0 rgba(0,0,0,.2)}
+
+/* Q12 — playlist */
+.pl{border-radius:18px;overflow:hidden;background:linear-gradient(180deg,#0f5e37 0,#121212 300px);color:#fff}
+.plh{display:flex;align-items:flex-end;gap:22px;padding:26px}
+.cover{width:160px;height:160px;flex:none;border-radius:8px;background:conic-gradient(from 210deg,#18d26e,#3b82f6,#8b5cf6,#f59e0b,#18d26e);display:flex;align-items:center;justify-content:center;font-size:44px;font-weight:700;box-shadow:0 20px 40px -10px rgba(0,0,0,.6);position:relative}
+.cover::after{content:"";position:absolute;inset:34%;border-radius:50%;background:#121212;box-shadow:0 0 0 5px rgba(255,255,255,.12)}
+.plh small{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
+.plh h4{font-size:clamp(34px,6vw,64px);margin:6px 0 8px;letter-spacing:-.03em;line-height:1}
+.plh p{margin:0;font-size:13px;opacity:.8}
+.plc{display:flex;align-items:center;gap:18px;padding:4px 26px 16px}
+.play{width:54px;height:54px;border-radius:50%;background:var(--fill);color:#06371b;border:0;font-size:26px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .2s}
+.play:hover{transform:scale(1.06)}
+.plc i.bi-heart-fill{font-size:26px;color:var(--fill)}
+.tracks{padding:0 14px 18px}
+.trk{display:grid;grid-template-columns:34px 40px 1fr 1fr;align-items:center;gap:12px;padding:8px 12px;border-radius:8px;cursor:pointer;font-size:14px}
+.trk:hover{background:rgba(255,255,255,.08)}
+.trk .st{color:#b3b3b3;display:flex;justify-content:center}
+.trk .cv{width:40px;height:40px;border-radius:4px;background:#fff;display:flex;align-items:center;justify-content:center}
+.trk .cv .ico{width:26px;height:26px}.trk .cv .ico i{font-size:22px}
+.trk b{font-weight:600}.trk small{color:#b3b3b3;font-size:12.5px}
+.trk.on b{color:var(--fill)}
+.eq{display:none;gap:2px;align-items:flex-end;height:14px}
+.eq i{width:3px;background:var(--fill);animation:eq .9s ease-in-out infinite}
+.eq i:nth-child(2){animation-delay:-.3s}.eq i:nth-child(3){animation-delay:-.6s}
+@keyframes eq{0%,100%{height:4px}50%{height:14px}}
+.trk.on .eq{display:flex}.trk.on .st .bi{display:none}
+.trk .st .bi{opacity:0}.trk:hover .st .bi{opacity:1}
+@media(max-width:600px){.plh{flex-direction:column;align-items:flex-start}.cover{width:120px;height:120px}.trk{grid-template-columns:26px 40px 1fr}.trk small.g{display:none}}
+
+/* Q13 — achievements */
+.ach{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;position:relative}
+.ac{display:flex;align-items:center;gap:14px;padding:14px;border-radius:16px;background:#151a17;color:#e8efe9;border:1px solid rgba(255,255,255,.06);position:relative;overflow:hidden;opacity:.35;filter:grayscale(1);transition:opacity .5s,filter .5s,box-shadow .5s}
+.ac.un{opacity:1;filter:none;box-shadow:0 0 0 1px rgba(24,210,110,.4),0 10px 24px -14px rgba(24,210,110,.7)}
+.ac .bdg{width:54px;height:54px;flex:none;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%);background:linear-gradient(150deg,#f5d36b,#c9a227);display:flex;align-items:center;justify-content:center}
+.ac .bdg .ico{width:30px;height:30px;background:#fff;border-radius:50%;padding:4px}.ac .bdg .ico i{font-size:20px}
+.ac small{display:block;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#7ef0b0;margin-bottom:3px}
+.ac b{font-size:14px}
+.ac .shine{position:absolute;inset:0;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.18) 50%,transparent 70%);transform:translateX(-100%)}
+.ac.un .shine{animation:sh 1s .1s}
+@keyframes sh{to{transform:translateX(100%)}}
+.achbg{background:#0b0f0c;border-radius:18px;padding:22px}
+.toast{position:absolute;right:22px;top:22px;display:flex;align-items:center;gap:10px;background:#fff;color:var(--text);border-radius:14px;padding:10px 14px;box-shadow:0 14px 30px -12px rgba(0,0,0,.5);font-size:13px;transform:translateY(-14px);opacity:0;transition:.35s var(--ease);z-index:4}
+.toast.on{transform:none;opacity:1}
+.toast i{font-size:22px;color:#c9a227}
+
+/* Q14 — pyramid */
+.pyr{display:flex;flex-direction:column;align-items:center;gap:6px;max-width:860px;margin:0 auto}
+.lvl{display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;padding:18px 70px;color:#fff;clip-path:polygon(var(--i) 0,calc(100% - var(--i)) 0,100% 100%,0 100%);transition:filter .3s}
+.lvl:hover{filter:brightness(1.08)}
+.lvl .lb{width:100%;text-align:center;font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:700;opacity:.9}
+.lvl .pill{background:rgba(255,255,255,.95);color:var(--text);border:0}
+.lv1{width:34%;--i:22%;background:linear-gradient(var(--fill),var(--accent));padding:22px 20px 14px}
+.lv2{width:58%;--i:10%;background:#f59e0b}
+.lv3{width:80%;--i:7%;background:#0f9d4f}
+.lv4{width:100%;--i:5%;background:#3b82f6}
+.pyr .side{font-size:12px;color:var(--muted);margin-top:10px;text-align:center}
+@media(max-width:640px){.lvl{padding:16px 30px}.lv1{width:60%}.lv2{width:80%}.lv3{width:92%}}
+
+/* Q15 — film strip */
+.film{background:#141414;padding:30px 0;border-radius:14px;overflow:hidden;position:relative}
+.film::before,.film::after{content:"";position:absolute;left:0;right:0;height:14px;background:repeating-linear-gradient(90deg,transparent 0 10px,#e9e3d6 10px 26px,transparent 26px 36px);opacity:.9}
+.film::before{top:8px}.film::after{bottom:8px}
+.reel{display:flex;gap:14px;width:max-content;animation:roll 40s linear infinite;padding:0 7px}
+.film:hover .reel{animation-play-state:paused}
+@keyframes roll{to{transform:translateX(-50%)}}
+.frame{width:190px;height:150px;border-radius:4px;background:linear-gradient(160deg,#f6efe0,#e2d6bd);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;filter:sepia(.75) contrast(.95);transition:filter .4s,transform .3s var(--ease)}
+.frame:hover{filter:none;transform:scale(1.05)}
+.frame .ico{width:56px;height:56px}.frame .ico i{font-size:48px}
+.frame b{font-size:14px;color:#3a2f1e}
+.frame small{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:#7a6a4e}
+.filmcap{text-align:center;font-size:12px;color:var(--muted);margin-top:12px}
+</style>
+</head>
+<body>
+<div class="top"><div class="in">
+  <h1>Skills — yana <b>15</b> variant</h1>
+  <a class="prev" href="skills-variants-3.html">← P1–P15</a>
+  <nav class="jump" id="jump"></nav>
+</div></div>
+<div class="wrap">
+  <p class="intro">To'rtinchi to'plam — avvalgi 42 tadan boshqacha. <b>Raqam, foiz va daraja yo'q.</b> Variantlar Q1–Q15 deb belgilangan.</p>
+  <div id="variants"></div>
+</div>
+
+<script>
+const SK={
+ java:{n:"Java",ic:"java",g:"be",d:"OOP & clean, typed code"},
+ spring:{n:"Spring Boot",ic:"spring",g:"be",d:"REST APIs & microservices"},
+ py:{n:"Python",ic:"python",g:"be",d:"Scripting & automation"},
+ pg:{n:"PostgreSQL",ic:"postgresql",g:"da",d:"Relational design & SQL"},
+ html:{n:"HTML",ic:"html5",g:"fe",d:"Semantic, accessible markup"},
+ css:{n:"CSS",ic:"css3",g:"fe",d:"Responsive layouts & motion"},
+ js:{n:"JavaScript",ic:"javascript",g:"fe",d:"Interactive UI & browser APIs"},
+ gh:{n:"GitHub",ic:"github",g:"tl",d:"Version control & teamwork"},
+ cloud:{n:"Cloud",ic:null,g:"tl",d:"Cloud integration & security"},
+ claude:{n:"Claude",ic:"claude",g:"tl",d:"AI-assisted development"}
+};
+const ALL=Object.keys(SK);
+const G={be:{n:"Backend",c:"#0f9d4f",soft:"#e7f8ee",d:"Server-side logic, APIs and services.",bi:"bi-hdd-stack"},fe:{n:"Frontend",c:"#3b82f6",soft:"#eaf2ff",d:"Everything the user sees and touches.",bi:"bi-window"},da:{n:"Data",c:"#8b5cf6",soft:"#f2edff",d:"Storing, shaping and querying data.",bi:"bi-database"},tl:{n:"Tools & AI",c:"#f59e0b",soft:"#fff5e0",d:"The workflow that ships it all.",bi:"bi-tools"}};
+const COMP=["Programming Proficiency","Debugging Skills","Version Control","Database Management","Code Testing","Problem Solving","API Integration","Basic Security Knowledge"];
+const ico=k=>{const s=SK[k];return `<span class="ico">${s.ic?`<img src="assets/img/skills/${s.ic}.svg" alt="">`:`<i class="bi bi-cloud-fill"></i>`}</span>`};
+const pill=k=>`<span class="pill">${ico(k)}${SK[k].n}</span>`;
+const title=(t,c="")=>`<div class="ttl ${c}"><h3>${t}</h3></div>`;
+const byG=g=>ALL.filter(k=>SK[k].g===g);
+const CLOUD_D="M4.406 3.342A5.53 5.53 0 0 1 8 2c2.69 0 4.923 2 5.166 4.579C14.758 6.804 16 8.137 16 9.773 16 11.569 14.502 13 12.687 13H3.781C1.708 13 0 11.366 0 9.318c0-1.763 1.266-3.223 2.942-3.593.143-.863.698-1.723 1.464-2.383";
+const svgIcon=(k,x,y,s,plate)=>(plate?`<rect x="${x-3}" y="${y-3}" width="${s+6}" height="${s+6}" rx="5" fill="#fff"/>`:"")+(SK[k].ic?`<image href="assets/img/skills/${SK[k].ic}.svg" x="${x}" y="${y}" width="${s}" height="${s}"/>`:`<svg x="${x}" y="${y}" width="${s}" height="${s}" viewBox="0 0 16 16"><path fill="#3b82f6" d="${CLOUD_D}"/></svg>`);
+
+const V=[
+ {id:"Q1",t:"Kengayuvchi panellar",tag:"dramatik · ixcham",d:"To'rtta vertikal panel — har biri kategoriya. Bosilgan yoki ustiga borilgan panel kengayib, ichidagi ko'nikmalar chiqadi; qolganlari ingichka ustunga aylanadi.",
+  h:()=>title("Skills")+`<div class="acc" id="acc">${Object.keys(G).map((g,i)=>`<div class="pn ${i?"":"on"}" data-g="${g}" style="background:linear-gradient(160deg,${G[g].c},${G[g].c}cc)"><span class="vt">${G[g].n}</span><span class="ico bgi"><i class="bi ${G[g].bi}"></i></span><div class="ct"><h4>${G[g].n}</h4><p>${G[g].d}</p><div class="row">${byG(g).map(pill).join("")}</div></div></div>`).join("")}</div>`},
+
+ {id:"Q2",t:"O'sayotgan daraxt",tag:"organik · hikoya",d:"Ekranga kirganda daraxt o'sadi: tanasidan kategoriya shoxlari, uchlarida texnologiya “barglari”. O'sish va rivojlanish metaforasi.",
+  h:()=>{const W=1000,H=520,tx=500;
+   const B=[{g:"be",x:230,y:170,k:["java","spring","py"]},{g:"fe",x:770,y:170,k:["html","css","js"]},{g:"da",x:300,y:360,k:["pg"]},{g:"tl",x:700,y:360,k:["gh","cloud","claude"]}];
+   let s=`<svg class="tree" viewBox="0 0 ${W} ${H}"><path class="br" stroke-width="22" d="M${tx},${H} C${tx},${H-120} ${tx-10},${H-200} ${tx},260"/>`;
+   B.forEach(b=>{s+=`<path class="br" stroke-width="10" d="M${tx},${b.y+60} Q${(tx+b.x)/2},${b.y+40} ${b.x},${b.y}"/><text class="cat" x="${b.x}" y="${b.y+34}" text-anchor="middle">${G[b.g].n.toUpperCase()}</text>`;
+     b.k.forEach((k,i)=>{const a=(i-(b.k.length-1)/2)*0.9-Math.PI/2+(b.x<tx?-.5:.5),lx=b.x+Math.cos(a)*120,ly=b.y+Math.sin(a)*95;
+       s+=`<path class="br" stroke-width="4" d="M${b.x},${b.y} L${lx},${ly}"/><g class="lf" style="transition-delay:${1.2+i*.15}s"><ellipse cx="${lx}" cy="${ly}" rx="56" ry="40" fill="${G[b.g].soft}" stroke="${G[b.g].c}" stroke-width="2"/>${svgIcon(k,lx-14,ly-30,28)}<text x="${lx}" y="${ly+20}" text-anchor="middle">${SK[k].n}</text></g>`})});
+   s+=`<ellipse cx="${tx}" cy="${H-4}" rx="180" ry="10" fill="rgba(15,157,79,.18)"/></svg>`;return title("Skills")+s}},
+
+ {id:"Q3",t:"Pazl bo'laklari",tag:"jamoaviy · ma'noli",d:"Har bir texnologiya — pazl bo'lagi, birgalikda to'liq rasm hosil qiladi. “Hammasi bir-biriga mos tushadi” degan g'oya. Bo'lak ustiga borilsa ko'tariladi.",
+  h:()=>{const order=["java","spring","pg","py","cloud","html","css","js","gh","claude"];
+   return title("Skills")+`<div class="puz">${order.map((k,i)=>`<div class="pz ${i%5===4?"nr":""} ${i>=5?"nb":""}" style="background:${i%2?G[SK[k].g].soft:"#fff"};z-index:${10-i};box-shadow:inset 0 0 0 2px ${G[SK[k].g].c}22">${ico(k)}<b>${SK[k].n}</b></div>`).join("")}</div>`}},
+
+ {id:"Q4",t:"Elektron plata",tag:"texnik · coder",d:"Ko'nikmalar platadagi mikrosxemalar, markazda “JM” protsessori. Oltin yo'llar bo'ylab yashil signal yuguradi — tizim ishlayapti.",
+  h:()=>{const P={java:[110,80],spring:[110,200],py:[110,320],pg:[330,360],html:[890,80],css:[890,200],js:[890,320],gh:[670,360],cloud:[330,40],claude:[670,40]};
+   const cx=500,cy=200;let tr="",ch="";
+   ALL.forEach((k,i)=>{const [x,y]=P[k],mx=x<cx?x+130:x-130,d=`M${x<cx?x+60:x-60},${y} L${mx},${y} L${mx},${cy+(y<cy?-30:30)*(Math.abs(y-cy)>60?1:0)} L${x<cx?cx-70:cx+70},${cy+(y-cy)*.25}`;
+     tr+=`<path class="tr" d="${d}"/><path class="pulse" d="${d}" style="animation-delay:-${(i*.37).toFixed(2)}s"/>`;
+     ch+=`<g class="chip"><rect x="${x-60}" y="${y-22}" width="120" height="44" rx="6"/>${[0,1,2,3,4].map(j=>`<rect class="pin" x="${x-48+j*22}" y="${y-27}" width="8" height="5"/><rect class="pin" x="${x-48+j*22}" y="${y+22}" width="8" height="5"/>`).join("")}${svgIcon(k,x-50,y-11,22,true)}<text x="${x-20}" y="${y+5}">${SK[k].n}</text></g>`});
+   const cpu=`<g class="chip cpu"><rect x="${cx-70}" y="${cy-70}" width="140" height="140" rx="12" style="fill:#0b0d0f;stroke:#18d26e;stroke-width:2"/>${[0,1,2,3,4,5].map(j=>`<rect class="pin" x="${cx-58+j*22}" y="${cy-77}" width="8" height="7"/><rect class="pin" x="${cx-58+j*22}" y="${cy+70}" width="8" height="7"/><rect class="pin" x="${cx-77}" y="${cy-58+j*22}" width="7" height="8"/><rect class="pin" x="${cx+70}" y="${cy-58+j*22}" width="7" height="8"/>`).join("")}<text x="${cx}" y="${cy+8}" text-anchor="middle" style="fill:#18d26e">JM</text></g>`;
+   return `<div class="pcb">${title("Skills","light")}<svg viewBox="0 0 1000 400">${tr}${ch}${cpu}</svg></div>`}},
+
+ {id:"Q5",t:"3D karusel",tag:"hayratli · harakat",d:"Kartalar 3D halqada sekin aylanadi, ustiga borilsa to'xtaydi. Joyni tejaydi va birinchi qarashda e'tiborni tortadi.",
+  h:()=>{const n=ALL.length,r=320;return title("Skills")+`<div class="car"><div class="ringc">${ALL.map((k,i)=>`<div class="cc" style="transform:rotateY(${i*360/n}deg) translateZ(${r}px)">${ico(k)}<b>${SK[k].n}</b><span style="color:${G[SK[k].g].c}">${G[SK[k].g].n}</span></div>`).join("")}</div></div><div class="carfloor"></div>`}},
+
+ {id:"Q6",t:"Telefon ekrani",tag:"tanish · interaktiv",d:"Ko'nikmalar telefon bosh ekranidagi ilovalar kabi. Ilovani bossangiz pastdan izoh varag'i chiqadi. Har kim tushunadigan, o'ynab ko'riladigan interfeys.",
+  h:()=>{const main=["java","spring","py","pg","html","css","js"];return title("Skills")+`<div class="phwrap"><div class="phone"><div class="scr" id="scr"><div class="notch"></div><div class="sbar"><span>JM</span><span><i class="bi bi-reception-4"></i> <i class="bi bi-wifi"></i> <i class="bi bi-battery-full"></i></span></div>
+   <div class="apps">${main.map(k=>`<div class="app" data-k="${k}"><div class="ai">${ico(k)}</div><small>${SK[k].n}</small></div>`).join("")}</div>
+   <div class="widget"><b>✨ Strengths</b><span>Problem solving · API integration · Debugging · Version control</span></div>
+   <div class="dock">${["gh","cloud","claude"].map(k=>`<div class="app" data-k="${k}"><div class="ai">${ico(k)}</div><small>${SK[k].n}</small></div>`).join("")}</div>
+   <div class="sheet" id="psheet"></div></div></div><div class="phtxt"><h4>My stack, in my pocket.</h4><p>Ilovalardan birini bosing — pastdan qisqa ma'lumot chiqadi. Dock'da har kuni ishlatiladigan vositalar.</p></div></div>`}},
+
+ {id:"Q7",t:"Tikilgan nishonlar",tag:"teksturali · esda qoladi",d:"Har bir texnologiya kiyimga tikiladigan dumaloq nishon (patch): mato teksturasi, tikuv chizig'i, aylana bo'ylab yozuv. Ustiga borilsa buriladi.",
+  h:()=>title("Skills")+`<div class="patches">${ALL.map((k,i)=>{const g=G[SK[k].g];return `<div class="patch" style="--c:${g.c};--bgc:${g.c}"><svg viewBox="0 0 150 150"><defs><path id="ar${i}" d="M27,75 a48,48 0 1,1 96,0"/></defs><text><textPath href="#ar${i}" startOffset="50%" text-anchor="middle">${SK[k].n}</textPath></text></svg>${ico(k)}</div>`}).join("")}</div>`},
+
+ {id:"Q8",t:"Shveytsariya posteri",tag:"grafik dizayn · jasur",d:"Swiss-style afisha: qalin chegaralar, katta tipografiya, qizil-sariq-qora bloklar. Har bir katak ustiga borilsa rangi teskari bo'ladi. Dizayner ko'zi borligini ko'rsatadi.",
+  h:()=>title("Skills")+`<div class="poster"><div class="vbig">SKILLS</div>
+   <div class="pc wide red"><span class="lb">Backend</span><b>Java<br>Spring Boot</b>${ico("spring")}</div><div class="pc"><span class="lb">Data</span><b>Postgre<br>SQL</b>${ico("pg")}</div><div class="pc yel"><span class="lb">Script</span><b>Python</b>${ico("py")}</div>
+   <div class="pc"><span class="lb">Markup</span><b>HTML</b>${ico("html")}</div><div class="pc blk"><span class="lb">Style</span><b>CSS</b>${ico("css")}</div><div class="pc wide"><span class="lb">Frontend</span><b>JavaScript</b>${ico("js")}</div>
+   <div class="pc last"><span class="lb">Ship</span><b>GitHub</b>${ico("gh")}</div><div class="pc last yel"><span class="lb">Deploy</span><b>Cloud</b>${ico("cloud")}</div><div class="pc last wide red"><span class="lb">AI pair</span><b>Claude</b>${ico("claude")}</div>
+   <div class="foot"><span>Jamshid Mirkhadjayev</span><span>Problem solving · API · Debugging</span><span>Tashkent</span></div></div>`},
+
+ {id:"Q9",t:"Kontur harflar",tag:"tipografik · nafis",d:"Ulkan kontur (ichi bo'sh) harflar. Ustiga borilganda so'z yashil rang bilan to'ladi, yonida ikonka va izoh paydo bo'ladi.",
+  h:()=>title("Skills")+`<div class="otl">${["java","spring","pg","py","js","html","css","gh","cloud","claude"].map(k=>`<div class="ow"><b>${SK[k].n}</b>${ico(k)}<small>${SK[k].d}</small></div>`).join("")}</div>`},
+
+ {id:"Q10",t:"Retsept kartasi",tag:"hazil · samimiy",d:"“Ishonchli tizim retsepti”: ingredientlar — texnologiyalar, tayyorlash usuli — kompetensiyalar. Kulgili, lekin aniq — recruiter jilmayadi va eslab qoladi.",
+  h:()=>title("Skills")+`<div class="rcp"><span class="pin"></span><h4>Recipe: a reliable web system <small>— by Jamshid</small></h4><div class="cols">
+   <div><h5>Ingredients</h5><ul>
+    <li><em>a solid base of</em> ${pill("java")}</li><li><em>a generous layer of</em> ${pill("spring")}</li><li><em>well-structured</em> ${pill("pg")}</li><li><em>a dash of</em> ${pill("py")}</li>
+    <li><em>fresh</em> ${pill("html")} ${pill("css")}</li><li><em>a sprinkle of</em> ${pill("js")}</li></ul></div>
+   <div><h5>Method</h5><ul>
+    <li class="st">Plan with problem solving</li><li class="st">Connect through API integration</li><li class="st">Store with database management</li><li class="st">Test and debug carefully</li><li class="st">Track every change in ${pill("gh")}</li><li class="st">Serve on the ${pill("cloud")}</li></ul>
+    <div class="tip">💡 Chef's tip: pair with ${pill("claude")} for best results.</div></div></div></div>`},
+
+ {id:"Q11",t:"LEGO g'ishtlar",tag:"o'yinchoq · konstruktiv",d:"Ko'nikmalar bir-biriga ulanadigan LEGO g'ishtlari — devor qurilgan. “Men tizimni qismlardan yig'aman” degan g'oya. G'isht ustiga borilsa ko'tariladi.",
+  h:()=>{const R=[["claude","gh"],["cloud","js","css"],["html","py","pg"],["java","spring"]];
+   const wid=k=>["java","spring","pg"].includes(k)?220:k==="js"||k==="py"?180:150;
+   const col={be:"#0f9d4f",fe:"#3b82f6",da:"#8b5cf6",tl:"#f59e0b"};
+   return title("Skills")+`<div class="lego">${R.map(r=>`<div class="lrow">${r.map(k=>`<div class="brick" style="width:${wid(k)}px;background:${col[SK[k].g]}"><span class="studs">${Array.from({length:Math.round(wid(k)/44)}).map(()=>"<i></i>").join("")}</span>${ico(k)}${SK[k].n}</div>`).join("")}</div>`).join("")}<div class="base"></div></div>`}},
+
+ {id:"Q12",t:"Pleylist",tag:"musiqiy · shaxsiy",d:"Spotify uslubidagi pleylist “My Stack”: har bir texnologiya — trek, “ijrochisi” — kategoriya. Trekni bossangiz ekvalayzer o'ynaydi. Gitara va rok sevgingizga ishora.",
+  h:()=>`<div class="pl"><div class="plh"><div class="cover" aria-hidden="true"></div><div><small>Public playlist</small><h4>My Stack</h4><p>Jamshid Mirkhadjayev · backend, frontend & tools on repeat</p></div></div>
+   <div class="plc"><button class="play" id="plPlay" aria-label="Play"><i class="bi bi-play-fill"></i></button><i class="bi bi-heart-fill"></i><i class="bi bi-shuffle" style="font-size:22px;opacity:.7"></i></div>
+   <div class="tracks" id="tracks">${ALL.map((k,i)=>`<div class="trk ${i?"":"on"}" data-i="${i}"><span class="st"><i class="bi bi-play-fill"></i><span class="eq"><i></i><i></i><i></i></span></span><span class="cv">${ico(k)}</span><span><b>${SK[k].n}</b><br><small>${SK[k].d}</small></span><small class="g">${G[SK[k].g].n}</small></div>`).join("")}</div></div>`},
+
+ {id:"Q13",t:"Yutuqlar ochildi",tag:"o'yin uslubi",d:"Video o'yinlardagi “Achievement unlocked” kabi: bo'lim ekranga kirganda nishonlar birin-ketin ochiladi, burchakda bildirishnoma chiqadi.",
+  h:()=>`<div class="achbg">${title("Skills","light")}<div class="toast" id="atoast"><i class="bi bi-trophy-fill"></i><span id="atxt"></span></div><div class="ach">${ALL.map(k=>`<div class="ac" data-k="${k}"><span class="bdg">${ico(k)}</span><div><small>Unlocked</small><b>${SK[k].n}</b></div><span class="shine"></span></div>`).join("")}${["Problem Solver","API Integrator","Bug Hunter"].map(t=>`<div class="ac"><span class="bdg"><span class="ico"><i class="bi bi-star-fill" style="color:#c9a227"></i></span></span><div><small>Special</small><b>${t}</b></div><span class="shine"></span></div>`).join("")}</div></div>`},
+
+ {id:"Q14",t:"Piramida",tag:"tuzilmaviy · aniq",d:"Poydevordan cho'qqigacha: pastda Web asoslari, keyin Backend yadrosi, undan yuqorida Ma'lumotlar va vositalar, cho'qqida — muammo yechish. Bilim qanday qurilganini ko'rsatadi.",
+  h:()=>title("Skills")+`<div class="pyr"><div class="lvl lv1"><span class="lb">Peak</span><b>Problem Solving</b></div>
+   <div class="lvl lv2"><span class="lb">Tools & AI</span>${["gh","cloud","claude"].map(pill).join("")}</div>
+   <div class="lvl lv3"><span class="lb">Core · Backend & Data</span>${["java","spring","py","pg"].map(pill).join("")}</div>
+   <div class="lvl lv4"><span class="lb">Foundation · Web</span>${["html","css","js"].map(pill).join("")}</div>
+   <p class="side">poydevordan cho'qqiga — bilim qatlam-qatlam quriladi</p></div>`},
+
+ {id:"Q15",t:"Kino plyonkasi",tag:"retro · harakat",d:"Ko'nikmalar eski kino plyonkasi kadrlari bo'lib sekin o'tadi. Kadrlar sepiya rangda, ustiga borilsa jonli rangga kiradi va lenta to'xtaydi.",
+  h:()=>{const f=ALL.map(k=>`<div class="frame">${ico(k)}<b>${SK[k].n}</b><small>${G[SK[k].g].n}</small></div>`).join("");return title("Skills")+`<div class="film"><div class="reel">${f}${f}</div></div><p class="filmcap">🎞 kadr ustiga boring</p>`}}
+];
+
+document.getElementById("jump").innerHTML=V.map(v=>`<a href="#${v.id}">${v.id}</a>`).join("");
+document.getElementById("variants").innerHTML=V.map(v=>`<section class="var" id="${v.id}"><div class="vh"><span class="n">${v.id}</span><h2>${v.t}</h2><span class="tag">${v.tag}</span><p>${v.d}</p></div><div class="vb">${v.h()}</div></section>`).join("");
+const links=[...document.querySelectorAll(".jump a")];
+addEventListener("scroll",()=>{let cur="Q1";V.forEach(v=>{if(document.getElementById(v.id).getBoundingClientRect().top<160)cur=v.id});links.forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+cur))},{passive:true});
+const once={},START={Q13:ach};
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;e.target.classList.add("in");if(!once[e.target.id]){once[e.target.id]=1;(START[e.target.id]||(()=>{}))()}}),{threshold:.2});
+document.querySelectorAll(".var").forEach(s=>io.observe(s));
+
+/* Q1 */
+document.querySelectorAll("#acc .pn").forEach(p=>{const act=()=>document.querySelectorAll("#acc .pn").forEach(x=>x.classList.toggle("on",x===p));p.addEventListener("mouseenter",act);p.addEventListener("click",act)});
+
+/* Q6 */
+const ps=document.getElementById("psheet");
+document.querySelectorAll("#scr .app").forEach(a=>a.addEventListener("click",()=>{const s=SK[a.dataset.k],g=G[s.g];ps.innerHTML=`<div class="grab"></div><div class="hd">${ico(a.dataset.k)}<div><b>${s.n}</b><br><span class="cat" style="color:${g.c}">${g.n}</span></div></div><p>${s.d}. ${g.d}</p>`;ps.classList.add("on")}));
+ps.addEventListener("click",()=>ps.classList.remove("on"));
+
+/* Q12 */
+const trks=[...document.querySelectorAll(".trk")];let cur=0,playing=true;
+const setT=i=>{cur=i;trks.forEach((t,j)=>t.classList.toggle("on",j===i&&playing))};
+trks.forEach((t,i)=>t.addEventListener("click",()=>{playing=true;setT(i);document.querySelector("#plPlay i").className="bi bi-pause-fill"}));
+document.getElementById("plPlay").addEventListener("click",()=>{playing=!playing;setT(cur);document.querySelector("#plPlay i").className=playing?"bi bi-pause-fill":"bi bi-play-fill"});
+document.querySelector("#plPlay i").className="bi bi-pause-fill";
+
+/* Q13 */
+function ach(){const cards=[...document.querySelectorAll("#Q13 .ac")],t=document.getElementById("atoast"),tx=document.getElementById("atxt");
+ cards.forEach((c,i)=>setTimeout(()=>{c.classList.add("un");const name=c.querySelector("b").textContent;tx.innerHTML=`Achievement unlocked: <b>${name}</b>`;t.classList.add("on");clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove("on"),1100)},300+i*260))}
+</script>
+</body>
+</html>

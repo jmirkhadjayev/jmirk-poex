@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yangi texnologiyalar & funksiyalar — jonli demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js" defer></script>
+  <style>
+    :root{
+      --accent:#18d26e; --accent-text:#0a7d3f; --accent-dark:#15bb62; --accent-soft:rgba(24,210,110,.13);
+      --ink:#15181d; --muted:#5b6b62; --panel:#fff; --border:rgba(15,23,42,.1);
+      --ease:cubic-bezier(.22,1,.36,1); --mono:"M PLUS 1 Code",ui-monospace,SFMono-Regular,Menlo,monospace;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:var(--mono);background:linear-gradient(160deg,#e7eeea,#dfeae3);color:var(--ink);
+      padding:32px 18px 90px;-webkit-font-smoothing:antialiased}
+    h1{text-align:center;font-size:25px;margin:0 0 6px}
+    .sub{text-align:center;color:var(--muted);font-size:13px;margin:0 auto 14px;max-width:640px;line-height:1.6}
+    .legend{text-align:center;font-size:11.5px;color:var(--muted);margin:0 auto 34px}
+    .legend b{color:var(--accent-text)}
+    .wrap{max-width:900px;margin:0 auto}
+    .card{background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:24px;margin-bottom:28px;
+      box-shadow:0 18px 40px -28px rgba(15,23,30,.4)}
+    .num{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:9px;
+      background:var(--accent-soft);color:var(--accent-text);font-weight:700;font-size:15px;margin-right:10px;flex:none}
+    .htitle{display:flex;align-items:center;font-size:18px;font-weight:700;margin:0 0 6px;flex-wrap:wrap;gap:6px}
+    .hdesc{color:var(--muted);font-size:12.5px;line-height:1.6;margin:0 0 18px}
+    .tag{display:inline-block;font-size:10px;font-weight:700;color:var(--accent-text);background:var(--accent-soft);
+      padding:2px 9px;border-radius:99px;margin-left:auto}
+    .demo{border:1px dashed var(--border);border-radius:14px;padding:18px;background:#fafdfb}
+    .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:13px;font-weight:600;
+      padding:9px 16px;border-radius:999px;cursor:pointer;border:0;text-decoration:none;
+      background:var(--accent);color:#06371b;box-shadow:0 10px 22px -12px rgba(24,210,110,.7);transition:all .22s var(--ease)}
+    .btn:hover{background:var(--accent-dark);transform:translateY(-2px)}
+    .btn.ghost{background:#fff;color:var(--ink);border:1px solid var(--border);box-shadow:none}
+    .btn.ghost:hover{border-color:var(--accent);transform:translateY(-1px)}
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+    label.fld{font-size:11px;color:var(--muted);display:block;margin:0 0 5px}
+    select,input.txt,textarea{font-family:var(--mono);font-size:13px;padding:9px 11px;border:1px solid var(--border);
+      border-radius:10px;background:#fff;color:var(--ink);outline:0;width:100%}
+    select:focus,input.txt:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft)}
+    code{background:#eef3f0;padding:1px 6px;border-radius:5px;font-size:12px}
+    pre{background:#0d1117;color:#c9d1d9;border-radius:11px;padding:14px;font-size:12.5px;line-height:1.6;
+      overflow:auto;margin:0}
+    pre .k{color:#79c0ff}.pre .s{color:#a5d6ff}pre .s{color:#a5d6ff}pre .n{color:#f2cc60}pre .b{color:#ff7b72}
+    .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:#eafff3;
+      padding:12px 20px;border-radius:12px;font-size:13px;opacity:0;pointer-events:none;transition:all .3s var(--ease);z-index:1100}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+    .toast b{color:var(--accent)}
+    .pill{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;padding:4px 10px;border-radius:99px;
+      background:#fff;border:1px solid var(--border);cursor:pointer;transition:all .2s}
+    .pill.on{background:var(--accent);color:#06371b;border-color:var(--accent)}
+
+    /* 1. theme */
+    .preview{border-radius:14px;padding:20px;transition:all .4s var(--ease);border:1px solid var(--border)}
+    .preview.lite{background:#f5f8f6;color:#15181d}
+    .preview.dark{background:#0f1714;color:#e9f5ee;border-color:#1f2d27}
+    .preview h4{margin:0 0 6px;font-size:15px}
+    .preview p{margin:0;font-size:12px;opacity:.8;line-height:1.6}
+    .switch{position:relative;width:54px;height:28px;border-radius:99px;background:#cdd8d2;cursor:pointer;transition:.3s;border:0}
+    .switch.on{background:var(--accent)}
+    .switch i{position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:.3s;
+      display:grid;place-items:center;font-size:12px;color:#0a7d3f;font-style:normal}
+    .switch.on i{left:29px}
+
+    /* 3. chatbot */
+    .chat{display:flex;flex-direction:column;height:300px;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#fff}
+    .chat .log{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+    .msg{max-width:82%;padding:9px 13px;border-radius:14px;font-size:12.5px;line-height:1.55}
+    .msg.bot{background:var(--accent-soft);color:var(--ink);border-bottom-left-radius:4px;align-self:flex-start}
+    .msg.me{background:var(--accent);color:#06371b;border-bottom-right-radius:4px;align-self:flex-end}
+    .chat .bar{display:flex;gap:8px;padding:10px;border-top:1px solid var(--border)}
+    .chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+
+    /* 5. radar */
+    #radar{display:block;margin:0 auto;max-width:100%}
+
+    /* 6. particles */
+    #pnet{display:block;width:100%;height:200px;border-radius:12px;background:#0d1117;cursor:crosshair}
+
+    /* 9. scheduler */
+    .days{display:flex;gap:7px;overflow-x:auto;padding-bottom:6px}
+    .day{flex:none;text-align:center;border:1px solid var(--border);border-radius:11px;padding:9px 12px;cursor:pointer;
+      font-size:12px;background:#fff;transition:.2s}
+    .day.sel{background:var(--accent);color:#06371b;border-color:var(--accent)}
+    .day b{display:block;font-size:15px}
+    .slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(74px,1fr));gap:8px;margin-top:12px}
+    .slot{text-align:center;border:1px solid var(--border);border-radius:9px;padding:8px;font-size:12px;cursor:pointer;background:#fff;transition:.18s}
+    .slot.sel{background:var(--accent);color:#06371b;border-color:var(--accent)}
+
+    /* 10. cookie */
+    .cookie{border:1px solid var(--border);border-radius:13px;padding:16px;background:#fff;display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+    .cookie .ico{font-size:26px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Yangi texnologiyalar & funksiyalar</h1>
+    <p class="sub">Saytingiz uchun <b>takrorlanmaydigan</b> 10 ta tavsiya — har biri shu sahifada jonli ishlaydi.
+      Mavjud demolaringizdagi narsalar (terminal, ⌘K, QR, tilt, heatmap, PWA…) takrorlanmadi.</p>
+    <p class="legend"><b>🛠 Texnologiya</b> · <b>⚡ Funksiya</b> — har bir kartani sinab ko'ring.</p>
+
+    <!-- 1 -->
+    <div class="card">
+      <div class="htitle"><span class="num">1</span> Qorong'i / yorug' rejim <span class="tag">⚡ tizimga moslashadi</span></div>
+      <p class="hdesc">Tashrifchining qurilma sozlamasini (<code>prefers-color-scheme</code>) avtomatik oladi va tanlovni
+        <code>localStorage</code>'da saqlaydi. Kechasi ko'zga yengil, kunduzi tiniq.</p>
+      <div class="demo">
+        <div class="preview lite" id="thPrev">
+          <h4>Jamshid Mirkhadjayev</h4>
+          <p>IT Project Manager · Java Backend Developer · Toshkent</p>
+        </div>
+        <div class="row" style="margin-top:14px">
+          <button class="switch" id="thSwitch"><i>☀</i></button>
+          <span style="font-size:12px;color:var(--muted)" id="thLabel">Yorug' rejim</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="card">
+      <div class="htitle"><span class="num">2</span> Ko'p tilli interfeys (UZ / RU / EN) <span class="tag">⚡ i18n</span></div>
+      <p class="hdesc">Toshkentdagi mutaxassis uchun muhim: bir tugma bilan butun sahifa matni almashadi. Sahifa qayta yuklanmaydi —
+        matnlar <code>data-i18n</code> kalitlari orqali jonli yangilanadi.</p>
+      <div class="demo">
+        <div class="chips">
+          <span class="pill on" data-lang="uz">🇺🇿 O'zbek</span>
+          <span class="pill" data-lang="ru">🇷🇺 Русский</span>
+          <span class="pill" data-lang="en">🇬🇧 English</span>
+        </div>
+        <div style="background:#fff;border:1px solid var(--border);border-radius:12px;padding:16px">
+          <h4 style="margin:0 0 6px;font-size:15px" data-i18n="role">IT loyiha menejeri</h4>
+          <p style="margin:0 0 10px;font-size:12.5px;color:var(--muted);line-height:1.6" data-i18n="bio">
+            Men jamoalarni boshqaraman va Java backend yechimlarini ishlab chiqaman.</p>
+          <button class="btn" data-i18n="cta">Bog'lanish</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="card">
+      <div class="htitle"><span class="num">3</span> AI yordamchi chatbot <span class="tag">🛠 trend</span></div>
+      <p class="hdesc">Tashrifchi "Qanday tajribang bor?" deb so'raydi — bot rezyume bazasidan javob beradi. Bu yerda qoidaviy (offline)
+        demo; haqiqiy saytda buni Claude/OpenAI API'ga ulash mumkin (sizning Cloudflare worker'ingiz orqali).</p>
+      <div class="demo">
+        <div class="chat">
+          <div class="log" id="chLog">
+            <div class="msg bot">Salom! Men Jamshidning rezyume yordamchisiman 🤖 Tajriba, ko'nikmalar yoki aloqa haqida so'rang.</div>
+          </div>
+          <div class="chips" style="padding:8px 10px 0;margin:0">
+            <span class="pill" data-q="Qanday ko'nikmalaring bor?">Ko'nikmalar</span>
+            <span class="pill" data-q="Tajribang qancha?">Tajriba</span>
+            <span class="pill" data-q="Qanday bog'lansam bo'ladi?">Aloqa</span>
+          </div>
+          <div class="bar">
+            <input class="txt" id="chIn" placeholder="Savolingizni yozing…" autocomplete="off">
+            <button class="btn" id="chSend"><i class="bi bi-send"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="card">
+      <div class="htitle"><span class="num">4</span> REST API playground <span class="tag">🛠 backend ruhi</span></div>
+      <p class="hdesc">Java backend dasturchi sifatida o'zingizni ko'rsating: tashrifchi endpoint tanlab "So'rov yuborish"ni
+        bosadi — jonli JSON javob + status kod + kechikish ko'rinadi. Bu mock; haqiqiy API'ga ham ulanadi.</p>
+      <div class="demo">
+        <div class="row" style="margin-bottom:12px">
+          <div style="flex:1;min-width:240px">
+            <label class="fld">Endpoint</label>
+            <select id="apiEp">
+              <option value="GET /api/profile">GET&nbsp;&nbsp;/api/profile</option>
+              <option value="GET /api/skills">GET&nbsp;&nbsp;/api/skills</option>
+              <option value="GET /api/projects">GET&nbsp;&nbsp;/api/projects</option>
+              <option value="POST /api/contact">POST&nbsp;/api/contact</option>
+            </select>
+          </div>
+          <button class="btn" id="apiSend" style="align-self:flex-end"><i class="bi bi-play-fill"></i> So'rov yuborish</button>
+        </div>
+        <div class="row" style="margin-bottom:8px;font-size:11.5px;color:var(--muted)">
+          <span id="apiStatus">⏺ Tayyor</span><span id="apiTime"></span>
+        </div>
+        <pre id="apiOut">// Javob shu yerda chiqadi…</pre>
+      </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="card">
+      <div class="htitle"><span class="num">5</span> Ko'nikmalar radar diagrammasi <span class="tag">🛠 data-viz</span></div>
+      <p class="hdesc">Skill darajalarini sonlar bilan emas, vizual "o'rgimchak to'ri" bilan ko'rsating — bir qarashda kuchli
+        tomonlaringiz ko'rinadi. Toza <code>&lt;canvas&gt;</code> bilan chizilgan, hech qanday kutubxonasiz.</p>
+      <div class="demo">
+        <canvas id="radar" width="420" height="320"></canvas>
+        <div class="row" style="justify-content:center;margin-top:8px">
+          <button class="btn ghost" id="radarAnim"><i class="bi bi-arrow-repeat"></i> Qayta animatsiya</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="card">
+      <div class="htitle"><span class="num">6</span> Zarrachalar tarmog'i foni <span class="tag">🛠 canvas</span></div>
+      <p class="hdesc">Hero bo'limi uchun jonli, interaktiv fon: nuqtalar harakatlanadi va yaqinlashganda chiziq bilan bog'lanadi.
+        Sichqonchani ustiga olib boring — zarrachalar unga tortiladi. Toza canvas, rasm yo'q.</p>
+      <div class="demo" style="padding:0;border:0;background:transparent">
+        <canvas id="pnet"></canvas>
+      </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="card">
+      <div class="htitle"><span class="num">7</span> Matn → ovoz (Web Speech API) <span class="tag">🛠 brauzer API</span></div>
+      <p class="hdesc">Bio'ingizni ovoz bilan o'qib beradi — qulaylik (a11y) va "wow" effekti. Brauzerga o'rnatilgan, server kerak emas.
+        Chrome/Edge'da eng yaxshi ishlaydi.</p>
+      <div class="demo">
+        <p style="font-size:12.5px;line-height:1.6;background:#fff;border:1px solid var(--border);border-radius:11px;padding:14px;margin:0 0 12px" id="ttsText">
+          Salom, men Jamshid Mirkhadjayev. Toshkentda faoliyat yurituvchi IT loyiha menejeri va Java backend dasturchisiman.</p>
+        <div class="row">
+          <button class="btn" id="ttsPlay"><i class="bi bi-volume-up"></i> Eshitish</button>
+          <button class="btn ghost" id="ttsStop"><i class="bi bi-stop-fill"></i> To'xtatish</button>
+          <span style="font-size:11.5px;color:var(--muted)" id="ttsNote"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="card">
+      <div class="htitle"><span class="num">8</span> PDF rezyume generatori <span class="tag">⚡ jsPDF</span></div>
+      <p class="hdesc">"CV yuklab olish" tugmasi statik fayl emas — brauzerda real vaqtda PDF yasaydi. Ma'lumotni yangilasangiz,
+        fayl o'zi yangilanadi, qo'lda eksport qilish shart emas.</p>
+      <div class="demo">
+        <div class="row">
+          <button class="btn" id="pdfGen"><i class="bi bi-file-earmark-pdf"></i> CV PDF yaratish</button>
+          <span style="font-size:11.5px;color:var(--muted)" id="pdfNote">Brauzerda yaratiladi va yuklab olinadi.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9 -->
+    <div class="card">
+      <div class="htitle"><span class="num">9</span> "Qo'ng'iroq belgilang" rejalashtirgich <span class="tag">⚡ recruiter CTA</span></div>
+      <p class="hdesc">HR/mijoz sana va vaqt tanlab uchrashuv belgilaydi — Calendly'ning yengil varianti. Tanlov tasdiqlangach,
+        Telegram yoki email'ga yuborish mumkin.</p>
+      <div class="demo">
+        <label class="fld">Kunni tanlang</label>
+        <div class="days" id="schDays"></div>
+        <label class="fld" style="margin-top:14px">Vaqtni tanlang</label>
+        <div class="slots" id="schSlots"></div>
+        <button class="btn" id="schConfirm" style="margin-top:16px" disabled><i class="bi bi-calendar-check"></i> Uchrashuvni tasdiqlash</button>
+        <div id="schResult" style="font-size:12.5px;color:var(--accent-text);margin-top:10px"></div>
+      </div>
+    </div>
+
+    <!-- 10 -->
+    <div class="card">
+      <div class="htitle"><span class="num">10</span> Cookie / maxfiylik roziligi <span class="tag">⚡ amaliy · huquqiy</span></div>
+      <p class="hdesc">Analitika (masalan visitor.js) ishlatsangiz, professional saytda rozilik banneri kerak. Tanlov
+        <code>localStorage</code>'da saqlanadi va qaytadan ko'rsatilmaydi.</p>
+      <div class="demo" id="ckBox">
+        <div class="cookie" id="ckBanner">
+          <span class="ico">🍪</span>
+          <span style="flex:1;min-width:200px;font-size:12.5px;line-height:1.55;color:var(--muted)">
+            Bu sayt tajribani yaxshilash uchun cookie'lardan foydalanadi.</span>
+          <button class="btn ghost" id="ckNo">Rad etish</button>
+          <button class="btn" id="ckYes">Qabul qilish</button>
+        </div>
+        <div id="ckState" style="font-size:12.5px;color:var(--accent-text);margin-top:12px;display:none"></div>
+        <button class="btn ghost" id="ckReset" style="margin-top:12px;display:none"><i class="bi bi-arrow-counterclockwise"></i> Qayta ko'rsatish</button>
+      </div>
+    </div>
+
+    <p class="legend" style="margin-top:6px">Qaysi birini saytga qo'shamiz? Ayting — index.html'ga integratsiya qilib beraman.</p>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+  (function(){
+    "use strict";
+    var toastEl = document.getElementById('toast'), toastT;
+    function toast(html){ toastEl.innerHTML = html; toastEl.classList.add('show'); clearTimeout(toastT);
+      toastT = setTimeout(function(){ toastEl.classList.remove('show'); }, 2400); }
+
+    /* ---------- 1. Theme ---------- */
+    (function(){
+      var prev = document.getElementById('thPrev'), sw = document.getElementById('thSwitch'),
+          lbl = document.getElementById('thLabel'), icon = sw.querySelector('i');
+      var dark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      function apply(){
+        prev.className = 'preview ' + (dark ? 'dark' : 'lite');
+        sw.classList.toggle('on', dark);
+        icon.textContent = dark ? '🌙' : '☀';
+        lbl.textContent = dark ? "Qorong'i rejim" : "Yorug' rejim";
+      }
+      apply();
+      sw.addEventListener('click', function(){ dark = !dark; apply();
+        toast(dark ? "🌙 <b>Qorong'i</b> rejim — saqlandi" : "☀ <b>Yorug'</b> rejim — saqlandi"); });
+    })();
+
+    /* ---------- 2. i18n ---------- */
+    (function(){
+      var dict = {
+        uz:{role:"IT loyiha menejeri", bio:"Men jamoalarni boshqaraman va Java backend yechimlarini ishlab chiqaman.", cta:"Bog'lanish"},
+        ru:{role:"IT проектный менеджер", bio:"Я руковожу командами и разрабатываю backend-решения на Java.", cta:"Связаться"},
+        en:{role:"IT Project Manager", bio:"I lead teams and build Java backend solutions.", cta:"Get in touch"}
+      };
+      var pills = document.querySelectorAll('[data-lang]');
+      pills.forEach(function(p){
+        p.addEventListener('click', function(){
+          pills.forEach(function(x){ x.classList.remove('on'); });
+          p.classList.add('on');
+          var d = dict[p.getAttribute('data-lang')];
+          document.querySelectorAll('[data-i18n]').forEach(function(el){
+            el.textContent = d[el.getAttribute('data-i18n')];
+          });
+        });
+      });
+    })();
+
+    /* ---------- 3. Chatbot ---------- */
+    (function(){
+      var log = document.getElementById('chLog'), inp = document.getElementById('chIn'), send = document.getElementById('chSend');
+      var kb = [
+        {k:['ko\'nikma','skill','texnologi','stack','nima bil'], a:"Asosiy ko'nikmalar: Java, Spring Boot, REST API, SQL/PostgreSQL, Docker, Git va Agile/Scrum loyiha boshqaruvi."},
+        {k:['tajriba','experience','necha yil','qancha'], a:"Bir necha yillik tajriba: backend dasturlash + IT loyihalarni boshlanishidan yetkazib berishgacha boshqarish."},
+        {k:['aloqa','bog\'lan','contact','telegram','email','yozish'], a:"Bog'lanish: Telegram @jmirkhadjayev yoki saytdagi aloqa formasi orqali. LinkedIn'da ham bor."},
+        {k:['loyiha','project','portfolio','ish'], a:"Portfolio bo'limida case-study'lar bor: backend xizmatlar, integratsiyalar va jamoa boshqaruvi misollari."},
+        {k:['salom','assalom','hi','hello','hey'], a:"Salom! 👋 Tajriba, ko'nikmalar yoki aloqa haqida bemalol so'rang."},
+        {k:['java','spring','backend'], a:"Java + Spring Boot — asosiy yo'nalish. REST API, mikroservis va ma'lumotlar bazasi bilan ishlash."}
+      ];
+      function add(text, who){ var d = document.createElement('div'); d.className='msg '+who; d.textContent=text;
+        log.appendChild(d); log.scrollTop = log.scrollHeight; }
+      function answer(q){
+        var s = q.toLowerCase();
+        for(var i=0;i<kb.length;i++){ for(var j=0;j<kb[i].k.length;j++){ if(s.indexOf(kb[i].k[j])>-1) return kb[i].a; } }
+        return "Yaxshi savol! Buni Jamshidning o'ziga yo'naltiraman — aloqa bo'limidan yozib qoldiring. (Demo'da cheklangan baza)";
+      }
+      function ask(q){ if(!q.trim()) return; add(q,'me'); inp.value='';
+        setTimeout(function(){ add(answer(q),'bot'); }, 350); }
+      send.addEventListener('click', function(){ ask(inp.value); });
+      inp.addEventListener('keydown', function(e){ if(e.key==='Enter') ask(inp.value); });
+      document.querySelectorAll('[data-q]').forEach(function(p){ p.addEventListener('click', function(){ ask(p.getAttribute('data-q')); }); });
+    })();
+
+    /* ---------- 4. API playground ---------- */
+    (function(){
+      var ep = document.getElementById('apiEp'), btn = document.getElementById('apiSend'),
+          out = document.getElementById('apiOut'), st = document.getElementById('apiStatus'), tm = document.getElementById('apiTime');
+      var data = {
+        "GET /api/profile":{code:200,body:{name:"Jamshid Mirkhadjayev",role:"IT Project Manager",location:"Tashkent, UZ",available:true}},
+        "GET /api/skills":{code:200,body:{primary:["Java","Spring Boot","REST"],db:["PostgreSQL","MySQL"],tools:["Docker","Git","Jira"]}},
+        "GET /api/projects":{code:200,body:{total:3,items:[{id:1,name:"Backend Service"},{id:2,name:"Team Delivery"},{id:3,name:"Integration"}]}},
+        "POST /api/contact":{code:201,body:{status:"queued",message:"Xabaringiz qabul qilindi",ticket:"MSG-2026-0142"}}
+      };
+      function color(json){
+        return json
+          .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+          .replace(/"(\w+)":/g,'<span style="color:#f2cc60">"$1"</span>:')
+          .replace(/: "(.*?)"/g,': <span style="color:#a5d6ff">"$1"</span>')
+          .replace(/: (true|false|\d+)/g,': <span style="color:#ff7b72">$1</span>');
+      }
+      btn.addEventListener('click', function(){
+        var sel = ep.value, d = data[sel];
+        st.textContent = '⏳ So\'rov yuborilmoqda…'; tm.textContent=''; out.textContent='';
+        var start = performance.now();
+        var lat = 220 + Math.floor(Math.random()*480);
+        setTimeout(function(){
+          var ms = Math.round(performance.now()-start);
+          st.innerHTML = (d.code<300?'🟢':'🟡') + ' HTTP ' + d.code;
+          tm.textContent = '   ·   ' + ms + ' ms';
+          out.innerHTML = color(JSON.stringify(d.body, null, 2));
+        }, lat);
+      });
+    })();
+
+    /* ---------- 5. Radar chart ---------- */
+    (function(){
+      var cv = document.getElementById('radar'), ctx = cv.getContext('2d');
+      var labels = ['Java','Spring','SQL','Docker','Git','PM / Agile'];
+      var vals   = [0.92, 0.88, 0.82, 0.75, 0.85, 0.9];
+      var cx = cv.width/2, cy = cv.height/2 + 6, R = 110, N = labels.length;
+      function pt(i, r){ var a = -Math.PI/2 + i*2*Math.PI/N; return [cx + Math.cos(a)*r, cy + Math.sin(a)*r]; }
+      function draw(prog){
+        ctx.clearRect(0,0,cv.width,cv.height);
+        // grid
+        ctx.strokeStyle = 'rgba(15,23,42,.12)'; ctx.fillStyle = '#5b6b62'; ctx.font = '11px ui-monospace,monospace';
+        for(var g=1;g<=4;g++){ ctx.beginPath();
+          for(var i=0;i<=N;i++){ var p = pt(i%N, R*g/4); i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]); }
+          ctx.stroke(); }
+        for(var i=0;i<N;i++){ var e = pt(i,R), o = pt(i,R+22);
+          ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(e[0],e[1]); ctx.stroke();
+          ctx.textAlign = Math.abs(o[0]-cx)<6 ? 'center' : (o[0]<cx?'right':'left');
+          ctx.fillText(labels[i], o[0], o[1]+4); }
+        // value polygon
+        ctx.beginPath();
+        for(var i=0;i<=N;i++){ var k=i%N, p = pt(k, R*vals[k]*prog); i?ctx.lineTo(p[0],p[1]):ctx.moveTo(p[0],p[1]); }
+        ctx.closePath();
+        ctx.fillStyle = 'rgba(24,210,110,.22)'; ctx.fill();
+        ctx.strokeStyle = '#18d26e'; ctx.lineWidth = 2; ctx.stroke();
+        for(var i=0;i<N;i++){ var p = pt(i, R*vals[i]*prog); ctx.beginPath(); ctx.arc(p[0],p[1],3.5,0,7); ctx.fillStyle='#15bb62'; ctx.fill(); }
+      }
+      function animate(){ var s=null; function step(t){ if(!s)s=t; var pr=Math.min(1,(t-s)/700);
+        draw(1-Math.pow(1-pr,3)); if(pr<1) requestAnimationFrame(step); } requestAnimationFrame(step); }
+      animate();
+      document.getElementById('radarAnim').addEventListener('click', animate);
+    })();
+
+    /* ---------- 6. Particle network ---------- */
+    (function(){
+      var cv = document.getElementById('pnet'), ctx = cv.getContext('2d'), parts = [], mouse = {x:-999,y:-999};
+      function size(){ cv.width = cv.clientWidth; cv.height = 200; }
+      size(); window.addEventListener('resize', size);
+      var n = 46;
+      for(var i=0;i<n;i++) parts.push({x:Math.random()*cv.width, y:Math.random()*200, vx:(Math.random()-.5)*.6, vy:(Math.random()-.5)*.6});
+      cv.addEventListener('mousemove', function(e){ var r=cv.getBoundingClientRect(); mouse.x=e.clientX-r.left; mouse.y=e.clientY-r.top; });
+      cv.addEventListener('mouseleave', function(){ mouse.x=mouse.y=-999; });
+      function loop(){
+        ctx.clearRect(0,0,cv.width,cv.height);
+        for(var i=0;i<n;i++){ var p=parts[i];
+          var dx=mouse.x-p.x, dy=mouse.y-p.y, dist=Math.sqrt(dx*dx+dy*dy);
+          if(dist<120){ p.vx+=dx/dist*.05; p.vy+=dy/dist*.05; }
+          p.vx*=.99; p.vy*=.99; p.x+=p.vx; p.y+=p.vy;
+          if(p.x<0||p.x>cv.width)p.vx*=-1; if(p.y<0||p.y>200)p.vy*=-1;
+          p.x=Math.max(0,Math.min(cv.width,p.x)); p.y=Math.max(0,Math.min(200,p.y));
+          ctx.beginPath(); ctx.arc(p.x,p.y,2.2,0,7); ctx.fillStyle='#18d26e'; ctx.fill();
+        }
+        for(var i=0;i<n;i++)for(var j=i+1;j<n;j++){ var a=parts[i],b=parts[j],d=Math.hypot(a.x-b.x,a.y-b.y);
+          if(d<92){ ctx.beginPath(); ctx.moveTo(a.x,a.y); ctx.lineTo(b.x,b.y);
+            ctx.strokeStyle='rgba(24,210,110,'+(1-d/92)*.5+')'; ctx.lineWidth=1; ctx.stroke(); } }
+        requestAnimationFrame(loop);
+      }
+      loop();
+    })();
+
+    /* ---------- 7. TTS ---------- */
+    (function(){
+      var play = document.getElementById('ttsPlay'), stop = document.getElementById('ttsStop'),
+          note = document.getElementById('ttsNote'), txt = document.getElementById('ttsText').textContent;
+      if(!('speechSynthesis' in window)){ note.textContent='Brauzeringiz qo\'llab-quvvatlamaydi.'; play.disabled=true; return; }
+      play.addEventListener('click', function(){
+        window.speechSynthesis.cancel();
+        var u = new SpeechSynthesisUtterance(txt); u.rate=1; u.pitch=1;
+        var vs = window.speechSynthesis.getVoices();
+        var ru = vs.filter(function(v){ return /ru|uz/i.test(v.lang); })[0];
+        if(ru) u.voice = ru;
+        u.onstart=function(){ note.textContent='🔊 O\'qilmoqda…'; };
+        u.onend=function(){ note.textContent=''; };
+        window.speechSynthesis.speak(u);
+      });
+      stop.addEventListener('click', function(){ window.speechSynthesis.cancel(); note.textContent=''; });
+    })();
+
+    /* ---------- 8. jsPDF ---------- */
+    (function(){
+      var gen = document.getElementById('pdfGen'), note = document.getElementById('pdfNote');
+      gen.addEventListener('click', function(){
+        var lib = window.jspdf;
+        if(!lib || !lib.jsPDF){ note.textContent='Kutubxona yuklanmoqda, biroz kuting…'; return; }
+        var doc = new lib.jsPDF();
+        doc.setFontSize(22); doc.setTextColor(10,125,63); doc.text('Jamshid Mirkhadjayev', 20, 25);
+        doc.setFontSize(12); doc.setTextColor(60); doc.text('IT Project Manager · Java Backend Developer', 20, 34);
+        doc.setDrawColor(24,210,110); doc.setLineWidth(1); doc.line(20, 39, 190, 39);
+        doc.setFontSize(11); doc.setTextColor(30);
+        doc.text('Lokatsiya: Tashkent, UZ', 20, 50);
+        doc.text('Ko\'nikmalar: Java, Spring Boot, REST, SQL, Docker, Git, Agile', 20, 60);
+        doc.text('Aloqa: t.me/jmirkhadjayev  |  mirkhadjayev.uz', 20, 70);
+        doc.setFontSize(9); doc.setTextColor(150);
+        doc.text('Brauzerda jsPDF orqali yaratildi — ' + new Date().toLocaleDateString(), 20, 285);
+        doc.save('Jamshid_Mirkhadjayev_CV.pdf');
+        note.textContent='✅ PDF yaratildi va yuklab olindi.'; toast('📄 <b>CV PDF</b> yaratildi');
+      });
+    })();
+
+    /* ---------- 9. Scheduler ---------- */
+    (function(){
+      var daysEl = document.getElementById('schDays'), slotsEl = document.getElementById('schSlots'),
+          conf = document.getElementById('schConfirm'), res = document.getElementById('schResult');
+      var wd=['Yak','Du','Se','Cho','Pay','Ju','Sha'], mo=['Yan','Fev','Mar','Apr','May','Iyun','Iyul','Avg','Sen','Okt','Noy','Dek'];
+      var times=['10:00','11:00','12:00','14:00','15:00','16:00'];
+      var selDay=null, selTime=null, base=new Date();
+      for(var i=1;i<=7;i++){ (function(off){
+        var d=new Date(base.getTime()+off*86400000), el=document.createElement('div'); el.className='day';
+        el.innerHTML = wd[d.getDay()]+'<b>'+d.getDate()+'</b>'+mo[d.getMonth()];
+        el.addEventListener('click', function(){
+          daysEl.querySelectorAll('.day').forEach(function(x){x.classList.remove('sel');});
+          el.classList.add('sel'); selDay = wd[d.getDay()]+', '+d.getDate()+' '+mo[d.getMonth()]; check();
+        });
+        daysEl.appendChild(el);
+      })(i); }
+      times.forEach(function(t){ var el=document.createElement('div'); el.className='slot'; el.textContent=t;
+        el.addEventListener('click', function(){ slotsEl.querySelectorAll('.slot').forEach(function(x){x.classList.remove('sel');});
+          el.classList.add('sel'); selTime=t; check(); }); slotsEl.appendChild(el); });
+      function check(){ conf.disabled = !(selDay && selTime); }
+      conf.addEventListener('click', function(){ res.innerHTML='✅ Uchrashuv: <b>'+selDay+', '+selTime+'</b> — tasdiqlash uchun Telegram/email\'ga yuboriladi.';
+        toast('📅 <b>'+selDay+' '+selTime+'</b> tanlandi'); });
+    })();
+
+    /* ---------- 10. Cookie consent ---------- */
+    (function(){
+      var KEY='demo_cookie_consent', banner=document.getElementById('ckBanner'), state=document.getElementById('ckState'),
+          reset=document.getElementById('ckReset');
+      function show(val){ banner.style.display='none'; state.style.display='block'; reset.style.display='inline-flex';
+        state.innerHTML = val==='yes' ? '✅ Cookie\'lar <b>qabul qilindi</b> — analitika yoqildi.' : '🚫 Cookie\'lar <b>rad etildi</b> — faqat zaruriylari ishlaydi.'; }
+      var saved = localStorage.getItem(KEY); if(saved) show(saved);
+      document.getElementById('ckYes').addEventListener('click', function(){ localStorage.setItem(KEY,'yes'); show('yes'); toast('🍪 Rozilik <b>saqlandi</b>'); });
+      document.getElementById('ckNo').addEventListener('click', function(){ localStorage.setItem(KEY,'no'); show('no'); toast('🍪 Tanlov <b>saqlandi</b>'); });
+      reset.addEventListener('click', function(){ localStorage.removeItem(KEY); banner.style.display='flex'; state.style.display='none'; reset.style.display='none'; });
+    })();
+
+  })();
+  </script>
+</body>
+</html>

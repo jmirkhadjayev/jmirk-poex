@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>About — 30 ta dizayn varianti</title>
+<link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+@font-face{font-family:"M PLUS 1 Code";font-weight:300 700;font-display:swap;src:url("assets/fonts/mplus1code-latin.woff2") format("woff2");unicode-range:U+0000-00FF,U+2000-206F}
+@font-face{font-family:"M PLUS 1 Code";font-weight:300 700;font-display:swap;src:url("assets/fonts/mplus1code-latin-ext.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BB-02FF}
+:root{
+  --bg:#e7eeea;--panel:#fff;--surface:#f6f8f7;--surface2:#eef2f0;--line:rgba(15,23,30,.1);--line2:rgba(15,23,30,.18);
+  --text:#15181d;--muted:#5b636b;--faint:#8a939a;--accent:#0f9d4f;--accent-text:#0a7d3f;--fill:#18d26e;--soft:rgba(24,210,110,.12);
+  --ease:cubic-bezier(.22,1,.36,1);--font:"M PLUS 1 Code",ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:var(--font);color:var(--text);background:var(--bg);
+  background-image:linear-gradient(rgba(15,157,79,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(15,157,79,.06) 1px,transparent 1px);background-size:24px 24px;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+.top{position:sticky;top:0;z-index:40;background:rgba(255,255,255,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .in{max-width:1180px;margin:0 auto;padding:12px 18px;display:flex;align-items:center;gap:14px}
+.top h1{font-size:16px;margin:0;white-space:nowrap}.top h1 b{color:var(--accent)}
+.jump{display:flex;gap:5px;overflow-x:auto;scrollbar-width:none;margin-left:auto}
+.jump::-webkit-scrollbar{display:none}
+.jump a{flex:none;font-size:12px;font-weight:600;text-decoration:none;color:var(--muted);padding:6px 10px;border-radius:99px;border:1px solid var(--line);background:var(--panel)}
+.jump a:hover,.jump a.on{background:var(--text);color:#fff;border-color:var(--text)}
+.wrap{max-width:1180px;margin:0 auto;padding:22px 18px 80px}
+.intro{font-size:13px;color:var(--muted);line-height:1.6;margin:0 0 22px;max-width:900px}.intro b{color:var(--text)}
+.var{background:var(--panel);border-radius:20px;margin-bottom:24px;position:relative;overflow:hidden;box-shadow:0 18px 40px -30px rgba(15,23,30,.45);scroll-margin-top:70px}
+.var::before{content:"";position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,var(--fill),#9be8c0 60%,transparent);z-index:3}
+.vh{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:14px 22px 12px;border-bottom:1px dashed var(--line);background:#fbfcfb}
+.vh .n{min-width:34px;height:28px;padding:0 6px;border-radius:9px;background:var(--soft);color:var(--accent-text);font-weight:700;display:flex;align-items:center;justify-content:center;font-size:13px}
+.vh h2{font-size:16px;margin:0}
+.vh .tag{font-size:10.5px;font-weight:700;color:var(--accent-text);background:var(--soft);padding:3px 9px;border-radius:99px}
+.vh p{width:100%;margin:0 0 0 44px;font-size:12px;color:var(--muted);line-height:1.5}
+.vb{padding:24px 26px 28px;position:relative}
+@media(max-width:640px){.vh p{margin-left:0}.vb{padding:18px 16px 22px}}
+
+/* shared site-like title */
+.stl{margin:0 0 22px}
+.stl h3{display:flex;align-items:center;gap:12px;font-size:34px;font-weight:700;margin:0;text-transform:uppercase;letter-spacing:-.01em}
+.stl h3::after{content:"";width:48px;height:3px;background:var(--accent);border-radius:2px}
+.stl small{display:flex;align-items:center;gap:12px;margin-top:10px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;font-weight:700}
+.stl small::before,.stl small::after{content:"";width:28px;height:2px;background:var(--accent)}
+.stl.light h3,.stl.light small{color:#fff}
+.role{font-size:22px;font-weight:700;margin:0 0 10px;letter-spacing:-.01em}
+.lead{font-size:14px;line-height:1.75;color:var(--muted);margin:0}
+.lead.it{font-style:italic}
+.pass{font-size:13.5px;line-height:1.7;color:var(--muted);margin:0}
+.ph{width:100%;aspect-ratio:1;object-fit:cover;border-radius:14px}
+.eyebrow{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--faint);font-weight:700}
+.avail{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--accent-text);background:var(--soft);padding:6px 12px;border-radius:99px}
+.avail::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--fill);animation:pl 1.8s infinite}
+@keyframes pl{0%{box-shadow:0 0 0 0 rgba(24,210,110,.6)}70%{box-shadow:0 0 0 8px rgba(24,210,110,0)}100%{box-shadow:0 0 0 0 rgba(24,210,110,0)}}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 16px;border-radius:12px;font-weight:700;font-size:13px;text-decoration:none;border:1px solid var(--line2);background:#fff;cursor:pointer;font-family:inherit;transition:.2s}
+.btn.pri{background:var(--text);color:#fff;border-color:var(--text)}
+.btn.grn{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn:hover{transform:translateY(-2px)}
+.row2{display:flex;flex-wrap:wrap;gap:10px}
+
+/* fact layouts */
+.dl{display:grid;grid-template-columns:repeat(2,1fr);gap:0 28px}
+.dl div{display:grid;grid-template-columns:96px 1fr;gap:10px;padding:9px 0;border-bottom:1px solid var(--line);font-size:13px}
+.dl dt,.dl .k{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);font-weight:700;align-self:center}
+.dl .v{font-weight:600}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:7px;padding:8px 12px;border-radius:99px;background:var(--surface);font-size:12.5px;font-weight:600}
+.chip i{color:var(--accent)}
+.tiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
+.tile{padding:14px;border-radius:14px;background:var(--surface);display:flex;flex-direction:column;gap:8px}
+.tile i{font-size:18px;color:var(--accent)}
+.tile small{font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:700}
+.tile b{font-size:13.5px;word-break:break-word}
+@media(max-width:700px){.dl{grid-template-columns:1fr}}
+
+/* layout grids */
+.g-ph{display:grid;grid-template-columns:320px 1fr;gap:34px;align-items:start}
+.g-ph.r{grid-template-columns:1fr 320px}
+@media(max-width:860px){.g-ph,.g-ph.r{grid-template-columns:1fr}.g-ph .ph{max-width:320px}}
+
+/* A2 centered */
+.ctr{text-align:center;max-width:780px;margin:0 auto}
+.ctr .av{width:150px;height:150px;border-radius:50%;object-fit:cover;margin:0 auto 16px;box-shadow:0 0 0 6px #fff,0 0 0 8px var(--fill),0 18px 30px -16px rgba(0,0,0,.4)}
+.ctr .chips{justify-content:center;margin:18px 0}
+
+/* A3 split bleed */
+.bleed{display:grid;grid-template-columns:42% 1fr;margin:-24px -26px -28px}
+.bleed .pic{position:relative;min-height:520px;background:url(assets/img/opt/11111.webp) center/cover}
+.bleed .pic::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent 60%,#fff)}
+.bleed .txt{padding:30px 30px 30px 10px}
+@media(max-width:860px){.bleed{grid-template-columns:1fr;margin:0}.bleed .pic{min-height:320px;border-radius:14px}.bleed .pic::after{display:none}.bleed .txt{padding:20px 0 0}}
+
+/* A4 profile card */
+.pcard{max-width:820px;margin:0 auto;border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.pcard .cover{height:130px;background:linear-gradient(120deg,#0f9d4f,#18d26e 40%,#9be8c0);position:relative}
+.pcard .cover::after{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.25) 1px,transparent 1px);background-size:14px 14px}
+.pcard .bd{padding:0 26px 24px}
+.pcard .av{width:130px;height:130px;border-radius:50%;object-fit:cover;border:5px solid #fff;margin-top:-65px;position:relative;z-index:1;box-shadow:0 10px 20px -10px rgba(0,0,0,.4)}
+.pcard .hd{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;margin:10px 0 14px}
+.pcard h4{margin:0;font-size:24px}
+.pcard .meta{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:12.5px;color:var(--muted);margin:10px 0 14px}
+.pcard .meta i{color:var(--accent);margin-right:4px}
+
+/* A5 editorial */
+.edi .big{font-size:clamp(22px,3vw,32px);line-height:1.3;font-weight:700;letter-spacing:-.02em;margin:0 0 22px;max-width:920px}
+.edi .big span{color:var(--faint)}
+.edi .cols{display:grid;grid-template-columns:220px 1fr 1fr;gap:26px;border-top:2px solid var(--text);padding-top:18px}
+.edi figure{margin:0}.edi figure img{border-radius:10px;filter:grayscale(1);transition:filter .5s}.edi figure:hover img{filter:none}
+.edi figcaption{font-size:11px;color:var(--faint);margin-top:6px}
+@media(max-width:860px){.edi .cols{grid-template-columns:1fr}}
+
+/* A6 dark */
+.dark{background:#0d1210;border-radius:18px;padding:26px;color:#e7ece9;margin:-6px}
+.dark .lead,.dark .pass{color:#aab3ae}
+.dark .dl div{border-color:rgba(255,255,255,.08)}
+.dark .dl .k{color:#6f7a75}
+.dark .ph{border-radius:14px;box-shadow:0 0 0 1px rgba(255,255,255,.08)}
+.dark .role{color:#fff}
+.dark .role span{color:var(--fill)}
+
+/* A7 bento */
+.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:minmax(110px,auto);gap:10px}
+.bx{border-radius:16px;background:var(--surface);padding:16px;display:flex;flex-direction:column;justify-content:space-between;gap:8px}
+.bx.ph2{grid-row:span 3;padding:0;overflow:hidden}.bx.ph2 img{height:100%;object-fit:cover}
+.bx.w2{grid-column:span 2}.bx.w3{grid-column:span 3}
+.bx.dk{background:var(--text);color:#fff}.bx.dk .k{color:#9aa5a0}
+.bx.gr{background:var(--accent);color:#fff}.bx.gr .k{color:#d9f7e6}
+.bx .k{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--faint)}
+.bx b{font-size:14px}
+.bx .lead{font-size:13px}
+@media(max-width:860px){.bento{grid-template-columns:1fr 1fr}.bx.ph2{grid-row:span 2}.bx.w3{grid-column:span 2}}
+
+/* A9 floating badges */
+.flo{position:relative;max-width:340px}
+.flo .bd{position:absolute;display:flex;align-items:center;gap:8px;background:#fff;border-radius:14px;padding:9px 12px;font-size:12px;font-weight:700;box-shadow:0 14px 24px -14px rgba(0,0,0,.45);animation:fl 5s ease-in-out infinite;white-space:nowrap}
+.flo .bd i{color:var(--accent);font-size:16px}
+.flo .bd:nth-of-type(2){animation-delay:-2s}.flo .bd:nth-of-type(3){animation-delay:-3.5s}
+@keyframes fl{50%{transform:translateY(-6px)}}
+
+/* A10 sticky sidebar */
+.side{display:grid;grid-template-columns:280px 1fr;gap:30px;align-items:start}
+.side aside{border:1px solid var(--line);border-radius:16px;padding:16px;position:sticky;top:80px}
+.side aside img{border-radius:12px;margin-bottom:12px;aspect-ratio:1;object-fit:cover}
+.side aside .r{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:12.5px}
+.side aside .r span{color:var(--faint)}
+.side aside .r b{text-align:right}
+@media(max-width:860px){.side{grid-template-columns:1fr}.side aside{position:static}}
+
+/* A11 tabs */
+.tabs{display:inline-flex;background:var(--surface2);border-radius:12px;padding:4px;margin:6px 0 16px}
+.tabs button{font-family:inherit;font-size:13px;font-weight:600;border:0;background:transparent;padding:8px 16px;border-radius:9px;cursor:pointer;color:var(--muted)}
+.tabs button.on{background:#fff;color:var(--text);box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.tpn{animation:fd .35s var(--ease)}
+@keyframes fd{from{opacity:0;transform:translateY(6px)}}
+
+/* A12 business card */
+.biz{display:grid;grid-template-columns:200px 1fr;max-width:860px;margin:0 auto;border-radius:18px;overflow:hidden;box-shadow:0 24px 40px -28px rgba(0,0,0,.5);border:1px solid var(--line)}
+.biz img{height:100%;object-fit:cover}
+.biz .c{padding:22px 24px;display:flex;flex-direction:column;gap:10px}
+.biz h4{margin:0;font-size:22px}
+.biz .rl{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-text);font-weight:700}
+.biz .ln{display:flex;align-items:center;gap:9px;font-size:13px}.biz .ln i{color:var(--accent)}
+.biz .g2{display:grid;grid-template-columns:1fr 1fr;gap:6px 18px;border-top:1px solid var(--line);padding-top:12px}
+@media(max-width:700px){.biz{grid-template-columns:1fr}.biz img{height:260px}.biz .g2{grid-template-columns:1fr}}
+
+/* A13 text-first */
+.hi{font-size:clamp(30px,5vw,54px);font-weight:700;letter-spacing:-.03em;line-height:1.1;margin:0 0 16px}
+.hi img{display:inline-block;width:1.05em;height:1.05em;border-radius:50%;object-fit:cover;vertical-align:-.15em;margin:0 .1em;box-shadow:0 0 0 3px var(--fill)}
+.hi span{color:var(--accent)}
+
+/* A14 blob */
+.blob{position:relative;max-width:320px}
+.blob::before{content:"";position:absolute;inset:-14px;background:conic-gradient(from 120deg,#18d26e,#3b82f6,#9be8c0,#18d26e);border-radius:58% 42% 52% 48%/45% 55% 45% 55%;animation:mo 10s ease-in-out infinite;filter:blur(1px);opacity:.85}
+.blob img{position:relative;border-radius:58% 42% 52% 48%/45% 55% 45% 55%;animation:mo 10s ease-in-out infinite;aspect-ratio:1;object-fit:cover}
+@keyframes mo{50%{border-radius:42% 58% 45% 55%/55% 45% 55% 45%}}
+
+/* A15 mono */
+.mono .ph{filter:grayscale(1) contrast(1.05);transition:filter .6s}.mono .ph:hover{filter:none}
+.kv{font-size:13px;line-height:2;border-left:2px solid var(--text);padding-left:14px}
+.kv b{display:inline-block;min-width:110px;color:var(--faint);font-weight:600}
+
+/* A16 code */
+.code{background:#0d1117;border-radius:14px;padding:16px 18px;font-size:13px;line-height:1.75;color:#c9d1d9;overflow-x:auto;white-space:pre}
+.code .k{color:#79c0ff}.code .s{color:#a5d6ff}.code .p{color:#8b949e}.code .b{color:#ffa657}
+
+/* A17 highlight pills */
+.hl{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}
+.hl div{border:1px solid var(--line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:6px}
+.hl i{font-size:22px;color:var(--accent)}
+.hl b{font-size:14px}.hl small{font-size:11.5px;color:var(--muted)}
+@media(max-width:760px){.hl{grid-template-columns:1fr 1fr}}
+
+/* A18 big name */
+.bign{display:grid;grid-template-columns:1fr 300px;gap:30px;align-items:end}
+.bign h4{font-size:clamp(46px,8vw,96px);line-height:.9;letter-spacing:-.04em;margin:0 0 14px}
+.bign h4 span{display:block;color:var(--faint)}
+@media(max-width:860px){.bign{grid-template-columns:1fr}}
+
+/* A19 polaroid */
+.pol{background:#fff;padding:12px 12px 46px;box-shadow:0 18px 30px -16px rgba(0,0,0,.45);transform:rotate(-3deg);max-width:300px;position:relative;transition:transform .4s var(--ease)}
+.pol:hover{transform:rotate(0)}
+.pol img{aspect-ratio:1;object-fit:cover}
+.pol span{position:absolute;left:0;right:0;bottom:10px;text-align:center;font-family:"Caveat",cursive;font-size:24px}
+.sig{font-family:"Caveat",cursive;font-size:34px;color:var(--accent-text);margin-top:10px}
+
+/* A20 glass over photo */
+.gl{position:relative;border-radius:18px;overflow:hidden;min-height:460px;background:#6b6b6b url(assets/img/opt/11111.webp) left center/contain no-repeat;display:flex;align-items:flex-end;padding:22px;margin:-4px}
+.gl::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,18,16,.1),rgba(13,18,16,.55))}
+.gl .card{position:relative;margin-left:auto;max-width:560px;background:rgba(255,255,255,.72);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border:1px solid rgba(255,255,255,.7);border-radius:18px;padding:20px}
+
+/* A21 banner */
+.ban{height:220px;border-radius:16px;background:url(assets/img/opt/11111.webp) center 20%/cover;position:relative;margin-bottom:22px}
+.ban::after{content:"";position:absolute;inset:0;border-radius:16px;background:linear-gradient(0deg,rgba(13,18,16,.75),transparent 60%)}
+.ban div{position:absolute;left:22px;bottom:18px;color:#fff;z-index:1}
+.ban h4{margin:0;font-size:28px}.ban span{font-size:13px;opacity:.9}
+.three{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:26px}
+@media(max-width:860px){.three{grid-template-columns:1fr}}
+
+/* A23 accordion */
+.acc .it{border-top:1px solid var(--line)}
+.acc .it:last-child{border-bottom:1px solid var(--line)}
+.acc .hd{display:flex;align-items:center;justify-content:space-between;padding:13px 2px;cursor:pointer;font-weight:700;font-size:14px}
+.acc .hd i{transition:transform .3s var(--ease)}
+.acc .it.on .hd i{transform:rotate(45deg)}
+.acc .bd{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s var(--ease)}
+.acc .it.on .bd{grid-template-rows:1fr}
+.acc .bd>div{overflow:hidden}.acc .bd>div>div{padding:0 2px 14px}
+
+/* A24 three blocks */
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+.trio div{border-radius:14px;padding:16px;background:var(--surface)}
+.trio h6{margin:0 0 8px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-text)}
+.trio p{margin:0;font-size:13px;line-height:1.65;color:var(--muted)}
+@media(max-width:860px){.trio{grid-template-columns:1fr}}
+
+/* A25 magazine */
+.mag{display:grid;grid-template-columns:1fr 260px;gap:30px}
+.mag .dc::first-letter{float:left;font-size:58px;line-height:.85;padding:6px 8px 0 0;font-weight:700;color:var(--accent)}
+.mag blockquote{margin:18px 0;padding-left:16px;border-left:3px solid var(--accent);font-size:19px;line-height:1.4;font-weight:700}
+.mag .box{border:2px solid var(--text);border-radius:6px;padding:14px}
+.mag .box h6{margin:0 0 8px;font-size:11px;letter-spacing:.18em;text-transform:uppercase}
+.mag .box img{border-radius:6px;margin-bottom:10px}
+.mag .box .r{display:flex;justify-content:space-between;gap:8px;font-size:12px;padding:5px 0;border-top:1px solid var(--line)}
+.mag .box .r span{color:var(--faint)}
+@media(max-width:860px){.mag{grid-template-columns:1fr}}
+
+/* A26 offset frame */
+.off{position:relative;max-width:300px;margin:12px 16px 16px 0}
+.off::after{content:"";position:absolute;inset:0;transform:translate(16px,16px);border:2px solid var(--accent);border-radius:14px;z-index:0;transition:transform .3s var(--ease)}
+.off img{position:relative;z-index:1;border-radius:14px;filter:saturate(.9)}
+.off:hover::after{transform:translate(10px,10px)}
+.off::before{content:"";position:absolute;inset:0;border-radius:14px;background:var(--accent);mix-blend-mode:multiply;opacity:.25;z-index:2;transition:opacity .3s}
+.off:hover::before{opacity:0}
+
+/* A27 settings form */
+.form{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.fld label{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:700;margin-bottom:5px}
+.fld div{border:1px solid var(--line2);border-radius:10px;padding:10px 12px;font-size:13.5px;background:#fbfcfb;display:flex;align-items:center;gap:8px}
+.fld div i{color:var(--muted)}
+.fld.w{grid-column:1/-1}
+@media(max-width:700px){.form{grid-template-columns:1fr}}
+
+/* A29 rotating ring */
+.ring{position:relative;width:300px;height:300px;flex:none}
+.ring svg{position:absolute;inset:0;animation:sp 22s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.ring svg text{font-family:var(--font);font-size:12.5px;font-weight:700;letter-spacing:.28em;fill:var(--accent-text)}
+.ring img{position:absolute;inset:34px;width:calc(100% - 68px);height:calc(100% - 68px);border-radius:50%;object-fit:cover}
+.hero2{display:grid;grid-template-columns:1fr auto;gap:30px;align-items:center}
+@media(max-width:860px){.hero2{grid-template-columns:1fr;justify-items:center}}
+
+/* A30 duotone */
+.duo{position:relative;border-radius:18px;overflow:hidden;background:#06281a;color:#fff;display:grid;grid-template-columns:1fr 1fr;min-height:420px;margin:-4px}
+.duo .pic{background:url(assets/img/opt/11111.webp) center/cover;filter:grayscale(1) contrast(1.15);mix-blend-mode:screen;opacity:.9}
+.duo .pic-wrap{background:linear-gradient(160deg,#0f9d4f,#06281a);position:relative}
+.duo .pic-wrap .pic{position:absolute;inset:0}
+.duo .txt{padding:28px;display:flex;flex-direction:column;justify-content:center;gap:12px}
+.duo .lead{color:#c7d6ce}
+.duo .dl div{border-color:rgba(255,255,255,.1)}.duo .dl .k{color:#7fb59a}
+@media(max-width:860px){.duo{grid-template-columns:1fr}.duo .pic-wrap{min-height:300px}}
+
+/* current (V0) replica */
+.cur .lst{display:grid;grid-template-columns:1fr 1fr;gap:4px 24px;margin:14px 0}
+.cur .lst div{font-size:13.5px;padding:8px 0}
+.cur .lst i{color:var(--accent-text);background:var(--soft);border-radius:3px;margin-right:6px;font-size:12px;padding:1px 2px}
+</style>
+</head>
+<body>
+<div class="top"><div class="in">
+  <h1>About — <b>30</b> variant</h1>
+  <a href="about-variants-2.html" style="font-size:12px;color:var(--muted);white-space:nowrap;text-decoration:none">B1–B30 →</a>
+  <nav class="jump" id="jump"></nav>
+</div></div>
+<div class="wrap">
+  <p class="intro">Saytingizdagi <b>About</b> bo'limi uchun 30 ta dizayn — hammasi saytning haqiqiy matni, surati va ma'lumotlari bilan, saytning ranglari va shriftida. Eng tepada solishtirish uchun <b>hozirgi</b> ko'rinish. Har bir variantning o'z manzili bor (masalan <code>#A7</code>).</p>
+  <div id="variants"></div>
+</div>
+
+<script>
+/* ===== real content from the live site ===== */
+const P={
+ img:"assets/img/opt/11111.webp",
+ name:"Jamshid Mirkhadjayev",first:"Jamshid",last:"Mirkhadjayev",
+ role:"IT Project Manager & Java Backend Developer",
+ lead:"I am an IT Project Manager in the aviation industry, implementing modern solutions. Currently, I am working on the implementation of Awery Aero software at Tashkent International Airport. Previously, I served as a specialist at monitoring and accounting department at the Bureau of Compulsory Enforcement (BCE) in Uzbekistan.",
+ pass:"My passion for the guitar since childhood has made me a devoted fan of rock music. I have a deep passion for hiking and football, as they energize me and brighten my mood.",
+ F:[["Website","www.mirkhadjayev.uz","bi-globe2","https://mirkhadjayev.uz/"],["Phone","+99890 998 (383x13)","bi-telephone"],["City","Tashkent, Uzbekistan","bi-geo-alt"],["Degree","Bachelor","bi-mortarboard"],["Email","jmirkhadjayev@gmail.com","bi-envelope","mailto:jmirkhadjayev@gmail.com"],["Freelance","Available","bi-briefcase"],["Languages","Uzbek, English, Russian","bi-translate"]]
+};
+const fv=f=>f[3]?`<a href="${f[3]}">${f[1]}</a>`:f[1];
+const ST=(c="")=>`<div class="stl ${c}"><h3>About</h3><small>Learn more about me</small></div>`;
+const img=(cls="ph",alt="Jamshid Mirkhadjayev")=>`<img class="${cls}" src="${P.img}" alt="${alt}" width="900" height="900">`;
+const DL=()=>`<div class="dl">${P.F.map(f=>`<div><span class="k">${f[0]}</span><span class="v">${fv(f)}</span></div>`).join("")}</div>`;
+const CHIPS=(fs=P.F)=>`<div class="chips">${fs.map(f=>`<span class="chip"><i class="bi ${f[2]}"></i>${fv(f)}</span>`).join("")}</div>`;
+const TILES=()=>`<div class="tiles">${P.F.map(f=>`<div class="tile"><i class="bi ${f[2]}"></i><small>${f[0]}</small><b>${fv(f)}</b></div>`).join("")}</div>`;
+const F=k=>P.F.find(f=>f[0]===k);
+const ACTS=()=>`<div class="row2"><a class="btn pri" href="mailto:jmirkhadjayev@gmail.com"><i class="bi bi-envelope"></i>Email me</a><a class="btn" href="https://t.me/jmirkhadjayev" target="_blank" rel="noopener"><i class="bi bi-telegram"></i>Telegram</a><a class="btn" href="https://www.linkedin.com/in/jmirkhadjayev" target="_blank" rel="noopener"><i class="bi bi-linkedin"></i>LinkedIn</a></div>`;
+
+const V=[
+ {id:"A0",t:"Hozirgi ko'rinish",tag:"solishtirish uchun",d:"Saytda hozir turgan variant.",
+  h:()=>ST()+`<div class="g-ph cur">${img()}<div><p class="role">${P.role}</p><p class="lead it">${P.lead}</p><div class="lst">${P.F.map(f=>`<div><i class="bi bi-chevron-right"></i><b>${f[0]}:</b> ${fv(f)}</div>`).join("")}</div><p class="pass" style="font-style:italic">${P.pass}</p></div></div>`},
+
+ {id:"A1",t:"Toza ma'lumotlar jadvali",tag:"klassik · professional",d:"Hozirgi tuzilma saqlangan, lekin chevronli ro'yxat o'rniga ingichka chiziqli “label — qiymat” jadvali. Kursiv olib tashlandi — o'qish osonroq va jiddiyroq.",
+  h:()=>ST()+`<div class="g-ph">${img()}<div><p class="role">${P.role}</p><p class="lead">${P.lead}</p><div style="margin:18px 0">${DL()}</div><p class="pass">${P.pass}</p></div></div>`},
+
+ {id:"A2",t:"Markazlashgan profil",tag:"sodda · do'stona",d:"Dumaloq surat markazda, ostida rol, matn va ma'lumot kapsulalari. Ijtimoiy tarmoq profiliga o'xshash, ixcham va iliq.",
+  h:()=>ST()+`<div class="ctr">${img("av")}<p class="role">${P.role}</p><p class="lead">${P.lead}</p>${CHIPS()}<p class="pass">${P.pass}</p></div>`},
+
+ {id:"A3",t:"Yarim ekranli surat",tag:"dramatik · premium",d:"Surat bo'limning chap yarmini to'liq egallaydi va o'ngga silliq oqarib ketadi; matn o'ng tomonda. Katta brend saytlaridagidek ta'sirli.",
+  h:()=>`<div class="bleed"><div class="pic" role="img" aria-label="Jamshid Mirkhadjayev"></div><div class="txt">${ST()}<p class="role">${P.role}</p><p class="lead">${P.lead}</p><div style="margin:18px 0">${DL()}</div><p class="pass">${P.pass}</p></div></div>`},
+
+ {id:"A4",t:"Profil kartasi",tag:"LinkedIn uslubi · tanish",d:"Yashil muqova, ustiga chiqib turgan dumaloq surat, ism, rol, joylashuv va tugmalar. Recruiterlar uchun eng tanish format.",
+  h:()=>ST()+`<div class="pcard"><div class="cover"></div><div class="bd">${img("av")}<div class="hd"><div><h4>${P.name}</h4><span style="color:var(--muted);font-size:13px">${P.role}</span></div><span class="avail">Open to opportunities</span></div>
+   <div class="meta"><span><i class="bi bi-geo-alt"></i>Tashkent, Uzbekistan</span><span><i class="bi bi-mortarboard"></i>Bachelor</span><span><i class="bi bi-translate"></i>Uzbek, English, Russian</span><span><i class="bi bi-globe2"></i>${fv(F("Website"))}</span></div>
+   <p class="lead">${P.lead}</p><div style="margin:16px 0">${ACTS()}</div><p class="pass">${P.pass}</p></div></div>`},
+
+ {id:"A5",t:"Tahririy",tag:"jurnal · jiddiy",d:"Katta bayonot jumlasi, ostida qalin chiziq va uch ustun: surat (kulrang, ustiga borilsa rangli), biografiya, ma'lumotlar.",
+  h:()=>ST()+`<div class="edi"><p class="big">IT Project Manager in aviation <span>and a Java backend developer — building modern systems at Tashkent International Airport.</span></p><div class="cols"><figure>${img()}<figcaption>Tashkent, Uzbekistan</figcaption></figure><div><span class="eyebrow">Biography</span><p class="lead" style="margin-top:8px">${P.lead}</p><p class="pass" style="margin-top:10px">${P.pass}</p></div><div><span class="eyebrow">Details</span><div style="margin-top:8px" class="dl" >${P.F.map(f=>`<div style="grid-template-columns:90px 1fr"><span class="k">${f[0]}</span><span class="v">${fv(f)}</span></div>`).join("")}</div></div></div></div>`},
+
+ {id:"A6",t:"Qorong'i panel",tag:"premium · tech",d:"Butun bo'lim qorong'i kartada: oq sarlavha, kulrang matn, yashil urg'u. Saytning yorug' fonida keskin va zamonaviy ajralib turadi.",
+  h:()=>`<div class="dark">${ST("light")}<div class="g-ph">${img()}<div><p class="role">IT Project Manager <span>&amp;</span> Java Backend Developer</p><p class="lead">${P.lead}</p><div style="margin:18px 0">${DL()}</div><p class="pass">${P.pass}</p></div></div></div>`},
+
+ {id:"A7",t:"Bento grid",tag:"zamonaviy · trend",d:"Ma'lumotlar alohida plitkalarda: surat, rol (qora), biografiya, joylashuv, tillar, freelance holati (yashil), email va qiziqishlar.",
+  h:()=>ST()+`<div class="bento"><div class="bx ph2">${img("")}</div><div class="bx dk w3"><span class="k">Role</span><b style="font-size:20px">${P.role}</b></div><div class="bx w3"><span class="k">About</span><p class="lead">${P.lead}</p></div>
+   <div class="bx"><span class="k">City</span><b>Tashkent, Uzbekistan</b></div><div class="bx"><span class="k">Languages</span><b>Uzbek, English, Russian</b></div><div class="bx gr"><span class="k">Freelance</span><b>Available</b></div>
+   <div class="bx w2"><span class="k">Email</span><b>${fv(F("Email"))}</b></div><div class="bx"><span class="k">Degree</span><b>Bachelor</b></div><div class="bx"><span class="k">Phone</span><b>${F("Phone")[1]}</b></div><div class="bx w2"><span class="k">Off duty</span><p class="pass" style="font-size:12.5px">${P.pass}</p></div><div class="bx w2"><span class="k">Website</span><b>${fv(F("Website"))}</b></div></div>`},
+
+ {id:"A8",t:"Ikonkali plitkalar",tag:"aniq · vizual",d:"Matn o'ng tomonda, ma'lumotlar esa ikonkali alohida plitkalarda. Har bir fakt tez topiladi.",
+  h:()=>ST()+`<div class="g-ph">${img()}<div><p class="role">${P.role}</p><p class="lead">${P.lead}</p><div style="margin:18px 0">${TILES()}</div><p class="pass">${P.pass}</p></div></div>`},
+
+ {id:"A9",t:"Suratda suzuvchi belgilar",tag:"jonli · zamonaviy",d:"Surat atrofida sekin suzib turuvchi kichik kartochkalar: “Available”, “Tashkent”, “Languages”. Mahsulot sahifalaridagi kabi zamonaviy.",
+  h:()=>ST()+`<div class="g-ph"><div class="flo">${img()}<span class="bd" style="left:-14px;top:24px"><i class="bi bi-circle-fill" style="font-size:9px"></i>Freelance: Available</span><span class="bd" style="right:-18px;top:46%"><i class="bi bi-geo-alt"></i>Tashkent</span><span class="bd" style="left:10px;bottom:18px"><i class="bi bi-translate"></i>UZ · EN · RU</span></div>
+   <div><p class="role">${P.role}</p><p class="lead">${P.lead}</p><div style="margin:18px 0">${DL()}</div><p class="pass">${P.pass}</p></div></div>`},
+
+ {id:"A10",t:"Yon panel",tag:"tartibli · hujjat uslubi",d:"Chapda yopishqoq panel: surat va qisqa faktlar; o'ngda matn erkin o'qiladi. Wikipedia'dagi ma'lumot qutisiga o'xshash.",
+  h:()=>ST()+`<div class="side"><aside>${img("")}${P.F.map(f=>`<div class="r"><span>${f[0]}</span><b>${fv(f)}</b></div>`).join("")}</aside><div><p class="role">${P.role}</p><p class="lead">${P.lead}</p><p class="pass" style="margin-top:16px">${P.pass}</p><div style="margin-top:18px">${ACTS()}</div></div></div>`},
+
+ {id:"A11",t:"Tablar",tag:"ixcham · interaktiv",d:"Surat yonida uchta tab: Bio, Details, Personal. Bir vaqtda bitta qism ko'rinadi — bo'lim qisqa bo'ladi.",
+  h:()=>ST()+`<div class="g-ph">${img()}<div><p class="role">${P.role}</p><div class="tabs" id="a11t"><button data-t="b" class="on">Bio</button><button data-t="d">Details</button><button data-t="p">Personal</button></div><div id="a11"></div></div></div>`},
+
+ {id:"A12",t:"Vizitka",tag:"biznes · ixcham",d:"Gorizontal vizitka: chapda surat, o'ngda ism, rol, aloqa va ma'lumotlar. Ostida qisqa biografiya.",
+  h:()=>ST()+`<div class="biz">${img("")}<div class="c"><span class="rl">${P.role}</span><h4>${P.name}</h4>${["Email","Phone","Website"].map(k=>{const f=F(k);return `<div class="ln"><i class="bi ${f[2]}"></i>${fv(f)}</div>`}).join("")}<div class="g2">${["City","Degree","Languages","Freelance"].map(k=>{const f=F(k);return `<div class="ln"><i class="bi ${f[2]}"></i>${f[1]}</div>`}).join("")}</div></div></div><p class="lead" style="max-width:860px;margin:18px auto 0">${P.lead}</p>`},
+
+ {id:"A13",t:"Matn birinchi",tag:"shaxsiy · zamonaviy",d:"Katta salomlashuv: “Hi, I'm [kichik dumaloq surat] Jamshid”. Surat matn ichida — zamonaviy portfoliolardagi uslub.",
+  h:()=>ST()+`<p class="hi">Hi, I'm ${img("")} <span>Jamshid</span> —<br>${P.role}.</p><p class="lead" style="max-width:860px">${P.lead}</p><div style="margin:18px 0">${CHIPS()}</div><p class="pass" style="max-width:860px">${P.pass}</p>`},
+
+ {id:"A14",t:"Organik shakl",tag:"kreativ · yumshoq",d:"Surat sekin shakl o'zgartiruvchi “blob” ichida, orqasida gradient halqa. Yumshoq va esda qoladigan.",
+  h:()=>ST()+`<div class="g-ph"><div class="blob">${img("")}</div><div><p class="role">${P.role}</p><p class="lead">${P.lead}</p><div style="margin:18px 0">${DL()}</div><p class="pass">${P.pass}</p></div></div>`},
+
+ {id:"A15",t:"Monoxrom",tag:"minimal · nafis",d:"Surat qora-oq (ustiga borilsa rangli), ma'lumotlar chap chiziqli “kalit: qiymat” ko'rinishida. Juda sokin va jiddiy.",
+  h:()=>ST()+`<div class="g-ph mono">${img()}<div><p class="role">${P.role}</p><p class="lead">${P.lead}</p><div class="kv" style="margin:18px 0">${P.F.map(f=>`<div><b>${f[0]}</b>${fv(f)}</div>`).join("")}</div><p class="pass">${P.pass}</p></div></div>`},
+
+ {id:"A16",t:"Kod bloki",tag:"dasturchi · aqlli",d:"Biografiya matn sifatida, ma'lumotlar esa JSON obyekt ko'rinishida — backend dasturchiga mos, lekin jiddiy.",
+  h:()=>ST()+`<div class="g-ph">${img()}<div><p class="role">${P.role}</p><p class="lead">${P.lead}</p><div class="code" style="margin:18px 0"><span class="p">const</span> <span class="k">jamshid</span> <span class="p">=</span> {
+${P.F.map(f=>`  <span class="k">${f[0].toLowerCase()}</span>: <span class="s">"${f[1]}"</span>,`).join("\n")}
+  <span class="k">offline</span>: [<span class="s">"guitar"</span>, <span class="s">"rock"</span>, <span class="s">"hiking"</span>, <span class="s">"football"</span>]
+};</div></div></div>`},
+
+ {id:"A17",t:"Asosiy faktlar qatori",tag:"tez o'qiladi",d:"Matn ostida to'rtta katta “highlight” karta: Aviation IT, Java Backend, Tashkent, Available. Recruiter 3 soniyada asosiysini ko'radi.",
+  h:()=>ST()+`<div class="g-ph">${img()}<div><p class="role">${P.role}</p><p class="lead">${P.lead}</p><div class="hl"><div><i class="bi bi-airplane"></i><b>Aviation IT</b><small>Tashkent Int'l Airport</small></div><div><i class="bi bi-cpu"></i><b>Java Backend</b><small>Spring Boot</small></div><div><i class="bi bi-geo-alt"></i><b>Tashkent</b><small>Uzbekistan</small></div><div><i class="bi bi-briefcase"></i><b>Available</b><small>for freelance</small></div></div>${CHIPS(P.F.filter(f=>["Email","Phone","Website","Degree","Languages"].includes(f[0])))}<p class="pass" style="margin-top:14px">${P.pass}</p></div></div>`},
+
+ {id:"A18",t:"Katta ism",tag:"tipografik · kuchli",d:"Ism ulkan harflar bilan, familiya kulrangda; o'ngda surat. Shaxsiy brend sifatida juda kuchli.",
+  h:()=>ST()+`<div class="bign"><div><h4>${P.first}<span>${P.last}</span></h4><p class="role">${P.role}</p><p class="lead">${P.lead}</p></div>${img()}</div><div style="margin-top:20px">${DL()}</div><p class="pass" style="margin-top:14px">${P.pass}</p>`},
+
+ {id:"A19",t:"Polaroid va imzo",tag:"iliq · shaxsiy",d:"Surat qiyshiq polaroid ichida qo'lyozma imzo bilan, matn oxirida ham qo'lyozma imzo. Insoniy va iliq.",
+  h:()=>ST()+`<div class="g-ph"><div class="pol">${img("")}<span>Tashkent ✦</span></div><div><p class="role">${P.role}</p><p class="lead">${P.lead}</p><div style="margin:18px 0">${DL()}</div><p class="pass">${P.pass}</p><div class="sig">— Jamshid</div></div></div>`},
+
+ {id:"A20",t:"Surat ustida shisha karta",tag:"zamonaviy · ta'sirli",d:"Surat butun bo'lim foni, o'ng tomonda xira shisha karta ichida matn va ma'lumotlar.",
+  h:()=>`<div class="gl"><div class="card">${ST()}<p class="role" style="font-size:18px">${P.role}</p><p class="lead" style="font-size:13px">${P.lead}</p><div style="margin-top:14px">${CHIPS()}</div></div></div>`},
+
+ {id:"A21",t:"Banner + ustunlar",tag:"jurnalbop · keng",d:"Tepada keng surat-banner (ism va rol bilan), ostida uch ustun: biografiya, ma'lumotlar, shaxsiy.",
+  h:()=>ST()+`<div class="ban"><div><h4>${P.name}</h4><span>${P.role}</span></div></div><div class="three"><div><span class="eyebrow">Biography</span><p class="lead" style="margin-top:8px">${P.lead}</p></div><div><span class="eyebrow">Details</span><div class="kv" style="margin-top:8px;border:0;padding:0;line-height:1.9">${P.F.slice(0,4).map(f=>`<div><b style="min-width:90px">${f[0]}</b>${fv(f)}</div>`).join("")}</div></div><div><span class="eyebrow">More</span><div class="kv" style="margin-top:8px;border:0;padding:0;line-height:1.9">${P.F.slice(4).map(f=>`<div><b style="min-width:90px">${f[0]}</b>${fv(f)}</div>`).join("")}</div><p class="pass" style="margin-top:10px;font-size:12.5px">${P.pass}</p></div></div>`},
+
+ {id:"A22",t:"Harakatga undovchi",tag:"recruiter uchun · natijali",d:"Ma'lumotlardan tashqari aniq tugmalar: Email, Telegram, LinkedIn va “Copy email”. Mehmonni darhol bog'lanishga undaydi.",
+  h:()=>ST()+`<div class="g-ph">${img()}<div><span class="avail">Freelance: Available</span><p class="role" style="margin-top:12px">${P.role}</p><p class="lead">${P.lead}</p><div style="margin:18px 0">${ACTS()}<button class="btn" id="cpy" style="margin-top:10px"><i class="bi bi-copy"></i>Copy email</button></div>${CHIPS(P.F.filter(f=>["City","Degree","Languages","Website"].includes(f[0])))}<p class="pass" style="margin-top:14px">${P.pass}</p></div></div>`},
+
+ {id:"A23",t:"Akkordeon",tag:"ixcham · tartibli",d:"Biografiya ochiq, “Contact details”, “Background” va “Off duty” esa yig'iladigan qismlarda. Joyni tejaydi.",
+  h:()=>ST()+`<div class="g-ph">${img()}<div><p class="role">${P.role}</p><p class="lead">${P.lead}</p><div class="acc" style="margin-top:16px">${[["Contact details",P.F.filter(f=>["Email","Phone","Website","City"].includes(f[0]))],["Background",P.F.filter(f=>["Degree","Languages","Freelance"].includes(f[0]))]].map(([t,fs],i)=>`<div class="it ${i?"":"on"}"><div class="hd">${t}<i class="bi bi-plus-lg"></i></div><div class="bd"><div><div>${DLs(fs)}</div></div></div></div>`).join("")}<div class="it"><div class="hd">Off duty<i class="bi bi-plus-lg"></i></div><div class="bd"><div><div><p class="pass">${P.pass}</p></div></div></div></div></div></div></div>`},
+
+ {id:"A24",t:"Uch blok: hozir · avval · shaxsiy",tag:"hikoya · aniq",d:"Biografiya uch qismga bo'lingan: “What I do now”, “Before”, “Off duty”. Uzun paragraf o'rniga tez o'qiladigan bloklar.",
+  h:()=>ST()+`<div class="g-ph">${img()}<div><p class="role">${P.role}</p>${CHIPS()}<div class="trio"><div><h6>Now</h6><p>IT Project Manager in the aviation industry, implementing modern solutions — currently the Awery Aero software at Tashkent International Airport.</p></div><div><h6>Before</h6><p>Specialist at the monitoring and accounting department of the Bureau of Compulsory Enforcement (BCE) in Uzbekistan.</p></div><div><h6>Off duty</h6><p>${P.pass}</p></div></div></div></div>`},
+
+ {id:"A25",t:"Jurnal profili",tag:"tahririy · premium",d:"Bosh harf (drop cap), iqtibos bloki va o'ngda ramkali “profil qutisi” — surat va faktlar. Jurnal maqolasidagi intervyu sahifasi kabi.",
+  h:()=>ST()+`<div class="mag"><div><p class="role">${P.role}</p><p class="lead dc">${P.lead}</p><blockquote>“My passion for the guitar since childhood has made me a devoted fan of rock music.”</blockquote><p class="pass">I have a deep passion for hiking and football, as they energize me and brighten my mood.</p></div><div class="box"><h6>Profile</h6>${img("")}${P.F.map(f=>`<div class="r"><span>${f[0]}</span><b>${fv(f)}</b></div>`).join("")}</div></div>`},
+
+ {id:"A26",t:"Siljigan ramka",tag:"zamonaviy · nafis",d:"Surat o'ngda, orqasida yashil chiziqli siljigan ramka va yengil yashil tus; ustiga borilsa tus ketadi va ramka yaqinlashadi. Ko'plab kuchli dasturchi portfoliolaridagi uslub.",
+  h:()=>ST()+`<div class="g-ph r"><div><p class="role">${P.role}</p><p class="lead">${P.lead}</p><div style="margin:18px 0">${DL()}</div><p class="pass">${P.pass}</p></div><div class="off">${img("")}</div></div>`},
+
+ {id:"A27",t:"Profil sozlamalari",tag:"UI · ilova uslubi",d:"Ma'lumotlar ilovadagi “profil” formasi maydonlari kabi — label va qiymat ramkada. SaaS mahsulotlariga o'xshash zamonaviy ko'rinish.",
+  h:()=>ST()+`<div class="g-ph">${img()}<div><p class="role">${P.role}</p><div class="form" style="margin:6px 0 16px">${P.F.map(f=>`<div class="fld ${f[0]==="Languages"?"w":""}"><label>${f[0]}</label><div><i class="bi ${f[2]}"></i>${fv(f)}</div></div>`).join("")}<div class="fld w"><label>Bio</label><div style="align-items:flex-start;line-height:1.65;font-size:13px">${P.lead}</div></div></div><p class="pass">${P.pass}</p></div></div>`},
+
+ {id:"A28",t:"Bayroqli tillar",tag:"vizual · tez",d:"Tillar bayroqlar bilan, freelance holati jonli yashil nuqta bilan, qolgan ma'lumotlar kapsulalarda. Eng muhim belgilar ko'zga darhol tashlanadi.",
+  h:()=>ST()+`<div class="g-ph">${img()}<div><div class="row2" style="margin-bottom:12px"><span class="avail">Freelance: Available</span><span class="chip">🇺🇿 Uzbek</span><span class="chip">🇬🇧 English</span><span class="chip">🇷🇺 Russian</span></div><p class="role">${P.role}</p><p class="lead">${P.lead}</p><div style="margin:18px 0">${CHIPS(P.F.filter(f=>!["Languages","Freelance"].includes(f[0])))}</div><p class="pass">${P.pass}</p></div></div>`},
+
+ {id:"A29",t:"Aylanuvchi yozuv halqasi",tag:"kreativ · signature",d:"Dumaloq surat atrofida sekin aylanuvchi yozuv: “IT PROJECT MANAGER · JAVA BACKEND · TASHKENT ·”. Zamonaviy dizayn studiyalari uslubi.",
+  h:()=>ST()+`<div class="hero2"><div><p class="role">${P.role}</p><p class="lead">${P.lead}</p><div style="margin:18px 0">${DL()}</div><p class="pass">${P.pass}</p></div><div class="ring"><svg viewBox="0 0 300 300"><defs><path id="cir" d="M150,150 m-132,0 a132,132 0 1,1 264,0 a132,132 0 1,1 -264,0"/></defs><text><textPath href="#cir">IT PROJECT MANAGER · JAVA BACKEND · TASHKENT · AVIATION IT ·</textPath></text></svg>${img("")}</div></div>`},
+
+ {id:"A30",t:"Duotone",tag:"brend · jasur",d:"Surat qora-yashil duotone ko'rinishda, yonida to'q yashil fonda matn. Saytning yashil brendini kuchli ifodalaydi.",
+  h:()=>`<div class="duo"><div class="pic-wrap"><div class="pic" role="img" aria-label="Jamshid Mirkhadjayev"></div></div><div class="txt">${ST("light")}<p class="role" style="color:#fff">${P.role}</p><p class="lead">${P.lead}</p>${DL()}</div></div>`}
+];
+function DLs(fs){return `<div class="dl" style="grid-template-columns:1fr">${fs.map(f=>`<div><span class="k">${f[0]}</span><span class="v">${fv(f)}</span></div>`).join("")}</div>`}
+
+document.getElementById("jump").innerHTML=V.map(v=>`<a href="#${v.id}">${v.id==="A0"?"Hozirgi":v.id}</a>`).join("");
+document.getElementById("variants").innerHTML=V.map(v=>`<section class="var" id="${v.id}"><div class="vh"><span class="n">${v.id==="A0"?"0":v.id}</span><h2>${v.t}</h2><span class="tag">${v.tag}</span><p>${v.d}</p></div><div class="vb">${v.h()}</div></section>`).join("");
+addEventListener("scroll",()=>{let cur="A0";V.forEach(v=>{const el=document.getElementById(v.id);if(el.getBoundingClientRect().top<160)cur=v.id});document.querySelectorAll(".jump a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+cur))},{passive:true});
+
+/* A11 tabs */
+const a11=document.getElementById("a11");
+const tabs={b:`<p class="lead">${P.lead}</p>`,d:DLs(P.F),p:`<p class="pass">${P.pass}</p>`};
+function tb(t){document.querySelectorAll("#a11t button").forEach(b=>b.classList.toggle("on",b.dataset.t===t));a11.innerHTML=`<div class="tpn">${tabs[t]}</div>`}
+document.querySelectorAll("#a11t button").forEach(b=>b.addEventListener("click",()=>tb(b.dataset.t)));tb("b");
+/* A22 copy */
+document.getElementById("cpy").addEventListener("click",e=>{navigator.clipboard&&navigator.clipboard.writeText("jmirkhadjayev@gmail.com");e.currentTarget.innerHTML='<i class="bi bi-check2"></i>Copied';});
+/* A23 accordion */
+document.querySelectorAll(".acc .hd").forEach(h=>h.addEventListener("click",()=>h.parentElement.classList.toggle("on")));
+</script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dizayn takliflari — solishtirish</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<style>
+:root{--bg:#eef1ef;--panel:#fff;--ink:#15181d;--muted:#5f6b64;--line:rgba(15,23,42,.1);--accent:#18d26e;--ease:cubic-bezier(.22,1,.36,1)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:ui-sans-serif,system-ui,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.head{max-width:1400px;margin:0 auto;padding:30px 20px 10px;display:flex;flex-wrap:wrap;align-items:end;gap:14px}
+h1{margin:0;font-size:26px;letter-spacing:-.02em}
+.head p{margin:4px 0 0;color:var(--muted);font-size:14px;width:100%}
+.seg{margin-left:auto;display:flex;background:#dde3df;border-radius:11px;padding:3px}
+.seg button{border:0;background:transparent;padding:8px 14px;border-radius:9px;font:inherit;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer}
+.seg button.on{background:var(--panel);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+
+.grid{max-width:1400px;margin:0 auto;padding:16px 20px 60px;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 18px 40px -30px rgba(15,23,30,.45)}
+.thumb{position:relative;height:var(--h,420px);overflow:hidden;background:#ddd;border-bottom:1px solid var(--line)}
+.thumb iframe{position:absolute;top:0;left:0;width:1440px;border:0;transform-origin:0 0;pointer-events:none}
+.thumb a{position:absolute;inset:0}
+.body{padding:18px 18px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.title{display:flex;align-items:center;gap:10px}
+.num{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#fff}
+.title h2{font-size:18px;margin:0}
+.desc{font-size:13.5px;color:var(--muted);line-height:1.55;margin:0}
+.sw{display:flex;gap:6px}
+.sw span{width:22px;height:22px;border-radius:6px;border:1px solid var(--line)}
+.pros{margin:0;padding:0;list-style:none;font-size:13px;line-height:1.5}
+.pros li{display:flex;gap:7px;padding:3px 0}
+.pros li i{flex:none}
+.pros .p i{color:#16a34a}.pros .c i{color:#d97706}
+.actions{margin-top:auto;display:flex;gap:8px;padding-top:6px}
+.btn{flex:1;text-align:center;padding:11px;border-radius:11px;font-weight:600;font-size:13.5px;text-decoration:none;border:1px solid var(--line)}
+.btn.pri{background:var(--ink);color:#fff;border-color:var(--ink)}
+.btn:hover{filter:brightness(1.1)}
+
+/* side by side */
+.side{display:none;max-width:none;padding:10px 12px 20px;gap:10px;grid-template-columns:repeat(3,1fr)}
+.side.on{display:grid}
+.col{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;height:calc(100vh - 140px)}
+.col .bar{display:flex;align-items:center;gap:8px;padding:9px 12px;font-size:13px;font-weight:700;border-bottom:1px solid var(--line)}
+.col .bar a{margin-left:auto;color:var(--muted);text-decoration:none;font-size:14px}
+.col iframe{flex:1;border:0;width:100%}
+@media(max-width:1100px){.side{grid-template-columns:1fr 1fr}.col{height:80vh}}
+@media(max-width:640px){.side{grid-template-columns:1fr}.seg{margin-left:0}}
+</style>
+</head>
+<body>
+<div class="head">
+  <div><h1>🎨 2 ta dizayn taklifi</h1></div>
+  <div class="seg"><button class="on" data-v="cards">Kartalar</button><button data-v="side">Yonma-yon</button></div>
+  <p>Hammasi saytingizning haqiqiy kontentida qilingan. Kartani bosib to'liq ko'ring yoki “Yonma-yon” rejimida hozirgi sayt bilan birga solishtiring.</p>
+</div>
+
+<div class="grid" id="cards"></div>
+<div class="side" id="side"></div>
+
+<script>
+const D=[
+ {n:"0",url:"index.html",name:"Hozirgi sayt",color:"#64748b",sw:["#ffffff","#18d26e","#15181d"],
+  desc:"Hozir ishlab turgan versiya — solishtirish uchun.",pros:[],cons:[]},
+ {n:"1",url:"design-1-boarding.html",name:"Boarding Pass",color:"#d97706",sw:["#0a1120","#ffb800","#e8edf7"],
+  desc:"Aviatsiya konsepsiyasi: hero — aeroport tablosi (split-flap), About — bort chiptasi, Resume — “flight log”, sertifikatlar — pasport muhrlari, kontakt — check-in.",
+  pros:["Sizning sohangizga 100% xos — eslab qolinadi","Hech kimda yo'q, juda shaxsiy"],cons:["Konsepsiya kuchli — kontent ko'paysa, uslubni saqlash kerak"]},
+ {n:"3",url:"design-3-bento.html",name:"Bento Dark",color:"#18d26e",sw:["#080b09","#18d26e","#eef3ef"],
+  desc:"Zamonaviy tech uslub: birinchi ekran — bento grid (status, rasm, Toshkent vaqti, statistika, stack lentasi), spotlight kartalar, pastda suzuvchi dock-menyu.",
+  pros:["Hozirgi yashil brendni saqlaydi","Hamma narsa birinchi ekranda ko'rinadi"],cons:["Bento trend — ko'p saytlarda uchraydi"]}
+];
+const cards=document.getElementById("cards"), side=document.getElementById("side");
+cards.innerHTML=D.map(d=>`<div class="card">
+  <div class="thumb"><iframe src="${d.url}" loading="lazy" tabindex="-1" title="${d.name}"></iframe><a href="${d.url}" target="_blank" aria-label="${d.name} — ochish"></a></div>
+  <div class="body">
+    <div class="title"><span class="num" style="background:${d.color}">${d.n}</span><h2>${d.name}</h2><div class="sw" style="margin-left:auto">${d.sw.map(c=>`<span style="background:${c}"></span>`).join("")}</div></div>
+    <p class="desc">${d.desc}</p>
+    ${d.pros.length?`<ul class="pros">${d.pros.map(p=>`<li class="p"><i class="bi bi-check-circle-fill"></i>${p}</li>`).join("")}${d.cons.map(p=>`<li class="c"><i class="bi bi-exclamation-circle-fill"></i>${p}</li>`).join("")}</ul>`:""}
+    <div class="actions"><a class="btn pri" href="${d.url}" target="_blank">To'liq ochish <i class="bi bi-box-arrow-up-right"></i></a></div>
+  </div></div>`).join("");
+function fit(){document.querySelectorAll(".thumb").forEach(t=>{const f=t.querySelector("iframe"),s=t.clientWidth/1440;f.style.transform=`scale(${s})`;f.style.height=(t.clientHeight/s)+"px"})}
+addEventListener("resize",fit);fit();
+let built=false;
+document.querySelectorAll(".seg button").forEach(b=>b.addEventListener("click",()=>{
+  document.querySelectorAll(".seg button").forEach(x=>x.classList.toggle("on",x===b));
+  const s=b.dataset.v==="side";
+  if(s&&!built){side.innerHTML=D.map(d=>`<div class="col"><div class="bar"><span class="num" style="background:${d.color};width:22px;height:22px;font-size:12px;border-radius:6px">${d.n}</span>${d.name}<a href="${d.url}" target="_blank"><i class="bi bi-box-arrow-up-right"></i></a></div><iframe src="${d.url}" title="${d.name}"></iframe></div>`).join("");built=true}
+  cards.style.display=s?"none":"";side.classList.toggle("on",s);if(!s)fit();
+}));
+</script>
+</body>
+</html>

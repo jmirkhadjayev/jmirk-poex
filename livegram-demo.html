@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Livegram — anonim ikki tomonlama chat (demo)</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <style>
+    :root{
+      --accent:#18d26e; --accent-text:#0a7d3f; --accent-dark:#15bb62; --accent-soft:rgba(24,210,110,.13);
+      --tg:#2aabee; --tg-soft:rgba(42,171,238,.12);
+      --ink:#15181d; --muted:#5b6b62; --panel:#fff; --border:rgba(15,23,42,.1);
+      --ease:cubic-bezier(.22,1,.36,1); --mono:"M PLUS 1 Code",ui-monospace,monospace;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:var(--mono);background:linear-gradient(160deg,#e7eeea,#dfeae3);color:var(--ink);
+      padding:32px 18px 80px;-webkit-font-smoothing:antialiased}
+    h1{text-align:center;font-size:24px;margin:0 0 6px}
+    .sub{text-align:center;color:var(--muted);font-size:13px;margin:0 auto 30px;max-width:640px;line-height:1.6}
+    .wrap{max-width:780px;margin:0 auto}
+    .card{background:var(--panel);border:1px solid var(--border);border-radius:20px;padding:24px;margin-bottom:24px;
+      box-shadow:0 18px 40px -28px rgba(15,23,30,.4)}
+    .htitle{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:700;margin:0 0 14px}
+    .num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;
+      background:var(--accent-soft);color:var(--accent-text);font-weight:700;font-size:14px;flex:none}
+    .hdesc{color:var(--muted);font-size:12.5px;line-height:1.65;margin:0 0 14px}
+    .tag{margin-left:auto;font-size:10px;font-weight:700;color:var(--accent-text);background:var(--accent-soft);padding:3px 10px;border-radius:99px}
+
+    /* on-site button mockup */
+    .mock{border:1px dashed var(--border);border-radius:14px;padding:26px;background:#fafdfb;text-align:center}
+    .tg-btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#2aabee,#229ed9);
+      color:#fff;border:0;border-radius:14px;padding:13px 22px;font-family:var(--mono);font-size:14px;font-weight:600;
+      text-decoration:none;cursor:pointer;box-shadow:0 12px 26px -12px rgba(42,171,238,.7);transition:transform .2s var(--ease)}
+    .tg-btn:hover{transform:translateY(-2px)}
+    .mock small{display:block;color:var(--muted);font-size:11px;margin-top:12px}
+
+    /* steps */
+    .step{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid var(--border)}
+    .step:last-child{border-bottom:0}
+    .step .n{flex:none;width:26px;height:26px;border-radius:50%;background:var(--tg);color:#fff;font-weight:700;
+      display:grid;place-items:center;font-size:13px}
+    .step .t{font-size:12.5px;line-height:1.6}
+    .step .t b{color:var(--ink)} .step .t code{background:#eef3f0;padding:1px 6px;border-radius:5px;font-size:11.5px}
+
+    /* chat preview */
+    .chat{max-width:340px;margin:0 auto;background:#e9f2f6;border-radius:16px;padding:14px;border:1px solid var(--border)}
+    .bub{max-width:80%;padding:9px 13px;border-radius:14px;font-size:12.5px;line-height:1.5;margin:7px 0}
+    .bub.them{background:#fff;border-bottom-left-radius:4px}
+    .bub.you{background:#cdeccc;border-bottom-right-radius:4px;margin-left:auto}
+    .bub .who{display:block;font-size:10px;font-weight:700;color:var(--muted);margin-bottom:3px}
+
+    .note{background:var(--tg-soft);border:1px solid rgba(42,171,238,.25);border-radius:12px;padding:14px;font-size:12px;line-height:1.6;color:#0b5a82}
+    .warn{background:#fff7ed;border:1px solid #fed7aa;border-radius:12px;padding:14px;font-size:12px;line-height:1.6;color:#9a3412}
+    .legend{text-align:center;font-size:11.5px;color:var(--muted);margin-top:4px}
+    .cmp{width:100%;border-collapse:collapse;font-size:12px;margin-top:6px}
+    .cmp th,.cmp td{border:1px solid var(--border);padding:8px 10px;text-align:left}
+    .cmp th{background:var(--accent-soft);color:var(--accent-text);font-weight:700}
+    .ok{color:var(--accent-text);font-weight:700}.no{color:#b91c1c;font-weight:700}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>🤖 Livegram — anonim ikki tomonlama chat</h1>
+    <p class="sub">Foydalanuvchi <b>username yozmaydi</b>, o'zi anonim qoladi — lekin siz Telegram'da unga <b>javob qaytara olasiz</b>.
+      Kod yozilmaydi, server kerak emas. Quyida saytdagi ko'rinishi va sozlash bosqichlari.</p>
+
+    <!-- 1: on-site look -->
+    <div class="card">
+      <div class="htitle"><span class="num">1</span> Saytda qanday ko'rinadi <span class="tag">UI demo</span></div>
+      <p class="hdesc">Anonim forma yoniga shunday tugma qo'yiladi. Bosilganda Telegram'dagi botingiz ochiladi — odam to'g'ridan-to'g'ri yozadi.</p>
+      <div class="mock">
+        <a class="tg-btn" href="https://t.me/JMPortfolio_bot" target="_blank" rel="noopener">
+          <i class="bi bi-telegram"></i> Telegram'da anonim yozish
+        </a>
+        <small>Tugma → <code>t.me/JMPortfolio_bot</code> (test uchun; Livegram boti bilan almashtiriladi)</small>
+      </div>
+    </div>
+
+    <!-- 2: setup -->
+    <div class="card">
+      <div class="htitle"><span class="num">2</span> Livegram'ni sozlash (≈5 daqiqa) <span class="tag">Telegram'da</span></div>
+      <p class="hdesc">Hammasi Telegram ichida — kod yo'q. Tavsiya: forma uchun ishlatayotgan <code>@JMPortfolio_bot</code>ga tegmaslik uchun <b>yangi bot</b> oching.</p>
+      <div class="step"><span class="n">1</span><span class="t"><b>@BotFather</b> oching → <code>/newbot</code> → nom bering → <b>yangi token</b> oling (masalan chat uchun alohida bot).</span></div>
+      <div class="step"><span class="n">2</span><span class="t"><b>@LivegramBot</b> oching → <code>Start</code> → <b>"Add bot / Bot qo'shish"</b> → yuqoridagi <b>tokenni</b> joylashtiring.</span></div>
+      <div class="step"><span class="n">3</span><span class="t">Livegram salom xabari va sozlamalarni so'raydi — tayyor. Endi botingiz "feedback bot" bo'ldi.</span></div>
+      <div class="step"><span class="n">4</span><span class="t">Saytdagi tugmani shu yangi bot manziliga yo'naltirasiz (masalan <code>t.me/JMPortfolio_chat_bot</code>).</span></div>
+    </div>
+
+    <!-- 3: how reply works -->
+    <div class="card">
+      <div class="htitle"><span class="num">3</span> Javob qanday boradi <span class="tag">ikki tomonlama</span></div>
+      <p class="hdesc">Odam botga yozadi → sizga (bot egasiga) yetadi. Siz o'sha xabarga <b>reply</b> qilib javob berasiz → unga anonim qaytadi.</p>
+      <div class="chat">
+        <div class="bub them"><span class="who">🕵️ Anonim foydalanuvchi → sizga</span>Assalomu alaykum, loyiha bo'yicha savol bor edi…</div>
+        <div class="bub you"><span class="who">Siz (reply qilib)</span>Salom! Albatta, eshitaman 🙌</div>
+        <div class="bub them"><span class="who">🕵️ Anonim → sizga</span>Rahmat! Narxni ayta olasizmi?</div>
+      </div>
+      <p class="legend">Siz uning ism/username'ini ko'rmaysiz — faqat xabar. Reply qilsangiz, javob unga yetadi.</p>
+    </div>
+
+    <!-- 4: compare -->
+    <div class="card">
+      <div class="htitle"><span class="num">4</span> Hozirgi usul bilan farqi</div>
+      <table class="cmp">
+        <tr><th></th><th>Hozirgi (forma + username)</th><th>Livegram</th></tr>
+        <tr><td>Username yozish</td><td class="no">kerak (javob uchun)</td><td class="ok">kerak emas</td></tr>
+        <tr><td>Foydalanuvchi anonimligi</td><td>username bersa — yo'qoladi</td><td class="ok">to'liq anonim</td></tr>
+        <tr><td>Siz javob bera olasizmi</td><td>qo'lda (o'z akkauntingizdan)</td><td class="ok">ha (bot orqali)</td></tr>
+        <tr><td>Ikki tomonlama suhbat</td><td class="no">yo'q</td><td class="ok">ha</td></tr>
+        <tr><td>Kod/server</td><td>tayyor</td><td class="ok">kerak emas</td></tr>
+        <tr><td>Saytdan chiqadimi</td><td class="ok">yo'q (saytda)</td><td>ha (Telegram'ga o'tadi)</td></tr>
+      </table>
+    </div>
+
+    <!-- notes -->
+    <div class="card">
+      <div class="note"><b>ℹ️ Maslahat:</b> Forma uchun ishlatayotgan <code>@JMPortfolio_bot</code> tokenini Livegram'ga bermang —
+        Livegram unga webhook o'rnatadi. Forma (sendMessage) baribir ishlaydi, lekin xavfsiz bo'lishi uchun <b>alohida bot</b> oching.</div>
+      <div class="warn" style="margin-top:12px"><b>⚠️ Cheklov:</b> Livegram — uchinchi tomon xizmati (xabarlar ularning serveridan o'tadi).
+        To'liq nazorat va maxfiylik kerak bo'lsa — <b>2-variant</b> (o'zingizning Cloudflare Worker + KV) yaxshiroq. Ayting, o'shani yozaman.</div>
+    </div>
+
+    <p class="legend">Sinab ko'ring → yoqsa, saytga "Telegram'da anonim yozish" tugmasini qo'shib beraman.</p>
+  </div>
+</body>
+</html>

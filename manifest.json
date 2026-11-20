@@ -1,0 +1,25 @@
+{
+  "name": "Jamshid Mirkhadjayev — IT Project Manager",
+  "short_name": "Jamshid M.",
+  "description": "IT Project Manager and Java Backend Developer based in Tashkent. Portfolio, certificates, and contact.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "lang": "en",
+  "theme_color": "#0c1512",
+  "background_color": "#060a08",
+  "icons": [
+    {
+      "src": "assets/img/pwa-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "assets/img/favicon.png",
+      "sizes": "181x181",
+      "type": "image/png"
+    }
+  ]
+}

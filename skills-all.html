@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Skills — barcha variantlar</title>
+<style>
+@font-face{font-family:"M PLUS 1 Code";font-weight:300 700;font-display:swap;src:url("assets/fonts/mplus1code-latin.woff2") format("woff2");unicode-range:U+0000-00FF,U+2000-206F}
+@font-face{font-family:"M PLUS 1 Code";font-weight:300 700;font-display:swap;src:url("assets/fonts/mplus1code-latin-ext.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BB-02FF}
+:root{--bg:#e7eeea;--panel:#fff;--border:rgba(15,23,30,.12);--text:#15181d;--muted:#454b54;--accent:#0f9d4f;--accent-text:#0a7d3f;--soft:rgba(24,210,110,.14);--font:"M PLUS 1 Code",ui-monospace,monospace}
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--font);color:var(--text);background:var(--bg);
+  background-image:linear-gradient(rgba(15,157,79,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(15,157,79,.06) 1px,transparent 1px);background-size:24px 24px;-webkit-font-smoothing:antialiased}
+.top{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.93);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.top .in{max-width:1180px;margin:0 auto;padding:10px 18px 8px}
+.r1{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.top h1{font-size:16px;margin:0;white-space:nowrap}.top h1 b{color:var(--accent)}
+.groups{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-left:auto}
+.groups::-webkit-scrollbar,.jump::-webkit-scrollbar{display:none}
+.groups button{flex:none;font-family:inherit;font-size:12px;font-weight:700;padding:6px 11px;border-radius:9px;border:1px solid var(--border);background:var(--panel);color:var(--muted);cursor:pointer}
+.groups button.on{background:var(--accent);border-color:var(--accent);color:#fff}
+.jump{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;margin-top:8px}
+.jump a{flex:none;font-size:11.5px;font-weight:600;text-decoration:none;color:var(--muted);padding:4px 8px;border-radius:99px;border:1px solid var(--border);background:var(--panel)}
+.jump a:hover,.jump a.on{background:var(--text);color:#fff;border-color:var(--text)}
+.wrap{max-width:1180px;margin:0 auto;padding:22px 18px 60px}
+.intro{font-size:13px;color:var(--muted);line-height:1.6;margin:0 0 6px;max-width:880px}.intro b{color:var(--text)}
+.gh{display:flex;align-items:baseline;flex-wrap:wrap;gap:10px;margin:34px 0 14px;padding-bottom:10px;border-bottom:2px solid var(--text)}
+.gh h2{font-size:22px;margin:0}
+.gh .rng{font-size:12px;font-weight:700;color:var(--accent-text);background:var(--soft);padding:3px 10px;border-radius:99px}
+.gh .lst{font-size:12px;color:var(--muted)}
+.gh a{margin-left:auto;font-size:12px;color:var(--muted)}
+iframe{display:block;width:calc(100% + 36px);margin:0 -18px;border:0;height:1400px;background:transparent}
+.ld{font-size:13px;color:var(--muted);padding:20px 0}
+</style>
+</head>
+<body>
+<div class="top"><div class="in">
+  <div class="r1"><h1>Skills — barcha <b id="cnt">103</b> variant</h1><div class="groups" id="groups"></div></div>
+  <nav class="jump" id="jump"></nav>
+</div></div>
+<div class="wrap">
+  <p class="intro">Skills bo'limi uchun berilgan <b>hamma variantlar bitta sahifada</b>. 1–4 to'plamlar eski ko'nikmalar ro'yxati bilan, R/S/T to'plamlar esa yangilangan ro'yxat bilan (Spring Security, Hibernate/JPA, AWS, Postman, Jira…). Hozir saytda <b>R1</b> ishlatilgan.</p>
+  <div id="list"></div>
+</div>
+<script>
+const P=[
+ {f:"skills-variants.html",n:"1-to'plam",r:"v0–v12",l:"eski ro'yxat · foiz/darajali"},
+ {f:"skills-variants-2.html",n:"2-to'plam",r:"A–O",l:"eski ro'yxat"},
+ {f:"skills-variants-3.html",n:"3-to'plam",r:"P1–P15",l:"eski ro'yxat · raqamsiz"},
+ {f:"skills-variants-4.html",n:"4-to'plam",r:"Q1–Q15",l:"eski ro'yxat · raqamsiz"},
+ {f:"skills-variants-5.html",n:"5-to'plam",r:"R1–R15",l:"yangi ro'yxat · R1 — saytda"},
+ {f:"skills-variants-6.html",n:"6-to'plam",r:"S1–S15",l:"yangi ro'yxat"},
+ {f:"skills-variants-7.html",n:"7-to'plam",r:"T1–T15",l:"yangi ro'yxat"}
+];
+const list=document.getElementById("list"),jump=document.getElementById("jump"),groups=document.getElementById("groups");
+const HIDE=`.top,.intro{display:none!important}html{scroll-behavior:auto!important}body{background:transparent!important}.wrap{padding-top:0!important;padding-bottom:10px!important}`;
+const entries=[]; // {id,frame,group}
+P.forEach((p,gi)=>{
+  const h=document.createElement("div");h.className="gh";h.id="g"+gi;
+  h.innerHTML=`<h2>${p.n}</h2><span class="rng">${p.r}</span><span class="lst">${p.l}</span><a href="${p.f}" target="_blank">alohida ochish ↗</a>`;
+  const fr=document.createElement("iframe");fr.src=p.f;fr.title=p.n;fr.scrolling="no";
+  list.append(h,fr);p.h=h;p.fr=fr;
+  const b=document.createElement("button");b.textContent=p.r;b.onclick=()=>go(h.getBoundingClientRect().top+scrollY-hdr()+4);groups.appendChild(b);p.b=b;
+  fr.addEventListener("load",()=>{
+    const d=fr.contentDocument;if(!d)return;
+    const st=d.createElement("style");st.textContent=HIDE;d.head.appendChild(st);
+    const fit=()=>{const hgt=Math.max(d.documentElement.scrollHeight,d.body.scrollHeight);if(Math.abs(fr.offsetHeight-hgt)>2)fr.style.height=hgt+"px"};
+    fit();new (fr.contentWindow.ResizeObserver)(fit).observe(d.body);setTimeout(fit,800);setTimeout(fit,2500);
+    p.ids=[...d.querySelectorAll("section.var")].map(s=>({id:s.id,t:(s.querySelector(".vh h2")||{}).textContent||"",el:s,gi}));
+    // ichki havolalar (#id) — tashqi sahifada scroll qilsin
+    d.addEventListener("click",e=>{const a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;const t=d.getElementById(a.getAttribute("href").slice(1));if(t){e.preventDefault();goEl(t,fr)}});
+    buildJump();
+  });
+});
+function hdr(){return document.querySelector(".top").offsetHeight}
+function go(y){scrollTo({top:y,behavior:"smooth"})}
+function goEl(el,fr){go(fr.getBoundingClientRect().top+scrollY+el.getBoundingClientRect().top-hdr()-10)}
+let all=[];
+function buildJump(){
+  all=P.flatMap(p=>p.ids||[]);document.getElementById("cnt").textContent=all.length||103;
+  jump.innerHTML=all.map(x=>`<a href="#${x.id}" title="${x.t.replace(/"/g,"&quot;")}">${x.id}</a>`).join("");
+  jump.querySelectorAll("a").forEach((a,i)=>a.onclick=e=>{e.preventDefault();const x=all[i];goEl(x.el,P[x.gi].fr);history.replaceState(null,"","#"+x.id)});
+  onScroll();
+  // URL #id bilan ochilganda
+  const want=location.hash.slice(1);if(want&&!buildJump.done){const x=all.find(v=>v.id===want);if(x){buildJump.done=1;setTimeout(()=>goEl(x.el,P[x.gi].fr),300)}}
+}
+let cur="";
+function onScroll(){
+  const line=hdr()+40;let c=all[0]&&all[0].id,g=0;
+  all.forEach(x=>{const fr=P[x.gi].fr;if(fr.getBoundingClientRect().top+x.el.getBoundingClientRect().top<line){c=x.id;g=x.gi}});
+  P.forEach((p,i)=>p.b.classList.toggle("on",i===g));
+  if(c!==cur){cur=c;jump.querySelectorAll("a").forEach(a=>{const on=a.getAttribute("href")==="#"+c;a.classList.toggle("on",on);if(on)jump.scrollLeft=a.offsetLeft-jump.clientWidth/2+a.offsetWidth/2})}
+}
+addEventListener("scroll",onScroll,{passive:true});
+</script>
+</body>
+</html>

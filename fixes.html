@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Sayt FIX'lari — hozir vs tuzatilgan</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<style>
+:root{--bg:#eef1ef;--panel:#fff;--soft:#f6f8f7;--ink:#15181d;--muted:#5f6b64;--line:rgba(15,23,42,.1);
+  --bad:#dc2626;--bad-soft:#fef2f2;--good:#16a34a;--good-soft:#f0fdf4;--ease:cubic-bezier(.22,1,.36,1);
+  --mono:ui-monospace,"Cascadia Code",Consolas,monospace}
+*{box-sizing:border-box}
+html,body{height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:ui-sans-serif,system-ui,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+.top{position:sticky;top:0;z-index:10;background:rgba(238,241,239,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.top .in{max-width:1600px;margin:0 auto;padding:14px 18px 10px;display:flex;flex-wrap:wrap;align-items:center;gap:10px}
+h1{margin:0;font-size:20px;letter-spacing:-.01em}
+.sub{width:100%;margin:2px 0 4px;font-size:13px;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font:inherit;font-size:12px;font-weight:600;padding:6px 11px;border-radius:99px;border:1px solid var(--line);background:var(--panel);color:var(--muted);cursor:pointer}
+.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.chip b{opacity:.6;margin-left:3px}
+
+.main{max-width:1600px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:16px;padding:14px 18px 40px}
+.list{display:flex;flex-direction:column;gap:12px}
+.fix{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;transition:border-color .2s,box-shadow .2s}
+.fix.act{border-color:var(--ink);box-shadow:0 10px 30px -18px rgba(0,0,0,.45)}
+.fh{display:flex;align-items:flex-start;gap:10px}
+.fh .n{flex:none;width:28px;height:28px;border-radius:8px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px}
+.fh h3{margin:2px 0 0;font-size:15px;line-height:1.35;flex:1}
+.cat{flex:none;font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:99px;white-space:nowrap}
+.c-bug{background:#fee2e2;color:#b91c1c}.c-a11y{background:#ede9fe;color:#6d28d9}.c-text{background:#fef3c7;color:#92400e}
+.c-tech{background:#e0f2fe;color:#0369a1}.c-ux{background:#dcfce7;color:#15803d}.c-priv{background:#fce7f3;color:#be185d}
+.why{margin:8px 0 10px 38px;font-size:13px;color:var(--muted);line-height:1.55}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-left:38px}
+.ba>div{border-radius:10px;padding:9px 11px;font-size:12.5px;line-height:1.5;min-width:0}
+.ba .b{background:var(--bad-soft);border:1px solid #fecaca}
+.ba .a{background:var(--good-soft);border:1px solid #bbf7d0}
+.ba small{display:block;font-size:10.5px;font-weight:700;letter-spacing:.05em;margin-bottom:3px}
+.ba .b small{color:var(--bad)} .ba .a small{color:var(--good)}
+.ba code{font-family:var(--mono);font-size:11.5px;word-break:break-word;white-space:pre-wrap}
+.ba del{color:var(--bad);text-decoration-thickness:2px}
+.ba ins{color:var(--good);text-decoration:none;font-weight:700;background:rgba(22,163,74,.12);border-radius:3px;padding:0 2px}
+.fa{display:flex;align-items:center;gap:8px;margin:10px 0 0 38px}
+.go{font:inherit;font-size:12.5px;font-weight:600;padding:7px 12px;border-radius:9px;border:1px solid var(--line);background:var(--soft);cursor:pointer;color:var(--ink)}
+.go:hover{background:var(--ink);color:#fff}
+.where{font-size:11.5px;color:var(--muted);font-family:var(--mono)}
+.warn{margin:8px 0 0 38px;font-size:12px;color:#92400e;background:#fffbeb;border:1px solid #fde68a;border-radius:8px;padding:7px 10px}
+.fix.hide{display:none}
+@media(max-width:560px){.ba{grid-template-columns:1fr;margin-left:0}.why,.fa,.warn{margin-left:0}}
+
+.cmp{position:sticky;top:96px;height:calc(100vh - 112px);display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.ch{display:flex;align-items:center;gap:8px;padding:9px 12px;border-bottom:1px solid var(--line);background:var(--soft);font-size:12.5px}
+.ch .t{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.seg{margin-left:auto;display:flex;background:#e2e8e4;border-radius:9px;padding:2px;flex:none}
+.seg button{border:0;background:transparent;font:inherit;font-size:12px;font-weight:600;padding:6px 10px;border-radius:7px;cursor:pointer;color:var(--muted)}
+.seg button.on{background:var(--panel);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.frames{flex:1;display:grid;grid-template-columns:1fr 1fr;min-height:0}
+.frames.only-b{grid-template-columns:1fr 0}.frames.only-a{grid-template-columns:0 1fr}
+.fr{display:flex;flex-direction:column;min-width:0;overflow:hidden}
+.fr+.fr{border-left:1px solid var(--line)}
+.fr .lbl{display:flex;align-items:center;gap:6px;padding:6px 10px;font-size:11.5px;font-weight:700}
+.fr.b .lbl{background:var(--bad-soft);color:var(--bad)} .fr.a .lbl{background:var(--good-soft);color:var(--good)}
+.fr .lbl a{margin-left:auto;color:inherit}
+.fr iframe{flex:1;width:100%;border:0;background:#fff}
+@media(max-width:1000px){.main{grid-template-columns:1fr}.cmp{position:relative;top:0;height:75vh;order:-1}}
+</style>
+</head>
+<body>
+<div class="top"><div class="in">
+  <h1>🛠 Saytdagi FIX'lar — <span id="cnt"></span></h1>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:12.5px;margin-left:auto">
+    <span style="background:#fff;border:1px solid var(--line);border-radius:10px;padding:6px 10px">📱 Performance <b style="color:var(--bad)">59</b> → <b style="color:var(--good)">81</b> · Accessibility <b style="color:var(--bad)">82</b> → <b style="color:var(--good)">100</b></span>
+    <span style="background:#fff;border:1px solid var(--line);border-radius:10px;padding:6px 10px">🖥 Performance <b style="color:var(--bad)">67</b> → <b style="color:var(--good)">98</b> · Accessibility <b style="color:var(--bad)">76</b> → <b style="color:var(--good)">100</b></span>
+    <span style="background:#fff;border:1px solid var(--line);border-radius:10px;padding:6px 10px">📦 4.8 MB → <b style="color:var(--good)">1.3 MB</b></span>
+  </div>
+  <p class="sub">Chapda xatolar ro'yxati. “Saytda ko'rish” tugmasini bossangiz, o'ngda o'sha joy ochiladi: <b style="color:var(--bad)">hozirgi sayt</b> va <b style="color:var(--good)">tuzatilgan nusxa</b> yonma-yon. Asosiy sayt (index.html) o'zgarmagan.</p>
+  <div class="chips" id="chips"></div>
+</div></div>
+
+<div class="main">
+  <div class="list" id="list"></div>
+  <aside class="cmp">
+    <div class="ch"><span class="t" id="ct">Butun sahifa</span>
+      <div class="seg"><button data-m="both" class="on">Yonma-yon</button><button data-m="b">Hozir</button><button data-m="a">Tuzatilgan</button></div>
+    </div>
+    <div class="frames" id="frames">
+      <div class="fr b"><div class="lbl"><i class="bi bi-x-circle-fill"></i> HOZIR · index.html<a href="index.html" target="_blank" title="Yangi oynada"><i class="bi bi-box-arrow-up-right"></i></a></div><iframe id="fb" title="Hozirgi sayt"></iframe></div>
+      <div class="fr a"><div class="lbl"><i class="bi bi-check-circle-fill"></i> TUZATILGAN · index-fixed.html<a href="index-fixed.html" target="_blank" title="Yangi oynada"><i class="bi bi-box-arrow-up-right"></i></a></div><iframe id="fa" title="Tuzatilgan sayt"></iframe></div>
+    </div>
+  </aside>
+</div>
+
+<script>
+const CATS={perf:"Tezlik (PageSpeed)",bug:"Xato",ux:"UX",a11y:"Accessibility",text:"Imlo / matn",priv:"Maxfiylik",tech:"Texnik"};
+/* sec = section hash, sel = element to scroll to inside the iframe */
+const F=[
+ {c:"perf",t:"Rasmlar juda og'ir — 2.3 MB",sec:"certificates",sel:"#certificates",
+  why:"PageSpeed: eng katta fayl pdp-foundation.jpg (1 MB, 3840px), profil rasmi 650 KB. Sertifikat oynasi 200px balandlikda — bunchalik katta rasm keraksiz. Rasmlar WebP'ga o'tkazildi va 1000px gacha kichraytirildi; asl fayllar lightbox (kattalashtirish) uchun qoldi.",
+  b:"11111.jpg <del>650 KB</del> · pdp-foundation.jpg <del>1041 KB</del> · korea <del>231</del> · sql <del>207</del> · pdp <del>126</del> · java <del>80</del> = <del>2.3 MB</del>",
+  a:"opt/*.webp: <ins>12</ins> · <ins>43</ins> · <ins>49</ins> · <ins>20</ins> · <ins>40</ins> · <ins>20</ins> = <ins>184 KB</ins> (−92%)",w:"assets/img/opt/"},
+ {c:"perf",t:"Devicon: 10 ta ikonka uchun 790 KB shrift",sec:"about",sel:".skills",
+  why:"Skills ikonkalari uchun devicon@latest'dan butun shrift (773 KB) va CSS (17 KB, 1.3 s bloklaydi) yuklanardi. Endi faqat kerakli 8 ta SVG o'z serverimizda.",
+  b:'<code>&lt;link … devicon<del>@latest</del>/devicon.min.css&gt;\n&lt;i class="devicon-java-plain colored"&gt;</code> → <del>790 KB</del>',a:'<code>&lt;img src="assets/img/skills/<ins>java.svg</ins>"&gt;</code> → <ins>19 KB</ins> jami',w:"index.html:77, 348–357"},
+ {c:"perf",t:"Ko'rinmaydigan 3 ta shrift yuklanadi (1 s bloklaydi)",sec:"header",sel:"#header",
+  why:"Open Sans, Raleway va Poppins (42 xil og'irlik) yuklanadi, lekin creative.css hamma matnni M PLUS 1 Code'ga o'tkazadi — ular saytda umuman ko'rinmaydi.",
+  b:'<code>&lt;link href="fonts.googleapis.com/css?family=<del>Open+Sans…|Raleway…|Poppins…</del>"&gt;</code>',a:"<ins>olib tashlandi</ins>",w:"index.html:63"},
+ {c:"perf",t:"Asosiy shrift @import orqali — 150 KB CSS, ~1 s kechikish",sec:"header",sel:"#header",
+  why:"M PLUS 1 Code creative.css ichida @import bilan Google'dan olinadi: avval CSS, keyin yana CSS, keyin shrift — zanjir. Endi faqat lotin + lotin-kengaytirilgan qismi (38 KB) o'z serverimizda va oldindan yuklanadi (preload).",
+  b:'<code><del>@import url(fonts.googleapis.com/…M+PLUS+1+Code…)</del></code>',a:'<code>@font-face { src: url(<ins>../fonts/mplus1code-latin.woff2</ins>) }\n&lt;link rel="<ins>preload</ins>" …&gt;</code>',w:"assets/css/creative.css:10"},
+ {c:"perf",t:"Ishlatilmaydigan kutubxonalar (≈250 KB)",sec:"header",sel:"#header",
+  why:"Swiper, Isotope, PureCounter, Waypoints, Bootstrap JS va Boxicons shablondan qolgan — bu sahifada hech biri ishlatilmaydi. Kontaktdagi 4 ta boxicon Bootstrap Icons bilan almashtirildi. main.js ular yo'q bo'lsa ham xatosiz ishlaydigan qilindi.",
+  b:"<del>swiper.css+js, isotope, purecounter, waypoints, bootstrap.bundle.js, boxicons.css + 113 KB shrift</del>",a:"<ins>olib tashlandi</ins>; remixicon va glightbox CSS — <ins>kechiktirib</ins> yuklanadi",w:"index.html:69–72, 800–805"},
+ {c:"perf",t:"www → apex qayta yo'naltirish (+0.8–1.5 s)",sec:"header",sel:"#header",
+  why:"Sayt mirkhadjayev.uz manzilida ishlaydi, lekin canonical, og:url va boshqa havolalar www.mirkhadjayev.uz'ga ko'rsatadi — har kirishda qo'shimcha yo'naltirish bo'ladi.",
+  b:'<code>canonical: https://<del>www.</del>mirkhadjayev.uz/</code>',a:'<code>canonical: https://mirkhadjayev.uz/</code> + havolani ulashishda ham <ins>www-siz</ins>',w:"index.html:12–43"},
+ {c:"a11y",t:"Kichik tugmalar: til (21×17 px) va yon nuqtalar (11×11 px)",sec:"about",sel:"#uiControls",
+  why:"PageSpeed: bosish maydoni kamida 24×24 px bo'lishi kerak. Yon nuqtalarda nom ham yo'q edi. Ko'rinishi o'zgarmagan holda bosish maydoni kattalashtirildi.",
+  b:"lang-btn <del>21.5×17.5</del> · dot-nav <del>11×11</del>, aria-label <del>yo'q</del>",a:"lang-btn <ins>28×26</ins> · dot-nav <ins>24×24</ins> + <ins>aria-label</ins>",w:"theme.css:27, creative.js:300"},
+ {c:"a11y",t:"Sarlavhalar tartibi, <main> yo'qligi, kontrast",sec:"about",sel:".skills-radar",
+  why:"h2 dan keyin to'g'ri h4 kelgan (h3 tushib qolgan), sahifada <main> hududi yo'q, terminaldagi kulrang yozuv kontrasti 1.1:1.",
+  b:"Skills <del>h4</del> · sertifikat <del>h4</del> · <del>&lt;main&gt; yo'q</del> · ht-name <del>1.1:1</del>",a:"<ins>h3</ins> (ko'rinish o'sha) · <ins>&lt;main&gt;</ins> · ht-name — <ins>dekorativ (CSS)</ins>",w:"index.html:363, 605…"},
+ {c:"bug",t:"Sertifikat rasmi kattalashtirilganda ochilmaydi (Netlify'da 404)",sec:"certificates",sel:"#certificates .col-lg-4:nth-child(5)",
+  why:"Lightbox havolasi “PDP-Foundation.jpg”, fayl esa “pdp-foundation.jpg”. Windows'da farqi bilinmaydi, lekin Netlify (Linux) katta-kichik harfni farqlaydi — 5-sertifikatni bosganda bo'sh oyna chiqadi.",
+  b:'<code>href="assets/img/<del>PDP-Foundation</del>.jpg"</code>',a:'<code>href="assets/img/<ins>pdp-foundation</ins>.jpg"</code>',w:"index.html:660"},
+ {c:"bug",t:"Resume'dagi kichik sarlavhalar sana “pill”iga o'xshab qolgan",sec:"resume",sel:"#resume .resume-item:nth-of-type(3)",
+  why:"“Project Planning…”, “Systems Integration…” kabi sarlavhalar <h5> bilan yozilgan, <h5> esa shablonda sana uchun ajratilgan stil. Natijada ular sanalar bilan bir xil yashil pill bo'lib ko'rinadi va tartib chalkashadi.",
+  b:'<code>&lt;ul&gt;\n  &lt;<del>h5</del>&gt;Project Planning…&lt;/h5&gt;</code>',a:'<code>&lt;ul&gt;\n  &lt;<ins>li class="rs-h"</ins>&gt;Project Planning…&lt;/li&gt;</code> — qalin oddiy sarlavha',w:"index.html:486–530"},
+ {c:"text",t:"About'dagi asosiy matn eskirgan va Resume'ga zid",sec:"about",sel:".about-me .content",
+  why:"About'da “Toshkent aeroportida Awery Aero joriy qilyapman, avval MIB'da ishlaganman” deyilgan. Resume'ga ko'ra esa Awery ERP Uzbekistan Airports Cargo'da (2023–2025) bo'lgan, hozir esa siz TAS'da IT PM'siz. MIB'dan keyin yana 3 ta ish bor.",
+  b:"…<del>Currently, I am working on the implementation of Awery Aero software at Tashkent International Airport. Previously … BCE</del>",a:"…<ins>Currently, I lead digitalization projects at Tashkent International Airport — biometric gates, smart baggage, SITA/Amadeus. Previously, I implemented Awery ERP at Uzbekistan Airports Cargo</ins>, and before that … BCE.",
+  w:"index.html:302",warn:"Bu matnni men resume asosida yozdim — to'g'riligini tekshirib bering. UZ/RU tarjimasi ham qo'shildi."},
+ {c:"text",t:"Imlo xatosi: “Montion design”",sec:"about",sel:".interests",
+  why:"Interests bo'limida “Graphic and Montion design” yozilgan.",b:"Graphic and <del>Montion</del> design",a:"Graphic and <ins>Motion</ins> design",w:"index.html:399"},
+ {c:"text",t:"Imlo xatosi: “Technology & Technolog”",sec:"resume",sel:"#resume .resume-item:nth-of-type(2)",
+  why:"Ta'lim bo'limidagi daraja nomida so'z ikki marta va xato bilan yozilgan.",b:"Bachelor of Technology <del>&amp; Technolog</del>, Engineer…",a:"Bachelor of Technology<ins>,</ins> Engineer, Service Technician",w:"index.html:474"},
+ {c:"text",t:"Ingliz grammatikasi xatolari (5 joyda)",sec:"resume",sel:"#resume .resume-item:nth-last-of-type(3)",
+  why:"Egalik qo'shimchasi (apostrof) tushib qolgan va bir nechta jumla noto'g'ri tuzilgan.",
+  b:"the <del>airports</del> internal · the <del>Bureaus</del> internal · <del>Dealt with customers complaints and did researchs on it</del> · <del>Collected and reduced debts of consumers</del>",
+  a:"the <ins>airport's</ins> internal · the <ins>Bureau's</ins> internal · <ins>Handled customer complaints and researched each case.</ins> · <ins>Collected and reduced consumer debts.</ins>",w:"index.html:490, 552, 564, 575"},
+ {c:"text",t:"TAS ishidagi takrorlangan qator",sec:"resume",sel:"#resume .resume-item:nth-of-type(3)",
+  why:"“Project Planning and Strategic Lifecycle Management” sarlavha sifatida turibdi, ro'yxat o'rtasida esa yana oddiy band sifatida takrorlangan.",
+  b:"…ground handling units.<br>• <del>Project Planning and Strategic Lifecycle Management</del><br>• Adaptation of the latest…",a:"…ground handling units.<br>• Adaptation of the latest…",w:"index.html:493"},
+ {c:"tech",t:"Noto'g'ri HTML: <ul> ro'yxati <p> ichida (7 joyda)",sec:"resume",sel:"#resume",
+  why:"Brauzer <p> ichidagi <ul>'ni qabul qilmaydi: <p>'ni yopib, keyin bo'sh <p></p> qo'shib yuboradi. Natijada resume'da keraksiz bo'sh joylar paydo bo'ladi.",
+  b:'<code><del>&lt;p&gt;</del>\n&lt;ul&gt;…&lt;/ul&gt;\n<del>&lt;/p&gt;</del></code>',a:'<code>&lt;ul&gt;…&lt;/ul&gt;</code>',w:"index.html:484, 512, 525, 545, 562, 573"},
+ {c:"tech",t:"Ortiqcha </li> teg (Software Technician)",sec:"resume",sel:"#resume .resume-item:nth-of-type(5)",
+  why:"“Training and technical support” sarlavhasidan keyin ochilmagan </li> yopilgan, hamma bandlar bitta qatorga yopishtirib yozilgan.",
+  b:'<code>…support&lt;/h5&gt;<del>&lt;/li&gt;</del>&lt;li&gt;Conducting…</code>',a:'<code>&lt;li class="rs-h"&gt;…support&lt;/li&gt;\n&lt;li&gt;Conducting…</code>',w:"index.html:530"},
+ {c:"tech",t:"Yopilmagan <div> — Interests bo'limi",sec:"about",sel:".interests",
+  why:"Interests konteynerining yopuvchi </div> tegi kommentga olingan. Brauzer uni o'zi yopadi, lekin keyingi CSS/JS uchun tartib buzilishi mumkin.",
+  b:'<code>&lt;!-- <del>&lt;/div&gt;</del> End Interests --&gt;</code>',a:'<code><ins>&lt;/div&gt;</ins>&lt;!-- End Interests --&gt;</code>',w:"index.html:450"},
+ {c:"a11y",t:"Profil rasmida alt matn yo'q",sec:"about",sel:".about-me",
+  why:"Ekran o'quvchi va Google rasm nimaligini bilmaydi. width/height ham yo'q, shuning uchun rasm yuklanganda sahifa “sakraydi”.",
+  b:'<code>&lt;img src="11111.jpg" alt=<del>""</del>&gt;</code>',a:'<code>&lt;img src="11111.jpg" alt="<ins>Jamshid Mirkhadjayev — portrait</ins>" <ins>width height</ins>&gt;</code>',w:"index.html:298"},
+ {c:"a11y",t:"Ijtimoiy tarmoq ikonkalarining nomi yo'q",sec:"contact",sel:"#contact .social-links",
+  why:"Ikonkali havolalarda matn yo'q — ekran o'quvchi faqat “link, link, link” deydi.",
+  b:'<code>&lt;a href="…facebook…"&gt;&lt;i class="bi-facebook"&gt;</code>',a:'<code>&lt;a href="…facebook…" <ins>aria-label="Facebook"</ins>&gt;</code>',w:"index.html:703–707"},
+ {c:"a11y",t:"Mobil menyu tugmasini klaviatura bilan ochib bo'lmaydi",sec:"header",sel:"#header",
+  why:"Menyu tugmasi oddiy <i> ikonka: Tab bilan unga o'tib, Enter bilan ochib bo'lmaydi.",
+  b:'<code>&lt;i class="bi-list mobile-nav-toggle"&gt;</code>',a:'<code>&lt;i … <ins>role="button" tabindex="0" aria-label="Open menu"</ins>&gt;</code> + Enter/Space',w:"index.html:279"},
+ {c:"ux",t:"“Send anonymously” tugmasi juda kichik",sec:"contact",sel:"#feedbackForm",
+  why:"Tugma balandligi ~28px, telefonda barmoq bilan bosish noqulay. Tavsiya etilgan minimum 44px.",
+  b:'<code>padding: 7px 16px; <del>/* ~28px */</del></code>',a:'<code>padding: 7px 18px; <ins>min-height: 44px;</ins></code>',w:"index.html:117"},
+ {c:"ux",t:"Website va Email bosilmaydi",sec:"about",sel:".about-me .content ul",
+  why:"About'dagi sayt manzili va email oddiy matn — bosib yozish yoki ochish imkoni yo'q.",
+  b:"Email: jmirkhadjayev@gmail.com <del>(matn)</del>",a:'Email: <ins>&lt;a href="mailto:…"&gt;</ins> — bosilsa pochta ochiladi',w:"index.html:310, 319"},
+ {c:"priv",t:"Tug'ilgan sana va oilaviy holat ochiq turibdi",sec:"about",sel:".about-me .content ul",
+  why:"Bu ma'lumotlar ish beruvchiga kerak emas, lekin firibgarlik va shaxsni aniqlash uchun ishlatilishi mumkin. Ko'p mamlakatlarda CV'ga yozmaslik tavsiya qilinadi.",
+  b:"<del>Birthday: 28 January 1997</del><br><del>Marital status: Single</del>",a:"<ins>(olib tashlandi)</ins>",w:"index.html:309, 313",warn:"Ixtiyoriy — qolishini istasangiz, bu bandni qo'llamaymiz."},
+ {c:"tech",t:"Eski havolalar va Twitter logosi",sec:"contact",sel:"#contact .social-links",
+  why:"LinkedIn havolasi http:// (xavfsiz emas), Telegram “www.t.me” orqali, ikonkada eski Twitter qushi turibdi.",
+  b:"<del>http://linkedin.com</del> · <del>www.t.me</del> · <del>bi-twitter</del> 🐦",a:"<ins>https://www.linkedin.com</ins> · <ins>t.me</ins> · <ins>bi-twitter-x</ins> 𝕏",w:"index.html:705–707"},
+ {c:"tech",t:"Kutubxona versiyalari qotirilmagan",sec:"about",sel:".skills",
+  why:"“devicon@latest” va qrcodejs versiyasiz yuklanadi. Muallif yangi versiya chiqarsa, skill ikonkalari yoki QR-kod ogohlantirishsiz buzilishi mumkin.",
+  b:'<code>devicon<del>@latest</del>\ngh/davidshimjs/qrcodejs<del>/</del>qrcode.min.js</code>',a:'<code>devicon<ins>@v2.16.0</ins>\ncdnjs …/qrcodejs/<ins>1.0.0</ins>/qrcode.min.js</code>',w:"index.html:77, 819"},
+ {c:"tech",t:"Shriftlar yuklanguncha matn ko'rinmaydi",sec:"header",sel:"#header",
+  why:"Google Fonts havolasida display=swap yo'q — sekin internetda sarlavhalar bir necha soniya ko'rinmay turadi.",
+  b:'<code>…Poppins:300,…,700i<del></del>"</code>',a:'<code>…Poppins:300,…,700i<ins>&amp;display=swap</ins>"</code>',w:"index.html:63"}
+];
+let filter="all", mode="both", n=0, current=null;
+const $=s=>document.querySelector(s);
+$("#cnt").textContent=F.length+" ta";
+const counts=F.reduce((m,f)=>(m[f.c]=(m[f.c]||0)+1,m),{});
+$("#chips").innerHTML=`<button class="chip on" data-f="all">Hammasi<b>${F.length}</b></button>`+Object.keys(CATS).filter(k=>counts[k]).map(k=>`<button class="chip" data-f="${k}">${CATS[k]}<b>${counts[k]}</b></button>`).join("");
+$("#list").innerHTML=F.map((f,i)=>`<div class="fix" id="fix${i+1}" data-c="${f.c}">
+  <div class="fh"><span class="n">${i+1}</span><h3>${f.t.replace(/</g,"&lt;")}</h3><span class="cat c-${f.c}">${CATS[f.c]}</span></div>
+  <p class="why">${f.why.replace(/</g,"&lt;")}</p>
+  <div class="ba"><div class="b"><small>✗ HOZIR</small>${f.b}</div><div class="a"><small>✓ TUZATILGAN</small>${f.a}</div></div>
+  ${f.warn?`<div class="warn">⚠ ${f.warn}</div>`:""}
+  <div class="fa"><button class="go" data-i="${i}"><i class="bi bi-eye"></i> Saytda ko'rish</button><span class="where">${f.w}</span></div>
+</div>`).join("");
+
+function load(fr,page,f){
+  const src=page+"?cmp="+(++n)+(f&&f.sec!=="header"?"#"+f.sec:"");
+  fr.onload=()=>{ if(!f||!f.sel) return; setTimeout(()=>{ try{
+    const d=fr.contentDocument, el=d.querySelector(f.sel); if(!el) return;
+    el.scrollIntoView({block:"start"});
+    el.style.outline="3px dashed "+(fr.id==="fb"?"#dc2626":"#16a34a"); el.style.outlineOffset="6px";
+    setTimeout(()=>{el.style.outline="";},3500);
+  }catch(e){} },900); };
+  fr.src=src;
+}
+function show(i){
+  const f=F[i]; current=i;
+  document.querySelectorAll(".fix").forEach((x,j)=>x.classList.toggle("act",j===i));
+  $("#ct").textContent=(i+1)+". "+f.t;
+  load($("#fb"),"index.html",f); load($("#fa"),"index-fixed.html",f);
+  if(innerWidth<=1000) $(".cmp").scrollIntoView({behavior:"smooth"});
+  history.replaceState(null,"","#fix"+(i+1));
+}
+document.addEventListener("click",e=>{
+  const g=e.target.closest(".go"); if(g){show(+g.dataset.i);return;}
+  const c=e.target.closest(".chip"); if(c){filter=c.dataset.f;document.querySelectorAll(".chip").forEach(x=>x.classList.toggle("on",x===c));
+    document.querySelectorAll(".fix").forEach(x=>x.classList.toggle("hide",filter!=="all"&&x.dataset.c!==filter));return;}
+  const s=e.target.closest(".seg button"); if(s){mode=s.dataset.m;document.querySelectorAll(".seg button").forEach(x=>x.classList.toggle("on",x===s));
+    $("#frames").className="frames"+(mode==="b"?" only-b":mode==="a"?" only-a":"");}
+});
+const m=location.hash.match(/^#fix(\d+)$/);
+if(m&&F[m[1]-1]){show(m[1]-1);setTimeout(()=>document.getElementById("fix"+m[1]).scrollIntoView({block:"center"}),50);}
+else{load($("#fb"),"index.html");load($("#fa"),"index-fixed.html");}
+</script>
+</body>
+</html>
